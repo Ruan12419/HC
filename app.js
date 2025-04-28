@@ -10,14 +10,25 @@ app.use((req, res, next) => {
   app.use(express.json())
 
 
+const email_G = "email@email.com"
+const senha_G = "senha123"
+
 app.get("/", (req, res) => {
     res.status(200).json({ dados: "Tela inicial" });
 });
 
-app.post("/entrada", (req, res) => {
-    let { nome, cpf } = req.body;
+app.post("/login", (req, res) => {
+    let { email, senha } = req.body;
+
+    if (email === email_G) {
+        if (senha === senha_G) {
+            res.status(200).json({data: `Login efetuado com sucesso!`})
+
+        }
+    }
+
     
-    res.status(201).json({data: `Horário adicionado com sucesso!`})
+    res.status(400).json({data: `Não foi possível fazer login!`})
     
 })
 
