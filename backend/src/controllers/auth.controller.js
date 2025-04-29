@@ -97,9 +97,8 @@ exports.confirmarEmail = (req, res) => {
             const usuario = User.find(u => u.email === decoded.email);
             if (!usuario) return res.status(404).json({ erro: "Usuário não encontrado." });
 
-            // Aqui podemos atualizar o campo "confirmado" do usuário ou similar
-            // Usuário confirmado
-            usuario.confirmado = true; // Simulando confirmação
+            // Atualiza o campo de usuário confirmado
+            usuario.confirmado = true;
 
             // Retorna resposta positiva
             return res.status(200).json({ mensagem: "E-mail confirmado com sucesso!" });
