@@ -33,7 +33,7 @@ const checkPortInUse = (port) => {
 
 // Definição de rotas
 const cadastroRoute = require("./src/routes/auth.routes");
-app.use("/cadastro", cadastroRoute);
+app.use("/auth", cadastroRoute);
 
 
 checkPortInUse(port)

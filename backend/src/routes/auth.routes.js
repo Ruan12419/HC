@@ -1,5 +1,6 @@
 const express = require("express")
 const authRoute = express.Router()
+const { cadastrarUsuario, login } = require("../controllers/auth.controller");
 
 
 /*
@@ -80,21 +81,9 @@ EXEMPLOS DE ESTRUTURA JSON PARA CADA ROLE
 OPERAÇÕES DE LOGIN DEVEM SER FEITAS VIA JWT
 */
 
-authRoute.post("/residente", (req, res) => {
 
-    let { email, senha, nome, telefone, data_nasc, role, numero_registro, especialidade, supervisor_responsavel, instituicao_formacao} = req.body;
-
-    if (email === "joao.silva@dominio.com") {
-        if (senha === "senhaSuperSecreta") {
-            return res.status(200).json({data: `Cadastro efetuado com sucesso!`});
-        }
-        return res.status(400).json({data: `Não é possível utilizar essa senha!`})
-    }
-    
-    return res.status(400).json({data: `Não foi possível efetuar o cadastro!`})
-    
-})
-
+authRoute.post("/cadastro", cadastrarUsuario);
+authRoute.post("/login", login);
 
 
 module.exports = authRoute;
