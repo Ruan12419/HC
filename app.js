@@ -1,5 +1,4 @@
 const express = require("express")
-const file = require("fs")
 
 const app = express()
 app.use((req, res, next) => {
@@ -9,6 +8,9 @@ app.use((req, res, next) => {
 
   app.use(express.json())
 
+
+const cadastroRoute = require("./routes/cadastro")
+app.use("/cadastro", cadastroRoute);
 
 const email_G = "email@email.com"
 const senha_G = "senha123"
