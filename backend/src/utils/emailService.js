@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+require('dotenv').config();
 const fs = require("fs");
 const path = require("path");
 
@@ -7,8 +8,8 @@ const path = require("path");
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'emailremetente', // Email do remetente
-        pass: "senhaapp"  // Senha do aplicativo ou senha gerada (não usar a senha da conta principal)
+        user: process.env.EMAIL_USER, // Email do remetente a partir do .env
+        pass: process.env.EMAIL_PASS  // Senha do aplicativo a partir do .env
     }
 });
 
@@ -31,7 +32,7 @@ const enviarEmailConfirmacao = (email, token) => {
 
             // Opções do e-mail
             const mailOptions = {
-                from: 'emailremetente', // Email do remetente
+                from: process.env.EMAIL_USER, // Email do remetente
                 to: email,                  // Email do destinatário
                 subject: 'Confirmação de Cadastro',
                 html: htmlContent            // Conteúdo HTML do e-mail
