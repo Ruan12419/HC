@@ -1,6 +1,7 @@
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { enviarEmailConfirmacao } = require("../utils/emailService");
 
 const {
     validarCamposComuns,
@@ -39,7 +40,8 @@ exports.cadastrarUsuario = async (req, res) => {
             nome_completo: dados.nome_completo.trim(),
             telefone: dados.telefone.replace(/\D/g, ""),
             data_nascimento: new Date(dados.data_nascimento).toISOString(),
-            role
+            role, 
+            confirmado: false
         };
 
         let userCompleto;
@@ -69,14 +71,45 @@ exports.cadastrarUsuario = async (req, res) => {
 
         User.push(userCompleto);
 
-        const token = jwt.sign({ id: userCompleto.email }, 'secretkey', { expiresIn: '1h' });
+         // Gerar o token de confirmação
+         const tokenConfirmacao = jwt.sign({ email: userCompleto.email }, 'secretkey-confirmacao', { expiresIn: '24h' });
 
-        return res.status(201).json({ message: "Cadastro realizado com sucesso", token });
+         // Enviar o e-mail de confirmação
+         await enviarEmailConfirmacao(userCompleto.email, tokenConfirmacao);
+ 
+         // Retornar resposta para o usuário
+         return res.status(201).json({ message: "Cadastro realizado com sucesso. Verifique seu e-mail para confirmar." });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ erro: "Erro interno ao cadastrar usuário" });
     }
 };
+
+exports.confirmarEmail = (req, res) => {
+    try {
+        const { token } = req.params;
+        
+        // Verifica se o token é válido
+        jwt.verify(token, 'secretkey-confirmacao', (err, decoded) => {
+            if (err) return res.status(400).json({ erro: "Token inválido ou expirado." });
+
+            // Encontrar o usuário pelo email (o email é parte do payload do token)
+            const usuario = User.find(u => u.email === decoded.email);
+            if (!usuario) return res.status(404).json({ erro: "Usuário não encontrado." });
+
+            // Aqui podemos atualizar o campo "confirmado" do usuário ou similar
+            // Usuário confirmado
+            usuario.confirmado = true; // Simulando confirmação
+
+            // Retorna resposta positiva
+            return res.status(200).json({ mensagem: "E-mail confirmado com sucesso!" });
+        });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ erro: "Erro ao confirmar o e-mail." });
+    }
+};
+
 
 
 exports.login = async (req, res) => {

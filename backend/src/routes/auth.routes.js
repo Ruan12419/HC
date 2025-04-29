@@ -1,6 +1,6 @@
 const express = require("express")
 const authRoute = express.Router()
-const { cadastrarUsuario, login } = require("../controllers/auth.controller");
+const { cadastrarUsuario, login, confirmarEmail } = require("../controllers/auth.controller");
 
 
 /*
@@ -84,6 +84,7 @@ OPERAÇÕES DE LOGIN DEVEM SER FEITAS VIA JWT
 
 authRoute.post("/cadastro", cadastrarUsuario);
 authRoute.post("/login", login);
+authRoute.get("/confirmar-email/:token", confirmarEmail);
 
 
 module.exports = authRoute;
