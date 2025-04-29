@@ -1,6 +1,5 @@
 const express = require("express")
-const cadastroRoute = express.Router()
-
+const authRoute = express.Router()
 
 
 /*
@@ -80,7 +79,8 @@ EXEMPLOS DE ESTRUTURA JSON PARA CADA ROLE
 /*
 OPERAÇÕES DE LOGIN DEVEM SER FEITAS VIA JWT
 */
-cadastroRoute.post("/residente", (req, res) => {
+
+authRoute.post("/residente", (req, res) => {
 
     let { email, senha, nome, telefone, data_nasc, role, numero_registro, especialidade, supervisor_responsavel, instituicao_formacao} = req.body;
 
@@ -90,7 +90,6 @@ cadastroRoute.post("/residente", (req, res) => {
         }
         return res.status(400).json({data: `Não é possível utilizar essa senha!`})
     }
-
     
     return res.status(400).json({data: `Não foi possível efetuar o cadastro!`})
     
@@ -98,4 +97,4 @@ cadastroRoute.post("/residente", (req, res) => {
 
 
 
-module.exports = cadastroRoute;
+module.exports = authRoute;
