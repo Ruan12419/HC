@@ -34,6 +34,8 @@ const checkPortInUse = (port) => {
 // Definição de rotas
 const cadastroRoute = require("./src/routes/auth.routes");
 app.use("/auth", cadastroRoute);
+const usuarioRoute = require("./src/routes/user.routes");
+app.use("/user", usuarioRoute);
 
 
 checkPortInUse(port)

@@ -228,6 +228,92 @@ Para contribuir para o projeto, siga os passos abaixo:
 
 ---
 
+## Funcionalidades Implementadas – Branch Cadastro/Login
+
+Esta branch concentra todas as funcionalidades essenciais relacionadas ao sistema de autenticação e gerenciamento de usuários na plataforma. Abaixo, a lista de recursos implementados:
+
+### Cadastro de Usuário
+
+* Suporte para múltiplos tipos de usuário:
+
+   * **Residente**: cadastro com CRM, especialidade, ano de residência, instituição de formação e setor.
+
+   * **Supervisor**: cadastro com CRM, especialidade e áreas supervisionadas.
+
+   * **Administrador**
+
+* Validação completa dos campos com mensagens específicas.
+
+* Hash de senha com `bcrypt`.
+
+* Armazenamento em banco com `Prisma ORM`.
+
+### Confirmação de E-mail
+
+* Após o cadastro, um e-mail de confirmação é enviado com link/token JWT.
+
+* A conta só é ativada após a confirmação do e-mail.
+
+* Token JWT expira em 24h.
+
+* Endpoint protegido que marca o campo `ativo` como `true` ao ser validado.
+
+### Login
+
+* Validação de credenciais com `bcrypt`.
+
+* Verificação de conta ativa e e-mail confirmado.
+
+* Geração de token JWT com expiração.
+
+* Retorno de dados mínimos do usuário autenticado.
+
+### Logout
+
+* Implementado no frontend via remoção do token JWT do armazenamento local.
+
+* O backend pode forçar redirecionamento caso o token não exista ou expire.
+
+### Recuperação de Senha
+
+* Endpoint `/auth/recuperar-senha` recebe o e-mail do usuário.
+
+* Um e-mail é enviado com link para redefinir a senha contendo um token JWT de curta duração (1h).
+
+* O link leva para a rota `/auth/redefinir-senha/:token` no frontend.
+
+### Redefinição de Senha
+
+* Rota protegida que valida o token de recuperação.
+
+* Nova senha é criptografada e salva no banco de dados.
+
+* O token é invalidado após uso (via expiração).
+
+### Proteção contra Brute Force (Rate Limiting)
+
+* Rota `/auth/login` protegida com `express-rate-limit`.
+
+* Limite configurado para 5 requisições a cada 15 minutos por IP.
+
+* Retorno de erro claro após exceder o limite.
+
+### Tecnologias Utilizadas
+
+* **Node.js**, **Express.js**
+
+* **Prisma ORM** (com MySQL)
+
+* **JWT** para autenticação
+
+* **bcrypt** para hashing de senha
+
+* **nodemailer** para envio de e-mails
+
+* **express-rate-limit** para proteção contra brute force
+
+
+
 # Licença
 
 Este projeto não possui licensa.

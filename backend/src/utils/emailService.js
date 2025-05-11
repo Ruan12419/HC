@@ -49,4 +49,17 @@ const enviarEmailConfirmacao = (email, token) => {
     });
 };
 
-module.exports = { enviarEmailConfirmacao };
+
+async function enviarEmailRecuperacao(email, token) {
+
+    const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: 'Recuperação de Senha',
+        text: `Clique no link para redefinir sua senha: http://localhost:3000/auth/redefinir-senha/${token}`
+    };
+
+    await transporter.sendMail(mailOptions);
+}
+
+module.exports = { enviarEmailConfirmacao, enviarEmailRecuperacao };

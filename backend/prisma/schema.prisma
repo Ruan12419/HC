@@ -1,0 +1,162 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Setor {
+  id          Int          @id @default(autoincrement())
+  nome        String       @db.VarChar(100)
+  descricao   String?      @db.Text
+  residentes  Residente[]
+  supervisores Supervisor[]
+}
+
+model Usuario {
+  id          Int           @id @default(autoincrement())
+  nome        String        @db.VarChar(100)
+  email       String        @unique @db.VarChar(100)
+  senha_hash  String        @db.VarChar(255)
+  tipo        TipoUsuario
+  ativo       Boolean       @default(true)
+  criado_em   DateTime      @default(now())
+
+  residente   Residente?
+  supervisor  Supervisor?
+  administrador Administrador?
+  logs        LogAcesso[]
+  notificacoes Notificacao[]
+  frequencias_registradas Frequencia[] @relation("Registradas")
+}
+
+enum TipoUsuario {
+  residente
+  supervisor
+  administrador
+}
+
+model Residente {
+  id                  Int         @id
+  usuario             Usuario     @relation(fields: [id], references: [id])
+  crm                 String?     @unique @db.VarChar(20)
+  especialidade       String?     @db.VarChar(100)
+  ano_residencia      Int?
+  setor_id            Int?
+  setor               Setor?      @relation(fields: [setor_id], references: [id])
+  frequencias         Frequencia[]
+  avaliacoes          Avaliacao[]
+}
+
+model Supervisor {
+  id           Int        @id
+  usuario      Usuario    @relation(fields: [id], references: [id])
+  crm          String?    @unique @db.VarChar(20)
+  setor_id     Int?
+  setor        Setor?     @relation(fields: [setor_id], references: [id])
+  avaliacoes   Avaliacao[]
+  comentarios  Comentario[]
+}
+
+model Administrador {
+  id      Int     @id
+  usuario Usuario @relation(fields: [id], references: [id])
+}
+
+model Frequencia {
+  id               Int       @id @default(autoincrement())
+  residente_id     Int
+  data             DateTime  @db.Date
+  presente         Boolean
+  horario_chegada  DateTime? @db.Time
+  horario_saida    DateTime? @db.Time
+  observacoes      String?   @db.Text
+  registrado_por   Int
+
+  residente        Residente @relation(fields: [residente_id], references: [id])
+  registradoPor    Usuario   @relation("Registradas", fields: [registrado_por], references: [id])
+
+  @@unique([residente_id, data])
+}
+
+model CampoAvaliacao {
+  id           Int       @id @default(autoincrement())
+  titulo       String    @db.VarChar(255)
+  descricao    String?   @db.Text
+  obrigatorio  Boolean   @default(true)
+  tipo         TipoCampo @default(numerica)
+  ordem        Int?
+  respostas    RespostaAvaliacao[]
+}
+
+enum TipoCampo {
+  numerica
+  texto
+  checkbox
+}
+
+model Avaliacao {
+  id              Int                  @id @default(autoincrement())
+  residente_id    Int
+  supervisor_id   Int
+  data_avaliacao  DateTime             @db.Date
+  periodo_inicio  DateTime?
+  periodo_fim     DateTime?
+  criado_em       DateTime             @default(now())
+
+  residente       Residente            @relation(fields: [residente_id], references: [id])
+  supervisor      Supervisor           @relation(fields: [supervisor_id], references: [id])
+  respostas       RespostaAvaliacao[]
+  comentarios     Comentario[]
+}
+
+model RespostaAvaliacao {
+  id                Int             @id @default(autoincrement())
+  avaliacao_id      Int
+  campo_id          Int
+  resposta_texto    String?         @db.Text
+  resposta_numerica Decimal?        @db.Decimal(4, 2)
+  resposta_checkbox Boolean?
+
+  avaliacao         Avaliacao       @relation(fields: [avaliacao_id], references: [id], onDelete: Cascade)
+  campo             CampoAvaliacao  @relation(fields: [campo_id], references: [id])
+}
+
+model Comentario {
+  id             Int         @id @default(autoincrement())
+  avaliacao_id   Int
+  supervisor_id  Int
+  comentario     String      @db.Text
+  criado_em      DateTime    @default(now())
+
+  avaliacao      Avaliacao   @relation(fields: [avaliacao_id], references: [id], onDelete: Cascade)
+  supervisor     Supervisor  @relation(fields: [supervisor_id], references: [id])
+}
+
+model LogAcesso {
+  id          Int       @id @default(autoincrement())
+  usuario_id  Int
+  ip_address  String?   @db.VarChar(45)
+  user_agent  String?   @db.Text
+  data_hora   DateTime  @default(now())
+  acao        String?   @db.Text
+
+  usuario     Usuario   @relation(fields: [usuario_id], references: [id])
+}
+
+model Notificacao {
+  id          Int       @id @default(autoincrement())
+  usuario_id  Int
+  titulo      String    @db.VarChar(255)
+  mensagem    String?   @db.Text
+  lida        Boolean   @default(false)
+  data_envio  DateTime  @default(now())
+
+  usuario     Usuario   @relation(fields: [usuario_id], references: [id])
+}
