@@ -1,6 +1,7 @@
 const express = require("express")
 const authRoute = express.Router()
-const { cadastrarUsuario, login, confirmarEmail } = require("../controllers/auth.controller");
+const {authMiddleware, limitador} = require("../middlewares/auth.middleware")
+const { cadastrarUsuario, login, confirmarEmail, recuperarSenha, redefinirSenha } = require("../controllers/auth.controller");
 
 
 /*
@@ -82,9 +83,12 @@ OPERAÇÕES DE LOGIN DEVEM SER FEITAS VIA JWT
 */
 
 
-authRoute.post("/cadastro", cadastrarUsuario);
-authRoute.post("/login", login);
+authRoute.post("/cadastro", limitador, cadastrarUsuario);
+authRoute.post("/login", limitador, login);
 authRoute.get("/confirmar-email/:token", confirmarEmail);
+
+authRoute.post('/recuperar-senha', recuperarSenha);
+authRoute.post('/redefinir-senha', redefinirSenha);
 
 
 module.exports = authRoute;
