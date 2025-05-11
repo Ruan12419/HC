@@ -2,8 +2,6 @@ const express = require("express")
 const authRoute = express.Router()
 const {authMiddleware, limitador} = require("../middlewares/auth.middleware")
 const { cadastrarUsuario, login, confirmarEmail, recuperarSenha, redefinirSenha } = require("../controllers/auth.controller");
-const usuarioController = require("../controllers/user.controller")
-const { limitador } = require("../middlewares/auth.middleware")
 
 
 /*
