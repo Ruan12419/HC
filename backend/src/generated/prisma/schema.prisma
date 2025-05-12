@@ -70,14 +70,16 @@ model Administrador {
 }
 
 model Frequencia {
-  id              Int       @id @default(autoincrement())
-  residente_id    Int
-  data            DateTime  @db.Date
-  presente        Boolean
-  horario_chegada DateTime? @db.Time
-  horario_saida   DateTime? @db.Time
-  observacoes     String?   @db.Text
-  registrado_por  Int
+  id               Int       @id @default(autoincrement())
+  residente_id     Int
+  data             DateTime  @db.Date
+  presente         Boolean
+  horario_chegada  DateTime? @db.Time
+  inicio_intervalo DateTime? @db.Time
+  fim_intervalo    DateTime? @db.Time
+  horario_saida    DateTime? @db.Time
+  observacoes      String?   @db.Text
+  registrado_por   Int
 
   residente     Residente @relation(fields: [residente_id], references: [id])
   registradoPor Usuario   @relation("Registradas", fields: [registrado_por], references: [id])

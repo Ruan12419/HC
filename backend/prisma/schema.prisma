@@ -75,6 +75,8 @@ model Frequencia {
   data             DateTime  @db.Date
   presente         Boolean
   horario_chegada  DateTime? @db.Time
+  inicio_intervalo DateTime? @db.Time
+  fim_intervalo    DateTime? @db.Time
   horario_saida    DateTime? @db.Time
   observacoes      String?   @db.Text
   registrado_por   Int
