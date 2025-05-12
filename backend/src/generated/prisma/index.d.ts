@@ -7202,6 +7202,8 @@ export namespace Prisma {
     data: Date | null
     presente: boolean | null
     horario_chegada: Date | null
+    inicio_intervalo: Date | null
+    fim_intervalo: Date | null
     horario_saida: Date | null
     observacoes: string | null
     registrado_por: number | null
@@ -7213,6 +7215,8 @@ export namespace Prisma {
     data: Date | null
     presente: boolean | null
     horario_chegada: Date | null
+    inicio_intervalo: Date | null
+    fim_intervalo: Date | null
     horario_saida: Date | null
     observacoes: string | null
     registrado_por: number | null
@@ -7224,6 +7228,8 @@ export namespace Prisma {
     data: number
     presente: number
     horario_chegada: number
+    inicio_intervalo: number
+    fim_intervalo: number
     horario_saida: number
     observacoes: number
     registrado_por: number
@@ -7249,6 +7255,8 @@ export namespace Prisma {
     data?: true
     presente?: true
     horario_chegada?: true
+    inicio_intervalo?: true
+    fim_intervalo?: true
     horario_saida?: true
     observacoes?: true
     registrado_por?: true
@@ -7260,6 +7268,8 @@ export namespace Prisma {
     data?: true
     presente?: true
     horario_chegada?: true
+    inicio_intervalo?: true
+    fim_intervalo?: true
     horario_saida?: true
     observacoes?: true
     registrado_por?: true
@@ -7271,6 +7281,8 @@ export namespace Prisma {
     data?: true
     presente?: true
     horario_chegada?: true
+    inicio_intervalo?: true
+    fim_intervalo?: true
     horario_saida?: true
     observacoes?: true
     registrado_por?: true
@@ -7369,6 +7381,8 @@ export namespace Prisma {
     data: Date
     presente: boolean
     horario_chegada: Date | null
+    inicio_intervalo: Date | null
+    fim_intervalo: Date | null
     horario_saida: Date | null
     observacoes: string | null
     registrado_por: number
@@ -7399,6 +7413,8 @@ export namespace Prisma {
     data?: boolean
     presente?: boolean
     horario_chegada?: boolean
+    inicio_intervalo?: boolean
+    fim_intervalo?: boolean
     horario_saida?: boolean
     observacoes?: boolean
     registrado_por?: boolean
@@ -7414,12 +7430,14 @@ export namespace Prisma {
     data?: boolean
     presente?: boolean
     horario_chegada?: boolean
+    inicio_intervalo?: boolean
+    fim_intervalo?: boolean
     horario_saida?: boolean
     observacoes?: boolean
     registrado_por?: boolean
   }
 
-  export type FrequenciaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residente_id" | "data" | "presente" | "horario_chegada" | "horario_saida" | "observacoes" | "registrado_por", ExtArgs["result"]["frequencia"]>
+  export type FrequenciaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residente_id" | "data" | "presente" | "horario_chegada" | "inicio_intervalo" | "fim_intervalo" | "horario_saida" | "observacoes" | "registrado_por", ExtArgs["result"]["frequencia"]>
   export type FrequenciaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     residente?: boolean | ResidenteDefaultArgs<ExtArgs>
     registradoPor?: boolean | UsuarioDefaultArgs<ExtArgs>
@@ -7437,6 +7455,8 @@ export namespace Prisma {
       data: Date
       presente: boolean
       horario_chegada: Date | null
+      inicio_intervalo: Date | null
+      fim_intervalo: Date | null
       horario_saida: Date | null
       observacoes: string | null
       registrado_por: number
@@ -7816,6 +7836,8 @@ export namespace Prisma {
     readonly data: FieldRef<"Frequencia", 'DateTime'>
     readonly presente: FieldRef<"Frequencia", 'Boolean'>
     readonly horario_chegada: FieldRef<"Frequencia", 'DateTime'>
+    readonly inicio_intervalo: FieldRef<"Frequencia", 'DateTime'>
+    readonly fim_intervalo: FieldRef<"Frequencia", 'DateTime'>
     readonly horario_saida: FieldRef<"Frequencia", 'DateTime'>
     readonly observacoes: FieldRef<"Frequencia", 'String'>
     readonly registrado_por: FieldRef<"Frequencia", 'Int'>
@@ -14229,6 +14251,8 @@ export namespace Prisma {
     data: 'data',
     presente: 'presente',
     horario_chegada: 'horario_chegada',
+    inicio_intervalo: 'inicio_intervalo',
+    fim_intervalo: 'fim_intervalo',
     horario_saida: 'horario_saida',
     observacoes: 'observacoes',
     registrado_por: 'registrado_por'
@@ -14771,6 +14795,8 @@ export namespace Prisma {
     data?: DateTimeFilter<"Frequencia"> | Date | string
     presente?: BoolFilter<"Frequencia"> | boolean
     horario_chegada?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
+    inicio_intervalo?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
+    fim_intervalo?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
     horario_saida?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
     observacoes?: StringNullableFilter<"Frequencia"> | string | null
     registrado_por?: IntFilter<"Frequencia"> | number
@@ -14784,6 +14810,8 @@ export namespace Prisma {
     data?: SortOrder
     presente?: SortOrder
     horario_chegada?: SortOrderInput | SortOrder
+    inicio_intervalo?: SortOrderInput | SortOrder
+    fim_intervalo?: SortOrderInput | SortOrder
     horario_saida?: SortOrderInput | SortOrder
     observacoes?: SortOrderInput | SortOrder
     registrado_por?: SortOrder
@@ -14802,6 +14830,8 @@ export namespace Prisma {
     data?: DateTimeFilter<"Frequencia"> | Date | string
     presente?: BoolFilter<"Frequencia"> | boolean
     horario_chegada?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
+    inicio_intervalo?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
+    fim_intervalo?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
     horario_saida?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
     observacoes?: StringNullableFilter<"Frequencia"> | string | null
     registrado_por?: IntFilter<"Frequencia"> | number
@@ -14815,6 +14845,8 @@ export namespace Prisma {
     data?: SortOrder
     presente?: SortOrder
     horario_chegada?: SortOrderInput | SortOrder
+    inicio_intervalo?: SortOrderInput | SortOrder
+    fim_intervalo?: SortOrderInput | SortOrder
     horario_saida?: SortOrderInput | SortOrder
     observacoes?: SortOrderInput | SortOrder
     registrado_por?: SortOrder
@@ -14834,6 +14866,8 @@ export namespace Prisma {
     data?: DateTimeWithAggregatesFilter<"Frequencia"> | Date | string
     presente?: BoolWithAggregatesFilter<"Frequencia"> | boolean
     horario_chegada?: DateTimeNullableWithAggregatesFilter<"Frequencia"> | Date | string | null
+    inicio_intervalo?: DateTimeNullableWithAggregatesFilter<"Frequencia"> | Date | string | null
+    fim_intervalo?: DateTimeNullableWithAggregatesFilter<"Frequencia"> | Date | string | null
     horario_saida?: DateTimeNullableWithAggregatesFilter<"Frequencia"> | Date | string | null
     observacoes?: StringNullableWithAggregatesFilter<"Frequencia"> | string | null
     registrado_por?: IntWithAggregatesFilter<"Frequencia"> | number
@@ -15511,6 +15545,8 @@ export namespace Prisma {
     data: Date | string
     presente: boolean
     horario_chegada?: Date | string | null
+    inicio_intervalo?: Date | string | null
+    fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
     residente: ResidenteCreateNestedOneWithoutFrequenciasInput
@@ -15523,6 +15559,8 @@ export namespace Prisma {
     data: Date | string
     presente: boolean
     horario_chegada?: Date | string | null
+    inicio_intervalo?: Date | string | null
+    fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
     registrado_por: number
@@ -15532,6 +15570,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     residente?: ResidenteUpdateOneRequiredWithoutFrequenciasNestedInput
@@ -15544,6 +15584,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     registrado_por?: IntFieldUpdateOperationsInput | number
@@ -15555,6 +15597,8 @@ export namespace Prisma {
     data: Date | string
     presente: boolean
     horario_chegada?: Date | string | null
+    inicio_intervalo?: Date | string | null
+    fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
     registrado_por: number
@@ -15564,6 +15608,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -15574,6 +15620,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     registrado_por?: IntFieldUpdateOperationsInput | number
@@ -16423,6 +16471,8 @@ export namespace Prisma {
     data?: SortOrder
     presente?: SortOrder
     horario_chegada?: SortOrder
+    inicio_intervalo?: SortOrder
+    fim_intervalo?: SortOrder
     horario_saida?: SortOrder
     observacoes?: SortOrder
     registrado_por?: SortOrder
@@ -16440,6 +16490,8 @@ export namespace Prisma {
     data?: SortOrder
     presente?: SortOrder
     horario_chegada?: SortOrder
+    inicio_intervalo?: SortOrder
+    fim_intervalo?: SortOrder
     horario_saida?: SortOrder
     observacoes?: SortOrder
     registrado_por?: SortOrder
@@ -16451,6 +16503,8 @@ export namespace Prisma {
     data?: SortOrder
     presente?: SortOrder
     horario_chegada?: SortOrder
+    inicio_intervalo?: SortOrder
+    fim_intervalo?: SortOrder
     horario_saida?: SortOrder
     observacoes?: SortOrder
     registrado_por?: SortOrder
@@ -18180,6 +18234,8 @@ export namespace Prisma {
     data: Date | string
     presente: boolean
     horario_chegada?: Date | string | null
+    inicio_intervalo?: Date | string | null
+    fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
     residente: ResidenteCreateNestedOneWithoutFrequenciasInput
@@ -18191,6 +18247,8 @@ export namespace Prisma {
     data: Date | string
     presente: boolean
     horario_chegada?: Date | string | null
+    inicio_intervalo?: Date | string | null
+    fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
   }
@@ -18359,6 +18417,8 @@ export namespace Prisma {
     data?: DateTimeFilter<"Frequencia"> | Date | string
     presente?: BoolFilter<"Frequencia"> | boolean
     horario_chegada?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
+    inicio_intervalo?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
+    fim_intervalo?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
     horario_saida?: DateTimeNullableFilter<"Frequencia"> | Date | string | null
     observacoes?: StringNullableFilter<"Frequencia"> | string | null
     registrado_por?: IntFilter<"Frequencia"> | number
@@ -18420,6 +18480,8 @@ export namespace Prisma {
     data: Date | string
     presente: boolean
     horario_chegada?: Date | string | null
+    inicio_intervalo?: Date | string | null
+    fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
     registradoPor: UsuarioCreateNestedOneWithoutFrequencias_registradasInput
@@ -18430,6 +18492,8 @@ export namespace Prisma {
     data: Date | string
     presente: boolean
     horario_chegada?: Date | string | null
+    inicio_intervalo?: Date | string | null
+    fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
     registrado_por: number
@@ -19663,6 +19727,8 @@ export namespace Prisma {
     data: Date | string
     presente: boolean
     horario_chegada?: Date | string | null
+    inicio_intervalo?: Date | string | null
+    fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
   }
@@ -19717,6 +19783,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     residente?: ResidenteUpdateOneRequiredWithoutFrequenciasNestedInput
@@ -19728,6 +19796,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -19738,6 +19808,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -19747,6 +19819,8 @@ export namespace Prisma {
     data: Date | string
     presente: boolean
     horario_chegada?: Date | string | null
+    inicio_intervalo?: Date | string | null
+    fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
     registrado_por: number
@@ -19765,6 +19839,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     registradoPor?: UsuarioUpdateOneRequiredWithoutFrequencias_registradasNestedInput
@@ -19775,6 +19851,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     registrado_por?: IntFieldUpdateOperationsInput | number
@@ -19785,6 +19863,8 @@ export namespace Prisma {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
     horario_chegada?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    inicio_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fim_intervalo?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     registrado_por?: IntFieldUpdateOperationsInput | number

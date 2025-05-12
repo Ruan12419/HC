@@ -160,6 +160,8 @@ exports.Prisma.FrequenciaScalarFieldEnum = {
   data: 'data',
   presente: 'presente',
   horario_chegada: 'horario_chegada',
+  inicio_intervalo: 'inicio_intervalo',
+  fim_intervalo: 'fim_intervalo',
   horario_saida: 'horario_saida',
   observacoes: 'observacoes',
   registrado_por: 'registrado_por'
