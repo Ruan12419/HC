@@ -1,13 +1,36 @@
-const { prisma } = require('../generated/prisma');
+const prisma = require('../config/db.config');
 
-const UsuarioRepository = {
-  async criarUsuario(dados) {
-    return await prisma.usuario.create({ data: dados });
-  },
+class UsuarioRepository {
+    static async findByEmail(email) {
+        return await prisma.usuario.findUnique({
+            where: { email }
+        });
+    }
 
-  async buscarPorEmail(email) {
-    return await prisma.usuario.findUnique({ where: { email } });
-  },
-};
+    static async createUsuario(data) {
+        return await prisma.usuario.create({
+            data,
+            include: {
+                residente: true,
+                supervisor: true,
+                administrador: true
+            }
+        });
+    }
+
+    static async updateUsuarioEmailStatus(email, ativo) {
+        return await prisma.usuario.update({
+            where: { email },
+            data: { ativo }
+        });
+    }
+
+    static async updateUsuarioPassword(email, senha_hash) {
+        return await prisma.usuario.update({
+            where: { email },
+            data: { senha_hash }
+        });
+    }
+}
 
 module.exports = UsuarioRepository;
