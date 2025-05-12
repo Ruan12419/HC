@@ -2,6 +2,7 @@ const express = require("express");
 const net = require("net");
 
 const app = express();
+const errorMiddleware = require('./src/middlewares/error.middleware');
 const port = 3000;
 
 // Middleware para configurar o Content-Type
@@ -19,7 +20,7 @@ const checkPortInUse = (port) => {
       server.close();
       resolve(false); // A porta está livre
     });
-
+    
     server.on("error", (err) => {
       if (err.code === "EADDRINUSE") {
         resolve(true); // A porta está em uso
@@ -39,20 +40,21 @@ app.use("/user", usuarioRoute);
 const frequenciaRoute = require('./src/routes/frequency.routes');
 app.use('/frequencias', frequenciaRoute);
 
+app.use(errorMiddleware);
 
 checkPortInUse(port)
-  .then((isInUse) => {
-    if (isInUse) {
-      console.error(`Já há outra instância rodando na URI:PORTA http://localhost:${port}`);
-      process.exit(1); // Finaliza o processo se a porta estiver em uso
-    } else {
-      // Se a porta não estiver em uso, inicia o servidor
-      app.listen(port, () => {
-        console.log(`Está rodando na porta ${port}!`);
-      });
-    }
-  })
-  .catch((err) => {
-    console.error("Erro ao verificar a porta:", err);
-    process.exit(1); // Finaliza o processo em caso de erro inesperado
-  });
+.then((isInUse) => {
+  if (isInUse) {
+    console.error(`Já há outra instância rodando na URI:PORTA http://localhost:${port}`);
+    process.exit(1); // Finaliza o processo se a porta estiver em uso
+  } else {
+    // Se a porta não estiver em uso, inicia o servidor
+    app.listen(port, () => {
+      console.log(`Está rodando na porta ${port}!`);
+    });
+  }
+})
+.catch((err) => {
+  console.error("Erro ao verificar a porta:", err);
+  process.exit(1); // Finaliza o processo em caso de erro inesperado
+});
