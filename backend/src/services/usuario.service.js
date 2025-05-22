@@ -63,10 +63,17 @@ class UsuarioService {
         }
 
         const tokenConfirmacao = jwt.sign({ email: usuarioCriado.email }, process.env.JWT_SECRET, { expiresIn: '24h' });
-
-        await enviarEmailConfirmacao(usuarioCriado.email, tokenConfirmacao);
+        
+        setImmediate(async () => {
+            try {
+                await enviarEmailConfirmacao(usuarioCriado.email, tokenConfirmacao);
+            } catch (err) {
+                console.error('Erro ao enviar e-mail de confirmação:', err.message);
+            }
+        });
 
         return { message: "Cadastro realizado com sucesso. Verifique seu e-mail para confirmar." };
+
     }
 
     static async confirmarEmail(token) {
