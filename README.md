@@ -41,7 +41,7 @@ Este projeto visa resolver os problemas enfrentados pela gestão de frequência 
 - **Frontend (Móvel)**: React Native
 - **Backend**: Node.js, Express
 - **Banco de Dados**: MySQL
-- **Autenticação**: JWT (JSON Web Tokens), OAuth 2.0
+- **Autenticação**: JWT (JSON Web Tokens)
 - **Segurança**: bcrypt.js para criptografia de senhas, TLS/SSL
 - **Notificações**: Firebase Cloud Messaging (FCM), Nodemailer para notificações por email
 - **Infraestrutura**: Docker, PM2, Render (para protótipos), AWS (para produção)
@@ -54,7 +54,7 @@ Este projeto visa resolver os problemas enfrentados pela gestão de frequência 
 
 - **Node.js** (versão 16 ou superior)
 - **MySQL**
-- **Conta de e-mail para envio de confirmações** (com acesso a uma senha de aplicativo)
+- **Conta de e-mail para envio de confirmações** (com acesso a uma [senha de aplicativo](https://support.google.com/accounts/answer/185833?hl=pt-BR))
 
 ### 1. **Backend**
 
@@ -160,7 +160,8 @@ Isso abrirá o painel para você testar no navegador ou no seu dispositivo móve
   "numero_registro": "123456",
   "especialidade": "Cirurgia Geral",
   "supervisor_responsavel": "Dr. João Silva",
-  "instituicao_formacao": "Hospital das Clínicas"
+  "instituicao_formacao": "Hospital das Clínicas",
+   "id_setor": 3
 }
 ```
 
