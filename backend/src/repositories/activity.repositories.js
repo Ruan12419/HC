@@ -1,4 +1,5 @@
 const prisma = require('../config/db.config');
+const { startOfWeek, endOfWeek } = require('date-fns');
 
 exports.buscarPorData = async (residenteId, data) => {
     return await prisma.atividade.findUnique({
@@ -18,8 +19,8 @@ exports.atualizarAtividade = async (id, dados) => {
 };
 
 exports.atividadesPendentes = async (semana, dia) => {
-    const primeiroDia = new Date(semana, dia - 1, 1);
-    const ultimoDia = new Date(semana, dia, 0);
+    const primeiroDia = startOfWeek(new Date(semana, 0));
+    const ultimoDia = endOfWeek(new Date(semana, 0));  
 
     const atividades = await prisma.atividade.count({
         where: {
