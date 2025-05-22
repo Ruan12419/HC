@@ -37,7 +37,6 @@ Este projeto visa resolver os problemas enfrentados pela gestão de frequência 
 
 ## Tecnologias Utilizadas
 
-- **Frontend (Web)**: React, HTML, CSS, JavaScript
 - **Frontend (Móvel)**: React Native
 - **Backend**: Node.js, Express
 - **Banco de Dados**: MySQL
