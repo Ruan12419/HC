@@ -18,6 +18,9 @@ exports.criarAtividade = async (dados) => {
 };
 
 exports.atualizarAtividade = async (id, dados) => {
+    if (dados.data_atividade) {
+        dados.data_atividade = new Date(dados.data_atividade);
+    }
     return await prisma.atividade.update({
         where: { id },
         data: dados
