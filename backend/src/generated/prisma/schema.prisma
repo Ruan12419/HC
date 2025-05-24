@@ -35,6 +35,7 @@ model Usuario {
   logs                    LogAcesso[]
   notificacoes            Notificacao[]
   frequencias_registradas Frequencia[]   @relation("Registradas")
+  AtividadeLog            AtividadeLog[]
 }
 
 enum TipoUsuario {
@@ -98,12 +99,26 @@ model Atividade {
   criado_em      DateTime @default(now())
   finalizada     Boolean
 
-  residente Residente @relation(fields: [residente_id], references: [id])
-  setor     Setor     @relation(fields: [setor_id], references: [id])
+  residente    Residente      @relation(fields: [residente_id], references: [id])
+  setor        Setor          @relation(fields: [setor_id], references: [id])
+  AtividadeLog AtividadeLog[]
 
   @@unique([residente_id, data_atividade, descricao])
   @@index([residente_id])
   @@index([setor_id])
+}
+
+model AtividadeLog {
+  id               Int      @id @default(autoincrement())
+  atividade_id     Int
+  acao             String   @db.VarChar(25) // 'criar', 'editar', 'excluir'
+  dados_anteriores Json?
+  dados_novos      Json?
+  usuario_id       Int
+  timestamp        DateTime @default(now())
+
+  atividade Atividade @relation(fields: [atividade_id], references: [id])
+  usuario   Usuario   @relation(fields: [usuario_id], references: [id])
 }
 
 model CampoAvaliacao {

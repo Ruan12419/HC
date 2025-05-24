@@ -12,29 +12,30 @@ datasource db {
 }
 
 model Setor {
-  id          Int          @id @default(autoincrement())
-  nome        String       @db.VarChar(100)
-  descricao   String?      @db.Text
-  residentes  Residente[]
+  id           Int          @id @default(autoincrement())
+  nome         String       @db.VarChar(100)
+  descricao    String?      @db.Text
+  residentes   Residente[]
   supervisores Supervisor[]
-  atividades  Atividade[]
+  atividades   Atividade[]
 }
 
 model Usuario {
-  id          Int           @id @default(autoincrement())
-  nome        String        @db.VarChar(100)
-  email       String        @unique @db.VarChar(100)
-  senha_hash  String        @db.VarChar(255)
-  tipo        TipoUsuario
-  ativo       Boolean       @default(true)
-  criado_em   DateTime      @default(now())
+  id         Int         @id @default(autoincrement())
+  nome       String      @db.VarChar(100)
+  email      String      @unique @db.VarChar(100)
+  senha_hash String      @db.VarChar(255)
+  tipo       TipoUsuario
+  ativo      Boolean     @default(true)
+  criado_em  DateTime    @default(now())
 
-  residente   Residente?
-  supervisor  Supervisor?
-  administrador Administrador?
-  logs        LogAcesso[]
-  notificacoes Notificacao[]
-  frequencias_registradas Frequencia[] @relation("Registradas")
+  residente               Residente?
+  supervisor              Supervisor?
+  administrador           Administrador?
+  logs                    LogAcesso[]
+  notificacoes            Notificacao[]
+  frequencias_registradas Frequencia[]   @relation("Registradas")
+  AtividadeLog            AtividadeLog[]
 }
 
 enum TipoUsuario {
@@ -44,26 +45,26 @@ enum TipoUsuario {
 }
 
 model Residente {
-  id                  Int         @id
-  usuario             Usuario     @relation(fields: [id], references: [id])
-  crm                 String?     @unique @db.VarChar(20)
-  especialidade       String?     @db.VarChar(100)
-  ano_residencia      Int?
-  setor_id            Int?
-  setor               Setor?      @relation(fields: [setor_id], references: [id])
-  frequencias         Frequencia[]
-  avaliacoes          Avaliacao[]
-  atividades          Atividade[]
+  id             Int          @id
+  usuario        Usuario      @relation(fields: [id], references: [id])
+  crm            String?      @unique @db.VarChar(20)
+  especialidade  String?      @db.VarChar(100)
+  ano_residencia Int?
+  setor_id       Int?
+  setor          Setor?       @relation(fields: [setor_id], references: [id])
+  frequencias    Frequencia[]
+  avaliacoes     Avaliacao[]
+  atividades     Atividade[]
 }
 
 model Supervisor {
-  id           Int        @id
-  usuario      Usuario    @relation(fields: [id], references: [id])
-  crm          String?    @unique @db.VarChar(20)
-  setor_id     Int?
-  setor        Setor?     @relation(fields: [setor_id], references: [id])
-  avaliacoes   Avaliacao[]
-  comentarios  Comentario[]
+  id          Int          @id
+  usuario     Usuario      @relation(fields: [id], references: [id])
+  crm         String?      @unique @db.VarChar(20)
+  setor_id    Int?
+  setor       Setor?       @relation(fields: [setor_id], references: [id])
+  avaliacoes  Avaliacao[]
+  comentarios Comentario[]
 }
 
 model Administrador {
@@ -83,37 +84,51 @@ model Frequencia {
   observacoes      String?   @db.Text
   registrado_por   Int
 
-  residente        Residente @relation(fields: [residente_id], references: [id])
-  registradoPor    Usuario   @relation("Registradas", fields: [registrado_por], references: [id])
+  residente     Residente @relation(fields: [residente_id], references: [id])
+  registradoPor Usuario   @relation("Registradas", fields: [registrado_por], references: [id])
 
   @@unique([residente_id, data])
 }
 
 model Atividade {
-  id              Int       @id @default(autoincrement())
-  residente_id    Int
-  setor_id        Int
-  descricao       String    @db.VarChar(255)
-  data_atividade  DateTime  @db.Date
-  criado_em       DateTime  @default(now())
-  finalizada      Boolean
+  id             Int      @id @default(autoincrement())
+  residente_id   Int
+  setor_id       Int
+  descricao      String   @db.VarChar(255)
+  data_atividade DateTime @db.Date
+  criado_em      DateTime @default(now())
+  finalizada     Boolean
 
-  residente       Residente @relation(fields: [residente_id], references: [id])
-  setor           Setor     @relation(fields: [setor_id], references: [id])
+  residente    Residente      @relation(fields: [residente_id], references: [id])
+  setor        Setor          @relation(fields: [setor_id], references: [id])
+  AtividadeLog AtividadeLog[]
 
+  @@unique([residente_id, data_atividade, descricao])
   @@index([residente_id])
   @@index([setor_id])
-  @@unique([residente_id, data_atividade, descricao])
+}
+
+model AtividadeLog {
+  id               Int      @id @default(autoincrement())
+  atividade_id     Int
+  acao             String   @db.VarChar(25) // 'criar', 'editar', 'excluir'
+  dados_anteriores Json?
+  dados_novos      Json?
+  usuario_id       Int
+  timestamp        DateTime @default(now())
+
+  atividade Atividade @relation(fields: [atividade_id], references: [id])
+  usuario   Usuario   @relation(fields: [usuario_id], references: [id])
 }
 
 model CampoAvaliacao {
-  id           Int       @id @default(autoincrement())
-  titulo       String    @db.VarChar(255)
-  descricao    String?   @db.Text
-  obrigatorio  Boolean   @default(true)
-  tipo         TipoCampo @default(numerica)
-  ordem        Int?
-  respostas    RespostaAvaliacao[]
+  id          Int                 @id @default(autoincrement())
+  titulo      String              @db.VarChar(255)
+  descricao   String?             @db.Text
+  obrigatorio Boolean             @default(true)
+  tipo        TipoCampo           @default(numerica)
+  ordem       Int?
+  respostas   RespostaAvaliacao[]
 }
 
 enum TipoCampo {
@@ -123,61 +138,61 @@ enum TipoCampo {
 }
 
 model Avaliacao {
-  id              Int                  @id @default(autoincrement())
-  residente_id    Int
-  supervisor_id   Int
-  data_avaliacao  DateTime             @db.Date
-  periodo_inicio  DateTime?
-  periodo_fim     DateTime?
-  criado_em       DateTime             @default(now())
+  id             Int       @id @default(autoincrement())
+  residente_id   Int
+  supervisor_id  Int
+  data_avaliacao DateTime  @db.Date
+  periodo_inicio DateTime?
+  periodo_fim    DateTime?
+  criado_em      DateTime  @default(now())
 
-  residente       Residente            @relation(fields: [residente_id], references: [id])
-  supervisor      Supervisor           @relation(fields: [supervisor_id], references: [id])
-  respostas       RespostaAvaliacao[]
-  comentarios     Comentario[]
+  residente   Residente           @relation(fields: [residente_id], references: [id])
+  supervisor  Supervisor          @relation(fields: [supervisor_id], references: [id])
+  respostas   RespostaAvaliacao[]
+  comentarios Comentario[]
 }
 
 model RespostaAvaliacao {
-  id                Int             @id @default(autoincrement())
+  id                Int      @id @default(autoincrement())
   avaliacao_id      Int
   campo_id          Int
-  resposta_texto    String?         @db.Text
-  resposta_numerica Decimal?        @db.Decimal(4, 2)
+  resposta_texto    String?  @db.Text
+  resposta_numerica Decimal? @db.Decimal(4, 2)
   resposta_checkbox Boolean?
 
-  avaliacao         Avaliacao       @relation(fields: [avaliacao_id], references: [id], onDelete: Cascade)
-  campo             CampoAvaliacao  @relation(fields: [campo_id], references: [id])
+  avaliacao Avaliacao      @relation(fields: [avaliacao_id], references: [id], onDelete: Cascade)
+  campo     CampoAvaliacao @relation(fields: [campo_id], references: [id])
 }
 
 model Comentario {
-  id             Int         @id @default(autoincrement())
-  avaliacao_id   Int
-  supervisor_id  Int
-  comentario     String      @db.Text
-  criado_em      DateTime    @default(now())
+  id            Int      @id @default(autoincrement())
+  avaliacao_id  Int
+  supervisor_id Int
+  comentario    String   @db.Text
+  criado_em     DateTime @default(now())
 
-  avaliacao      Avaliacao   @relation(fields: [avaliacao_id], references: [id], onDelete: Cascade)
-  supervisor     Supervisor  @relation(fields: [supervisor_id], references: [id])
+  avaliacao  Avaliacao  @relation(fields: [avaliacao_id], references: [id], onDelete: Cascade)
+  supervisor Supervisor @relation(fields: [supervisor_id], references: [id])
 }
 
 model LogAcesso {
-  id          Int       @id @default(autoincrement())
-  usuario_id  Int
-  ip_address  String?   @db.VarChar(45)
-  user_agent  String?   @db.Text
-  data_hora   DateTime  @default(now())
-  acao        String?   @db.Text
+  id         Int      @id @default(autoincrement())
+  usuario_id Int
+  ip_address String?  @db.VarChar(45)
+  user_agent String?  @db.Text
+  data_hora  DateTime @default(now())
+  acao       String?  @db.Text
 
-  usuario     Usuario   @relation(fields: [usuario_id], references: [id])
+  usuario Usuario @relation(fields: [usuario_id], references: [id])
 }
 
 model Notificacao {
-  id          Int       @id @default(autoincrement())
-  usuario_id  Int
-  titulo      String    @db.VarChar(255)
-  mensagem    String?   @db.Text
-  lida        Boolean   @default(false)
-  data_envio  DateTime  @default(now())
+  id         Int      @id @default(autoincrement())
+  usuario_id Int
+  titulo     String   @db.VarChar(255)
+  mensagem   String?  @db.Text
+  lida       Boolean  @default(false)
+  data_envio DateTime @default(now())
 
-  usuario     Usuario   @relation(fields: [usuario_id], references: [id])
+  usuario Usuario @relation(fields: [usuario_id], references: [id])
 }
