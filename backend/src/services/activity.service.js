@@ -1,4 +1,5 @@
 const repository = require('../repositories/activity.repositories');
+const logRepository = require('../repositories/activityLog.repository');
 
 exports.criar = async (dados) => {
     const existente = await repository.buscarPorAtividade(dados.residente_id, dados.data_atividade, dados.descricao);
@@ -7,11 +8,21 @@ exports.criar = async (dados) => {
     return await repository.criarAtividade(dados);
 };
 
-exports.atualizar = async (id, dados) => {
+exports.atualizar = async (id, dados, usuario_id) => {
     const atividade = await repository.buscarPorId(id);
     if (!atividade) throw new Error('Atividade não encontrada.');
 
-    return await repository.atualizarAtividade(id, dados);
+    const atualizada = await repository.atualizarAtividade(id, dados);
+
+    await logRepository.registrarLog({
+        atividade_id: id,
+        acao: 'editar',
+        dados_anteriores: atividade,
+        dados_novos: atualizada,
+        usuario_id
+    });
+
+    return atualizada;
 };
 
 exports.excluir = async (id) => {

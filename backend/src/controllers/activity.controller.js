@@ -1,4 +1,12 @@
-const service = require('../services/activity.service');
+const atividadeService = require('../services/activity.service');
+const jwt = require("jsonwebtoken")
+const UsuarioRepository = require('../repositories/usuario.repository');
+
+
+
+const usuario = (req) => {
+    return req.usuario;
+}
 
 /**
  * Cria as atividades
@@ -10,7 +18,7 @@ const service = require('../services/activity.service');
  */
 exports.criar = async (req, res, next) => {
     try {
-        const atividade = await service.criar(req.body);
+        const atividade = await atividadeService.criar(req.body);
         res.status(201).json(atividade);
     } catch (err) {
         next(err);
@@ -24,7 +32,7 @@ exports.criar = async (req, res, next) => {
 exports.atualizar = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const atividade = await service.atualizar(Number(id), req.body);
+        const atividade = await atividadeService.atualizar(Number(id), req.body,  usuario(req).id);
         res.json(atividade);
     } catch (err) {
         next(err);
@@ -36,7 +44,7 @@ exports.atualizar = async (req, res, next) => {
 exports.excluir = async (req, res, next) => {
     try {
         const { id } = req.params;
-        await service.excluir(Number(id));
+        await atividadeService.excluir(Number(id));
         res.json({ mensagem: 'Atividade excluída com sucesso.' });
     } catch (err) {
         next(err);
@@ -47,7 +55,7 @@ exports.excluir = async (req, res, next) => {
 exports.buscarPorId = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const atividade = await service.buscarPorId(Number(id));
+        const atividade = await atividadeService.buscarPorId(Number(id));
         if (!atividade) return res.status(404).json({ message: 'Atividade não encontrada' });
         res.json(atividade);
     } catch (err) {
@@ -59,7 +67,7 @@ exports.buscarPorId = async (req, res, next) => {
 exports.listarPorResidente = async (req, res, next) => {
     try {
         const { residenteId } = req.params;
-        const atividades = await service.buscarPorResidente(Number(residenteId));
+        const atividades = await atividadeService.buscarPorResidente(Number(residenteId));
         res.json(atividades);
     } catch (err) {
         next(err);
@@ -70,7 +78,7 @@ exports.listarPorResidente = async (req, res, next) => {
 exports.pendentes = async (req, res, next) => {
     try {
         const { residenteId } = req.params;
-        const resultado = await service.buscarPendentes(Number(residenteId));
+        const resultado = await atividadeService.buscarPendentes(Number(residenteId));
         res.json(resultado);
     } catch (err) {
         next(err);
@@ -81,7 +89,7 @@ exports.pendentes = async (req, res, next) => {
 exports.listarFinalizadas = async (req, res, next) => {
     try {
         const { residenteId } = req.params;
-        const resultado = await service.buscarFinalizadas(Number(residenteId));
+        const resultado = await atividadeService.buscarFinalizadas(Number(residenteId));
         res.json(resultado);
     } catch (err) {
         next(err);
@@ -92,7 +100,7 @@ exports.listarFinalizadas = async (req, res, next) => {
 exports.estatisticas = async (req, res, next) => {
     try {
         const residenteId = Number(req.params.residenteId);
-        const stats = await service.obterEstatisticas(residenteId);
+        const stats = await atividadeService.obterEstatisticas(residenteId);
         res.json(stats);
     } catch (err) {
         next(err);
