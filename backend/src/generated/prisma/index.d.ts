@@ -44,6 +44,11 @@ export type Administrador = $Result.DefaultSelection<Prisma.$AdministradorPayloa
  */
 export type Frequencia = $Result.DefaultSelection<Prisma.$FrequenciaPayload>
 /**
+ * Model Atividade
+ * 
+ */
+export type Atividade = $Result.DefaultSelection<Prisma.$AtividadePayload>
+/**
  * Model CampoAvaliacao
  * 
  */
@@ -289,6 +294,16 @@ export class PrismaClient<
     * ```
     */
   get frequencia(): Prisma.FrequenciaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.atividade`: Exposes CRUD operations for the **Atividade** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Atividades
+    * const atividades = await prisma.atividade.findMany()
+    * ```
+    */
+  get atividade(): Prisma.AtividadeDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.campoAvaliacao`: Exposes CRUD operations for the **CampoAvaliacao** model.
@@ -795,6 +810,7 @@ export namespace Prisma {
     Supervisor: 'Supervisor',
     Administrador: 'Administrador',
     Frequencia: 'Frequencia',
+    Atividade: 'Atividade',
     CampoAvaliacao: 'CampoAvaliacao',
     Avaliacao: 'Avaliacao',
     RespostaAvaliacao: 'RespostaAvaliacao',
@@ -819,7 +835,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "setor" | "usuario" | "residente" | "supervisor" | "administrador" | "frequencia" | "campoAvaliacao" | "avaliacao" | "respostaAvaliacao" | "comentario" | "logAcesso" | "notificacao"
+      modelProps: "setor" | "usuario" | "residente" | "supervisor" | "administrador" | "frequencia" | "atividade" | "campoAvaliacao" | "avaliacao" | "respostaAvaliacao" | "comentario" | "logAcesso" | "notificacao"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1216,6 +1232,72 @@ export namespace Prisma {
           count: {
             args: Prisma.FrequenciaCountArgs<ExtArgs>
             result: $Utils.Optional<FrequenciaCountAggregateOutputType> | number
+          }
+        }
+      }
+      Atividade: {
+        payload: Prisma.$AtividadePayload<ExtArgs>
+        fields: Prisma.AtividadeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AtividadeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AtividadeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadePayload>
+          }
+          findFirst: {
+            args: Prisma.AtividadeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AtividadeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadePayload>
+          }
+          findMany: {
+            args: Prisma.AtividadeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadePayload>[]
+          }
+          create: {
+            args: Prisma.AtividadeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadePayload>
+          }
+          createMany: {
+            args: Prisma.AtividadeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.AtividadeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadePayload>
+          }
+          update: {
+            args: Prisma.AtividadeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadePayload>
+          }
+          deleteMany: {
+            args: Prisma.AtividadeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AtividadeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AtividadeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadePayload>
+          }
+          aggregate: {
+            args: Prisma.AtividadeAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAtividade>
+          }
+          groupBy: {
+            args: Prisma.AtividadeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AtividadeGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AtividadeCountArgs<ExtArgs>
+            result: $Utils.Optional<AtividadeCountAggregateOutputType> | number
           }
         }
       }
@@ -1705,6 +1787,7 @@ export namespace Prisma {
     supervisor?: SupervisorOmit
     administrador?: AdministradorOmit
     frequencia?: FrequenciaOmit
+    atividade?: AtividadeOmit
     campoAvaliacao?: CampoAvaliacaoOmit
     avaliacao?: AvaliacaoOmit
     respostaAvaliacao?: RespostaAvaliacaoOmit
@@ -1807,11 +1890,13 @@ export namespace Prisma {
   export type SetorCountOutputType = {
     residentes: number
     supervisores: number
+    atividades: number
   }
 
   export type SetorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     residentes?: boolean | SetorCountOutputTypeCountResidentesArgs
     supervisores?: boolean | SetorCountOutputTypeCountSupervisoresArgs
+    atividades?: boolean | SetorCountOutputTypeCountAtividadesArgs
   }
 
   // Custom InputTypes
@@ -1837,6 +1922,13 @@ export namespace Prisma {
    */
   export type SetorCountOutputTypeCountSupervisoresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SupervisorWhereInput
+  }
+
+  /**
+   * SetorCountOutputType without action
+   */
+  export type SetorCountOutputTypeCountAtividadesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AtividadeWhereInput
   }
 
 
@@ -1896,11 +1988,13 @@ export namespace Prisma {
   export type ResidenteCountOutputType = {
     frequencias: number
     avaliacoes: number
+    atividades: number
   }
 
   export type ResidenteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     frequencias?: boolean | ResidenteCountOutputTypeCountFrequenciasArgs
     avaliacoes?: boolean | ResidenteCountOutputTypeCountAvaliacoesArgs
+    atividades?: boolean | ResidenteCountOutputTypeCountAtividadesArgs
   }
 
   // Custom InputTypes
@@ -1926,6 +2020,13 @@ export namespace Prisma {
    */
   export type ResidenteCountOutputTypeCountAvaliacoesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AvaliacaoWhereInput
+  }
+
+  /**
+   * ResidenteCountOutputType without action
+   */
+  export type ResidenteCountOutputTypeCountAtividadesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AtividadeWhereInput
   }
 
 
@@ -2228,6 +2329,7 @@ export namespace Prisma {
     descricao?: boolean
     residentes?: boolean | Setor$residentesArgs<ExtArgs>
     supervisores?: boolean | Setor$supervisoresArgs<ExtArgs>
+    atividades?: boolean | Setor$atividadesArgs<ExtArgs>
     _count?: boolean | SetorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["setor"]>
 
@@ -2243,6 +2345,7 @@ export namespace Prisma {
   export type SetorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     residentes?: boolean | Setor$residentesArgs<ExtArgs>
     supervisores?: boolean | Setor$supervisoresArgs<ExtArgs>
+    atividades?: boolean | Setor$atividadesArgs<ExtArgs>
     _count?: boolean | SetorCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2251,6 +2354,7 @@ export namespace Prisma {
     objects: {
       residentes: Prisma.$ResidentePayload<ExtArgs>[]
       supervisores: Prisma.$SupervisorPayload<ExtArgs>[]
+      atividades: Prisma.$AtividadePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2598,6 +2702,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     residentes<T extends Setor$residentesArgs<ExtArgs> = {}>(args?: Subset<T, Setor$residentesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResidentePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     supervisores<T extends Setor$supervisoresArgs<ExtArgs> = {}>(args?: Subset<T, Setor$supervisoresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SupervisorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    atividades<T extends Setor$atividadesArgs<ExtArgs> = {}>(args?: Subset<T, Setor$atividadesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3018,6 +3123,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SupervisorScalarFieldEnum | SupervisorScalarFieldEnum[]
+  }
+
+  /**
+   * Setor.atividades
+   */
+  export type Setor$atividadesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    where?: AtividadeWhereInput
+    orderBy?: AtividadeOrderByWithRelationInput | AtividadeOrderByWithRelationInput[]
+    cursor?: AtividadeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AtividadeScalarFieldEnum | AtividadeScalarFieldEnum[]
   }
 
   /**
@@ -4385,6 +4514,7 @@ export namespace Prisma {
     setor?: boolean | Residente$setorArgs<ExtArgs>
     frequencias?: boolean | Residente$frequenciasArgs<ExtArgs>
     avaliacoes?: boolean | Residente$avaliacoesArgs<ExtArgs>
+    atividades?: boolean | Residente$atividadesArgs<ExtArgs>
     _count?: boolean | ResidenteCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["residente"]>
 
@@ -4404,6 +4534,7 @@ export namespace Prisma {
     setor?: boolean | Residente$setorArgs<ExtArgs>
     frequencias?: boolean | Residente$frequenciasArgs<ExtArgs>
     avaliacoes?: boolean | Residente$avaliacoesArgs<ExtArgs>
+    atividades?: boolean | Residente$atividadesArgs<ExtArgs>
     _count?: boolean | ResidenteCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -4414,6 +4545,7 @@ export namespace Prisma {
       setor: Prisma.$SetorPayload<ExtArgs> | null
       frequencias: Prisma.$FrequenciaPayload<ExtArgs>[]
       avaliacoes: Prisma.$AvaliacaoPayload<ExtArgs>[]
+      atividades: Prisma.$AtividadePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -4765,6 +4897,7 @@ export namespace Prisma {
     setor<T extends Residente$setorArgs<ExtArgs> = {}>(args?: Subset<T, Residente$setorArgs<ExtArgs>>): Prisma__SetorClient<$Result.GetResult<Prisma.$SetorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     frequencias<T extends Residente$frequenciasArgs<ExtArgs> = {}>(args?: Subset<T, Residente$frequenciasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FrequenciaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     avaliacoes<T extends Residente$avaliacoesArgs<ExtArgs> = {}>(args?: Subset<T, Residente$avaliacoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AvaliacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    atividades<T extends Residente$atividadesArgs<ExtArgs> = {}>(args?: Subset<T, Residente$atividadesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5206,6 +5339,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AvaliacaoScalarFieldEnum | AvaliacaoScalarFieldEnum[]
+  }
+
+  /**
+   * Residente.atividades
+   */
+  export type Residente$atividadesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    where?: AtividadeWhereInput
+    orderBy?: AtividadeOrderByWithRelationInput | AtividadeOrderByWithRelationInput[]
+    cursor?: AtividadeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AtividadeScalarFieldEnum | AtividadeScalarFieldEnum[]
   }
 
   /**
@@ -8199,6 +8356,1003 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: FrequenciaInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Atividade
+   */
+
+  export type AggregateAtividade = {
+    _count: AtividadeCountAggregateOutputType | null
+    _avg: AtividadeAvgAggregateOutputType | null
+    _sum: AtividadeSumAggregateOutputType | null
+    _min: AtividadeMinAggregateOutputType | null
+    _max: AtividadeMaxAggregateOutputType | null
+  }
+
+  export type AtividadeAvgAggregateOutputType = {
+    id: number | null
+    residente_id: number | null
+    setor_id: number | null
+  }
+
+  export type AtividadeSumAggregateOutputType = {
+    id: number | null
+    residente_id: number | null
+    setor_id: number | null
+  }
+
+  export type AtividadeMinAggregateOutputType = {
+    id: number | null
+    residente_id: number | null
+    setor_id: number | null
+    descricao: string | null
+    data_atividade: Date | null
+    criado_em: Date | null
+    finalizada: boolean | null
+  }
+
+  export type AtividadeMaxAggregateOutputType = {
+    id: number | null
+    residente_id: number | null
+    setor_id: number | null
+    descricao: string | null
+    data_atividade: Date | null
+    criado_em: Date | null
+    finalizada: boolean | null
+  }
+
+  export type AtividadeCountAggregateOutputType = {
+    id: number
+    residente_id: number
+    setor_id: number
+    descricao: number
+    data_atividade: number
+    criado_em: number
+    finalizada: number
+    _all: number
+  }
+
+
+  export type AtividadeAvgAggregateInputType = {
+    id?: true
+    residente_id?: true
+    setor_id?: true
+  }
+
+  export type AtividadeSumAggregateInputType = {
+    id?: true
+    residente_id?: true
+    setor_id?: true
+  }
+
+  export type AtividadeMinAggregateInputType = {
+    id?: true
+    residente_id?: true
+    setor_id?: true
+    descricao?: true
+    data_atividade?: true
+    criado_em?: true
+    finalizada?: true
+  }
+
+  export type AtividadeMaxAggregateInputType = {
+    id?: true
+    residente_id?: true
+    setor_id?: true
+    descricao?: true
+    data_atividade?: true
+    criado_em?: true
+    finalizada?: true
+  }
+
+  export type AtividadeCountAggregateInputType = {
+    id?: true
+    residente_id?: true
+    setor_id?: true
+    descricao?: true
+    data_atividade?: true
+    criado_em?: true
+    finalizada?: true
+    _all?: true
+  }
+
+  export type AtividadeAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Atividade to aggregate.
+     */
+    where?: AtividadeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Atividades to fetch.
+     */
+    orderBy?: AtividadeOrderByWithRelationInput | AtividadeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AtividadeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Atividades from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Atividades.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Atividades
+    **/
+    _count?: true | AtividadeCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AtividadeAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AtividadeSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AtividadeMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AtividadeMaxAggregateInputType
+  }
+
+  export type GetAtividadeAggregateType<T extends AtividadeAggregateArgs> = {
+        [P in keyof T & keyof AggregateAtividade]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAtividade[P]>
+      : GetScalarType<T[P], AggregateAtividade[P]>
+  }
+
+
+
+
+  export type AtividadeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AtividadeWhereInput
+    orderBy?: AtividadeOrderByWithAggregationInput | AtividadeOrderByWithAggregationInput[]
+    by: AtividadeScalarFieldEnum[] | AtividadeScalarFieldEnum
+    having?: AtividadeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AtividadeCountAggregateInputType | true
+    _avg?: AtividadeAvgAggregateInputType
+    _sum?: AtividadeSumAggregateInputType
+    _min?: AtividadeMinAggregateInputType
+    _max?: AtividadeMaxAggregateInputType
+  }
+
+  export type AtividadeGroupByOutputType = {
+    id: number
+    residente_id: number
+    setor_id: number
+    descricao: string
+    data_atividade: Date
+    criado_em: Date
+    finalizada: boolean
+    _count: AtividadeCountAggregateOutputType | null
+    _avg: AtividadeAvgAggregateOutputType | null
+    _sum: AtividadeSumAggregateOutputType | null
+    _min: AtividadeMinAggregateOutputType | null
+    _max: AtividadeMaxAggregateOutputType | null
+  }
+
+  type GetAtividadeGroupByPayload<T extends AtividadeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AtividadeGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AtividadeGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AtividadeGroupByOutputType[P]>
+            : GetScalarType<T[P], AtividadeGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AtividadeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    residente_id?: boolean
+    setor_id?: boolean
+    descricao?: boolean
+    data_atividade?: boolean
+    criado_em?: boolean
+    finalizada?: boolean
+    residente?: boolean | ResidenteDefaultArgs<ExtArgs>
+    setor?: boolean | SetorDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["atividade"]>
+
+
+
+  export type AtividadeSelectScalar = {
+    id?: boolean
+    residente_id?: boolean
+    setor_id?: boolean
+    descricao?: boolean
+    data_atividade?: boolean
+    criado_em?: boolean
+    finalizada?: boolean
+  }
+
+  export type AtividadeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residente_id" | "setor_id" | "descricao" | "data_atividade" | "criado_em" | "finalizada", ExtArgs["result"]["atividade"]>
+  export type AtividadeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    residente?: boolean | ResidenteDefaultArgs<ExtArgs>
+    setor?: boolean | SetorDefaultArgs<ExtArgs>
+  }
+
+  export type $AtividadePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Atividade"
+    objects: {
+      residente: Prisma.$ResidentePayload<ExtArgs>
+      setor: Prisma.$SetorPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      residente_id: number
+      setor_id: number
+      descricao: string
+      data_atividade: Date
+      criado_em: Date
+      finalizada: boolean
+    }, ExtArgs["result"]["atividade"]>
+    composites: {}
+  }
+
+  type AtividadeGetPayload<S extends boolean | null | undefined | AtividadeDefaultArgs> = $Result.GetResult<Prisma.$AtividadePayload, S>
+
+  type AtividadeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AtividadeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AtividadeCountAggregateInputType | true
+    }
+
+  export interface AtividadeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Atividade'], meta: { name: 'Atividade' } }
+    /**
+     * Find zero or one Atividade that matches the filter.
+     * @param {AtividadeFindUniqueArgs} args - Arguments to find a Atividade
+     * @example
+     * // Get one Atividade
+     * const atividade = await prisma.atividade.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AtividadeFindUniqueArgs>(args: SelectSubset<T, AtividadeFindUniqueArgs<ExtArgs>>): Prisma__AtividadeClient<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Atividade that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AtividadeFindUniqueOrThrowArgs} args - Arguments to find a Atividade
+     * @example
+     * // Get one Atividade
+     * const atividade = await prisma.atividade.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AtividadeFindUniqueOrThrowArgs>(args: SelectSubset<T, AtividadeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AtividadeClient<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Atividade that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeFindFirstArgs} args - Arguments to find a Atividade
+     * @example
+     * // Get one Atividade
+     * const atividade = await prisma.atividade.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AtividadeFindFirstArgs>(args?: SelectSubset<T, AtividadeFindFirstArgs<ExtArgs>>): Prisma__AtividadeClient<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Atividade that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeFindFirstOrThrowArgs} args - Arguments to find a Atividade
+     * @example
+     * // Get one Atividade
+     * const atividade = await prisma.atividade.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AtividadeFindFirstOrThrowArgs>(args?: SelectSubset<T, AtividadeFindFirstOrThrowArgs<ExtArgs>>): Prisma__AtividadeClient<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Atividades that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Atividades
+     * const atividades = await prisma.atividade.findMany()
+     * 
+     * // Get first 10 Atividades
+     * const atividades = await prisma.atividade.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const atividadeWithIdOnly = await prisma.atividade.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AtividadeFindManyArgs>(args?: SelectSubset<T, AtividadeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Atividade.
+     * @param {AtividadeCreateArgs} args - Arguments to create a Atividade.
+     * @example
+     * // Create one Atividade
+     * const Atividade = await prisma.atividade.create({
+     *   data: {
+     *     // ... data to create a Atividade
+     *   }
+     * })
+     * 
+     */
+    create<T extends AtividadeCreateArgs>(args: SelectSubset<T, AtividadeCreateArgs<ExtArgs>>): Prisma__AtividadeClient<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Atividades.
+     * @param {AtividadeCreateManyArgs} args - Arguments to create many Atividades.
+     * @example
+     * // Create many Atividades
+     * const atividade = await prisma.atividade.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AtividadeCreateManyArgs>(args?: SelectSubset<T, AtividadeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Atividade.
+     * @param {AtividadeDeleteArgs} args - Arguments to delete one Atividade.
+     * @example
+     * // Delete one Atividade
+     * const Atividade = await prisma.atividade.delete({
+     *   where: {
+     *     // ... filter to delete one Atividade
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AtividadeDeleteArgs>(args: SelectSubset<T, AtividadeDeleteArgs<ExtArgs>>): Prisma__AtividadeClient<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Atividade.
+     * @param {AtividadeUpdateArgs} args - Arguments to update one Atividade.
+     * @example
+     * // Update one Atividade
+     * const atividade = await prisma.atividade.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AtividadeUpdateArgs>(args: SelectSubset<T, AtividadeUpdateArgs<ExtArgs>>): Prisma__AtividadeClient<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Atividades.
+     * @param {AtividadeDeleteManyArgs} args - Arguments to filter Atividades to delete.
+     * @example
+     * // Delete a few Atividades
+     * const { count } = await prisma.atividade.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AtividadeDeleteManyArgs>(args?: SelectSubset<T, AtividadeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Atividades.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Atividades
+     * const atividade = await prisma.atividade.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AtividadeUpdateManyArgs>(args: SelectSubset<T, AtividadeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Atividade.
+     * @param {AtividadeUpsertArgs} args - Arguments to update or create a Atividade.
+     * @example
+     * // Update or create a Atividade
+     * const atividade = await prisma.atividade.upsert({
+     *   create: {
+     *     // ... data to create a Atividade
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Atividade we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AtividadeUpsertArgs>(args: SelectSubset<T, AtividadeUpsertArgs<ExtArgs>>): Prisma__AtividadeClient<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Atividades.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeCountArgs} args - Arguments to filter Atividades to count.
+     * @example
+     * // Count the number of Atividades
+     * const count = await prisma.atividade.count({
+     *   where: {
+     *     // ... the filter for the Atividades we want to count
+     *   }
+     * })
+    **/
+    count<T extends AtividadeCountArgs>(
+      args?: Subset<T, AtividadeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AtividadeCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Atividade.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AtividadeAggregateArgs>(args: Subset<T, AtividadeAggregateArgs>): Prisma.PrismaPromise<GetAtividadeAggregateType<T>>
+
+    /**
+     * Group by Atividade.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AtividadeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AtividadeGroupByArgs['orderBy'] }
+        : { orderBy?: AtividadeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AtividadeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAtividadeGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Atividade model
+   */
+  readonly fields: AtividadeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Atividade.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AtividadeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    residente<T extends ResidenteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ResidenteDefaultArgs<ExtArgs>>): Prisma__ResidenteClient<$Result.GetResult<Prisma.$ResidentePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    setor<T extends SetorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SetorDefaultArgs<ExtArgs>>): Prisma__SetorClient<$Result.GetResult<Prisma.$SetorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Atividade model
+   */
+  interface AtividadeFieldRefs {
+    readonly id: FieldRef<"Atividade", 'Int'>
+    readonly residente_id: FieldRef<"Atividade", 'Int'>
+    readonly setor_id: FieldRef<"Atividade", 'Int'>
+    readonly descricao: FieldRef<"Atividade", 'String'>
+    readonly data_atividade: FieldRef<"Atividade", 'DateTime'>
+    readonly criado_em: FieldRef<"Atividade", 'DateTime'>
+    readonly finalizada: FieldRef<"Atividade", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Atividade findUnique
+   */
+  export type AtividadeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    /**
+     * Filter, which Atividade to fetch.
+     */
+    where: AtividadeWhereUniqueInput
+  }
+
+  /**
+   * Atividade findUniqueOrThrow
+   */
+  export type AtividadeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    /**
+     * Filter, which Atividade to fetch.
+     */
+    where: AtividadeWhereUniqueInput
+  }
+
+  /**
+   * Atividade findFirst
+   */
+  export type AtividadeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    /**
+     * Filter, which Atividade to fetch.
+     */
+    where?: AtividadeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Atividades to fetch.
+     */
+    orderBy?: AtividadeOrderByWithRelationInput | AtividadeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Atividades.
+     */
+    cursor?: AtividadeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Atividades from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Atividades.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Atividades.
+     */
+    distinct?: AtividadeScalarFieldEnum | AtividadeScalarFieldEnum[]
+  }
+
+  /**
+   * Atividade findFirstOrThrow
+   */
+  export type AtividadeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    /**
+     * Filter, which Atividade to fetch.
+     */
+    where?: AtividadeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Atividades to fetch.
+     */
+    orderBy?: AtividadeOrderByWithRelationInput | AtividadeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Atividades.
+     */
+    cursor?: AtividadeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Atividades from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Atividades.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Atividades.
+     */
+    distinct?: AtividadeScalarFieldEnum | AtividadeScalarFieldEnum[]
+  }
+
+  /**
+   * Atividade findMany
+   */
+  export type AtividadeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    /**
+     * Filter, which Atividades to fetch.
+     */
+    where?: AtividadeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Atividades to fetch.
+     */
+    orderBy?: AtividadeOrderByWithRelationInput | AtividadeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Atividades.
+     */
+    cursor?: AtividadeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Atividades from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Atividades.
+     */
+    skip?: number
+    distinct?: AtividadeScalarFieldEnum | AtividadeScalarFieldEnum[]
+  }
+
+  /**
+   * Atividade create
+   */
+  export type AtividadeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Atividade.
+     */
+    data: XOR<AtividadeCreateInput, AtividadeUncheckedCreateInput>
+  }
+
+  /**
+   * Atividade createMany
+   */
+  export type AtividadeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Atividades.
+     */
+    data: AtividadeCreateManyInput | AtividadeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Atividade update
+   */
+  export type AtividadeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Atividade.
+     */
+    data: XOR<AtividadeUpdateInput, AtividadeUncheckedUpdateInput>
+    /**
+     * Choose, which Atividade to update.
+     */
+    where: AtividadeWhereUniqueInput
+  }
+
+  /**
+   * Atividade updateMany
+   */
+  export type AtividadeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Atividades.
+     */
+    data: XOR<AtividadeUpdateManyMutationInput, AtividadeUncheckedUpdateManyInput>
+    /**
+     * Filter which Atividades to update
+     */
+    where?: AtividadeWhereInput
+    /**
+     * Limit how many Atividades to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Atividade upsert
+   */
+  export type AtividadeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Atividade to update in case it exists.
+     */
+    where: AtividadeWhereUniqueInput
+    /**
+     * In case the Atividade found by the `where` argument doesn't exist, create a new Atividade with this data.
+     */
+    create: XOR<AtividadeCreateInput, AtividadeUncheckedCreateInput>
+    /**
+     * In case the Atividade was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AtividadeUpdateInput, AtividadeUncheckedUpdateInput>
+  }
+
+  /**
+   * Atividade delete
+   */
+  export type AtividadeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
+    /**
+     * Filter which Atividade to delete.
+     */
+    where: AtividadeWhereUniqueInput
+  }
+
+  /**
+   * Atividade deleteMany
+   */
+  export type AtividadeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Atividades to delete
+     */
+    where?: AtividadeWhereInput
+    /**
+     * Limit how many Atividades to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Atividade without action
+   */
+  export type AtividadeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Atividade
+     */
+    select?: AtividadeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Atividade
+     */
+    omit?: AtividadeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeInclude<ExtArgs> | null
   }
 
 
@@ -14261,6 +15415,19 @@ export namespace Prisma {
   export type FrequenciaScalarFieldEnum = (typeof FrequenciaScalarFieldEnum)[keyof typeof FrequenciaScalarFieldEnum]
 
 
+  export const AtividadeScalarFieldEnum: {
+    id: 'id',
+    residente_id: 'residente_id',
+    setor_id: 'setor_id',
+    descricao: 'descricao',
+    data_atividade: 'data_atividade',
+    criado_em: 'criado_em',
+    finalizada: 'finalizada'
+  };
+
+  export type AtividadeScalarFieldEnum = (typeof AtividadeScalarFieldEnum)[keyof typeof AtividadeScalarFieldEnum]
+
+
   export const CampoAvaliacaoScalarFieldEnum: {
     id: 'id',
     titulo: 'titulo',
@@ -14388,6 +15555,13 @@ export namespace Prisma {
   export type FrequenciaOrderByRelevanceFieldEnum = (typeof FrequenciaOrderByRelevanceFieldEnum)[keyof typeof FrequenciaOrderByRelevanceFieldEnum]
 
 
+  export const AtividadeOrderByRelevanceFieldEnum: {
+    descricao: 'descricao'
+  };
+
+  export type AtividadeOrderByRelevanceFieldEnum = (typeof AtividadeOrderByRelevanceFieldEnum)[keyof typeof AtividadeOrderByRelevanceFieldEnum]
+
+
   export const CampoAvaliacaoOrderByRelevanceFieldEnum: {
     titulo: 'titulo',
     descricao: 'descricao'
@@ -14500,6 +15674,7 @@ export namespace Prisma {
     descricao?: StringNullableFilter<"Setor"> | string | null
     residentes?: ResidenteListRelationFilter
     supervisores?: SupervisorListRelationFilter
+    atividades?: AtividadeListRelationFilter
   }
 
   export type SetorOrderByWithRelationInput = {
@@ -14508,6 +15683,7 @@ export namespace Prisma {
     descricao?: SortOrderInput | SortOrder
     residentes?: ResidenteOrderByRelationAggregateInput
     supervisores?: SupervisorOrderByRelationAggregateInput
+    atividades?: AtividadeOrderByRelationAggregateInput
     _relevance?: SetorOrderByRelevanceInput
   }
 
@@ -14520,6 +15696,7 @@ export namespace Prisma {
     descricao?: StringNullableFilter<"Setor"> | string | null
     residentes?: ResidenteListRelationFilter
     supervisores?: SupervisorListRelationFilter
+    atividades?: AtividadeListRelationFilter
   }, "id">
 
   export type SetorOrderByWithAggregationInput = {
@@ -14638,6 +15815,7 @@ export namespace Prisma {
     setor?: XOR<SetorNullableScalarRelationFilter, SetorWhereInput> | null
     frequencias?: FrequenciaListRelationFilter
     avaliacoes?: AvaliacaoListRelationFilter
+    atividades?: AtividadeListRelationFilter
   }
 
   export type ResidenteOrderByWithRelationInput = {
@@ -14650,6 +15828,7 @@ export namespace Prisma {
     setor?: SetorOrderByWithRelationInput
     frequencias?: FrequenciaOrderByRelationAggregateInput
     avaliacoes?: AvaliacaoOrderByRelationAggregateInput
+    atividades?: AtividadeOrderByRelationAggregateInput
     _relevance?: ResidenteOrderByRelevanceInput
   }
 
@@ -14666,6 +15845,7 @@ export namespace Prisma {
     setor?: XOR<SetorNullableScalarRelationFilter, SetorWhereInput> | null
     frequencias?: FrequenciaListRelationFilter
     avaliacoes?: AvaliacaoListRelationFilter
+    atividades?: AtividadeListRelationFilter
   }, "id" | "crm">
 
   export type ResidenteOrderByWithAggregationInput = {
@@ -14871,6 +16051,78 @@ export namespace Prisma {
     horario_saida?: DateTimeNullableWithAggregatesFilter<"Frequencia"> | Date | string | null
     observacoes?: StringNullableWithAggregatesFilter<"Frequencia"> | string | null
     registrado_por?: IntWithAggregatesFilter<"Frequencia"> | number
+  }
+
+  export type AtividadeWhereInput = {
+    AND?: AtividadeWhereInput | AtividadeWhereInput[]
+    OR?: AtividadeWhereInput[]
+    NOT?: AtividadeWhereInput | AtividadeWhereInput[]
+    id?: IntFilter<"Atividade"> | number
+    residente_id?: IntFilter<"Atividade"> | number
+    setor_id?: IntFilter<"Atividade"> | number
+    descricao?: StringFilter<"Atividade"> | string
+    data_atividade?: DateTimeFilter<"Atividade"> | Date | string
+    criado_em?: DateTimeFilter<"Atividade"> | Date | string
+    finalizada?: BoolFilter<"Atividade"> | boolean
+    residente?: XOR<ResidenteScalarRelationFilter, ResidenteWhereInput>
+    setor?: XOR<SetorScalarRelationFilter, SetorWhereInput>
+  }
+
+  export type AtividadeOrderByWithRelationInput = {
+    id?: SortOrder
+    residente_id?: SortOrder
+    setor_id?: SortOrder
+    descricao?: SortOrder
+    data_atividade?: SortOrder
+    criado_em?: SortOrder
+    finalizada?: SortOrder
+    residente?: ResidenteOrderByWithRelationInput
+    setor?: SetorOrderByWithRelationInput
+    _relevance?: AtividadeOrderByRelevanceInput
+  }
+
+  export type AtividadeWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    residente_id_data_atividade_descricao?: AtividadeResidente_idData_atividadeDescricaoCompoundUniqueInput
+    AND?: AtividadeWhereInput | AtividadeWhereInput[]
+    OR?: AtividadeWhereInput[]
+    NOT?: AtividadeWhereInput | AtividadeWhereInput[]
+    residente_id?: IntFilter<"Atividade"> | number
+    setor_id?: IntFilter<"Atividade"> | number
+    descricao?: StringFilter<"Atividade"> | string
+    data_atividade?: DateTimeFilter<"Atividade"> | Date | string
+    criado_em?: DateTimeFilter<"Atividade"> | Date | string
+    finalizada?: BoolFilter<"Atividade"> | boolean
+    residente?: XOR<ResidenteScalarRelationFilter, ResidenteWhereInput>
+    setor?: XOR<SetorScalarRelationFilter, SetorWhereInput>
+  }, "id" | "residente_id_data_atividade_descricao">
+
+  export type AtividadeOrderByWithAggregationInput = {
+    id?: SortOrder
+    residente_id?: SortOrder
+    setor_id?: SortOrder
+    descricao?: SortOrder
+    data_atividade?: SortOrder
+    criado_em?: SortOrder
+    finalizada?: SortOrder
+    _count?: AtividadeCountOrderByAggregateInput
+    _avg?: AtividadeAvgOrderByAggregateInput
+    _max?: AtividadeMaxOrderByAggregateInput
+    _min?: AtividadeMinOrderByAggregateInput
+    _sum?: AtividadeSumOrderByAggregateInput
+  }
+
+  export type AtividadeScalarWhereWithAggregatesInput = {
+    AND?: AtividadeScalarWhereWithAggregatesInput | AtividadeScalarWhereWithAggregatesInput[]
+    OR?: AtividadeScalarWhereWithAggregatesInput[]
+    NOT?: AtividadeScalarWhereWithAggregatesInput | AtividadeScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Atividade"> | number
+    residente_id?: IntWithAggregatesFilter<"Atividade"> | number
+    setor_id?: IntWithAggregatesFilter<"Atividade"> | number
+    descricao?: StringWithAggregatesFilter<"Atividade"> | string
+    data_atividade?: DateTimeWithAggregatesFilter<"Atividade"> | Date | string
+    criado_em?: DateTimeWithAggregatesFilter<"Atividade"> | Date | string
+    finalizada?: BoolWithAggregatesFilter<"Atividade"> | boolean
   }
 
   export type CampoAvaliacaoWhereInput = {
@@ -15270,6 +16522,7 @@ export namespace Prisma {
     descricao?: string | null
     residentes?: ResidenteCreateNestedManyWithoutSetorInput
     supervisores?: SupervisorCreateNestedManyWithoutSetorInput
+    atividades?: AtividadeCreateNestedManyWithoutSetorInput
   }
 
   export type SetorUncheckedCreateInput = {
@@ -15278,6 +16531,7 @@ export namespace Prisma {
     descricao?: string | null
     residentes?: ResidenteUncheckedCreateNestedManyWithoutSetorInput
     supervisores?: SupervisorUncheckedCreateNestedManyWithoutSetorInput
+    atividades?: AtividadeUncheckedCreateNestedManyWithoutSetorInput
   }
 
   export type SetorUpdateInput = {
@@ -15285,6 +16539,7 @@ export namespace Prisma {
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     residentes?: ResidenteUpdateManyWithoutSetorNestedInput
     supervisores?: SupervisorUpdateManyWithoutSetorNestedInput
+    atividades?: AtividadeUpdateManyWithoutSetorNestedInput
   }
 
   export type SetorUncheckedUpdateInput = {
@@ -15293,6 +16548,7 @@ export namespace Prisma {
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     residentes?: ResidenteUncheckedUpdateManyWithoutSetorNestedInput
     supervisores?: SupervisorUncheckedUpdateManyWithoutSetorNestedInput
+    atividades?: AtividadeUncheckedUpdateManyWithoutSetorNestedInput
   }
 
   export type SetorCreateManyInput = {
@@ -15411,6 +16667,7 @@ export namespace Prisma {
     setor?: SetorCreateNestedOneWithoutResidentesInput
     frequencias?: FrequenciaCreateNestedManyWithoutResidenteInput
     avaliacoes?: AvaliacaoCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteUncheckedCreateInput = {
@@ -15421,6 +16678,7 @@ export namespace Prisma {
     setor_id?: number | null
     frequencias?: FrequenciaUncheckedCreateNestedManyWithoutResidenteInput
     avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeUncheckedCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteUpdateInput = {
@@ -15431,6 +16689,7 @@ export namespace Prisma {
     setor?: SetorUpdateOneWithoutResidentesNestedInput
     frequencias?: FrequenciaUpdateManyWithoutResidenteNestedInput
     avaliacoes?: AvaliacaoUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUpdateManyWithoutResidenteNestedInput
   }
 
   export type ResidenteUncheckedUpdateInput = {
@@ -15441,6 +16700,7 @@ export namespace Prisma {
     setor_id?: NullableIntFieldUpdateOperationsInput | number | null
     frequencias?: FrequenciaUncheckedUpdateManyWithoutResidenteNestedInput
     avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUncheckedUpdateManyWithoutResidenteNestedInput
   }
 
   export type ResidenteCreateManyInput = {
@@ -15625,6 +16885,71 @@ export namespace Prisma {
     horario_saida?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
     registrado_por?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type AtividadeCreateInput = {
+    descricao: string
+    data_atividade: Date | string
+    criado_em?: Date | string
+    finalizada: boolean
+    residente: ResidenteCreateNestedOneWithoutAtividadesInput
+    setor: SetorCreateNestedOneWithoutAtividadesInput
+  }
+
+  export type AtividadeUncheckedCreateInput = {
+    id?: number
+    residente_id: number
+    setor_id: number
+    descricao: string
+    data_atividade: Date | string
+    criado_em?: Date | string
+    finalizada: boolean
+  }
+
+  export type AtividadeUpdateInput = {
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
+    residente?: ResidenteUpdateOneRequiredWithoutAtividadesNestedInput
+    setor?: SetorUpdateOneRequiredWithoutAtividadesNestedInput
+  }
+
+  export type AtividadeUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    residente_id?: IntFieldUpdateOperationsInput | number
+    setor_id?: IntFieldUpdateOperationsInput | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AtividadeCreateManyInput = {
+    id?: number
+    residente_id: number
+    setor_id: number
+    descricao: string
+    data_atividade: Date | string
+    criado_em?: Date | string
+    finalizada: boolean
+  }
+
+  export type AtividadeUpdateManyMutationInput = {
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AtividadeUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    residente_id?: IntFieldUpdateOperationsInput | number
+    setor_id?: IntFieldUpdateOperationsInput | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CampoAvaliacaoCreateInput = {
@@ -16044,6 +17369,12 @@ export namespace Prisma {
     none?: SupervisorWhereInput
   }
 
+  export type AtividadeListRelationFilter = {
+    every?: AtividadeWhereInput
+    some?: AtividadeWhereInput
+    none?: AtividadeWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -16054,6 +17385,10 @@ export namespace Prisma {
   }
 
   export type SupervisorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AtividadeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16530,6 +17865,65 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type SetorScalarRelationFilter = {
+    is?: SetorWhereInput
+    isNot?: SetorWhereInput
+  }
+
+  export type AtividadeOrderByRelevanceInput = {
+    fields: AtividadeOrderByRelevanceFieldEnum | AtividadeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type AtividadeResidente_idData_atividadeDescricaoCompoundUniqueInput = {
+    residente_id: number
+    data_atividade: Date | string
+    descricao: string
+  }
+
+  export type AtividadeCountOrderByAggregateInput = {
+    id?: SortOrder
+    residente_id?: SortOrder
+    setor_id?: SortOrder
+    descricao?: SortOrder
+    data_atividade?: SortOrder
+    criado_em?: SortOrder
+    finalizada?: SortOrder
+  }
+
+  export type AtividadeAvgOrderByAggregateInput = {
+    id?: SortOrder
+    residente_id?: SortOrder
+    setor_id?: SortOrder
+  }
+
+  export type AtividadeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    residente_id?: SortOrder
+    setor_id?: SortOrder
+    descricao?: SortOrder
+    data_atividade?: SortOrder
+    criado_em?: SortOrder
+    finalizada?: SortOrder
+  }
+
+  export type AtividadeMinOrderByAggregateInput = {
+    id?: SortOrder
+    residente_id?: SortOrder
+    setor_id?: SortOrder
+    descricao?: SortOrder
+    data_atividade?: SortOrder
+    criado_em?: SortOrder
+    finalizada?: SortOrder
+  }
+
+  export type AtividadeSumOrderByAggregateInput = {
+    id?: SortOrder
+    residente_id?: SortOrder
+    setor_id?: SortOrder
+  }
+
   export type EnumTipoCampoFilter<$PrismaModel = never> = {
     equals?: $Enums.TipoCampo | EnumTipoCampoFieldRefInput<$PrismaModel>
     in?: $Enums.TipoCampo[]
@@ -16886,6 +18280,13 @@ export namespace Prisma {
     connect?: SupervisorWhereUniqueInput | SupervisorWhereUniqueInput[]
   }
 
+  export type AtividadeCreateNestedManyWithoutSetorInput = {
+    create?: XOR<AtividadeCreateWithoutSetorInput, AtividadeUncheckedCreateWithoutSetorInput> | AtividadeCreateWithoutSetorInput[] | AtividadeUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: AtividadeCreateOrConnectWithoutSetorInput | AtividadeCreateOrConnectWithoutSetorInput[]
+    createMany?: AtividadeCreateManySetorInputEnvelope
+    connect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+  }
+
   export type ResidenteUncheckedCreateNestedManyWithoutSetorInput = {
     create?: XOR<ResidenteCreateWithoutSetorInput, ResidenteUncheckedCreateWithoutSetorInput> | ResidenteCreateWithoutSetorInput[] | ResidenteUncheckedCreateWithoutSetorInput[]
     connectOrCreate?: ResidenteCreateOrConnectWithoutSetorInput | ResidenteCreateOrConnectWithoutSetorInput[]
@@ -16898,6 +18299,13 @@ export namespace Prisma {
     connectOrCreate?: SupervisorCreateOrConnectWithoutSetorInput | SupervisorCreateOrConnectWithoutSetorInput[]
     createMany?: SupervisorCreateManySetorInputEnvelope
     connect?: SupervisorWhereUniqueInput | SupervisorWhereUniqueInput[]
+  }
+
+  export type AtividadeUncheckedCreateNestedManyWithoutSetorInput = {
+    create?: XOR<AtividadeCreateWithoutSetorInput, AtividadeUncheckedCreateWithoutSetorInput> | AtividadeCreateWithoutSetorInput[] | AtividadeUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: AtividadeCreateOrConnectWithoutSetorInput | AtividadeCreateOrConnectWithoutSetorInput[]
+    createMany?: AtividadeCreateManySetorInputEnvelope
+    connect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -16936,6 +18344,20 @@ export namespace Prisma {
     deleteMany?: SupervisorScalarWhereInput | SupervisorScalarWhereInput[]
   }
 
+  export type AtividadeUpdateManyWithoutSetorNestedInput = {
+    create?: XOR<AtividadeCreateWithoutSetorInput, AtividadeUncheckedCreateWithoutSetorInput> | AtividadeCreateWithoutSetorInput[] | AtividadeUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: AtividadeCreateOrConnectWithoutSetorInput | AtividadeCreateOrConnectWithoutSetorInput[]
+    upsert?: AtividadeUpsertWithWhereUniqueWithoutSetorInput | AtividadeUpsertWithWhereUniqueWithoutSetorInput[]
+    createMany?: AtividadeCreateManySetorInputEnvelope
+    set?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    disconnect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    delete?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    connect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    update?: AtividadeUpdateWithWhereUniqueWithoutSetorInput | AtividadeUpdateWithWhereUniqueWithoutSetorInput[]
+    updateMany?: AtividadeUpdateManyWithWhereWithoutSetorInput | AtividadeUpdateManyWithWhereWithoutSetorInput[]
+    deleteMany?: AtividadeScalarWhereInput | AtividadeScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -16970,6 +18392,20 @@ export namespace Prisma {
     update?: SupervisorUpdateWithWhereUniqueWithoutSetorInput | SupervisorUpdateWithWhereUniqueWithoutSetorInput[]
     updateMany?: SupervisorUpdateManyWithWhereWithoutSetorInput | SupervisorUpdateManyWithWhereWithoutSetorInput[]
     deleteMany?: SupervisorScalarWhereInput | SupervisorScalarWhereInput[]
+  }
+
+  export type AtividadeUncheckedUpdateManyWithoutSetorNestedInput = {
+    create?: XOR<AtividadeCreateWithoutSetorInput, AtividadeUncheckedCreateWithoutSetorInput> | AtividadeCreateWithoutSetorInput[] | AtividadeUncheckedCreateWithoutSetorInput[]
+    connectOrCreate?: AtividadeCreateOrConnectWithoutSetorInput | AtividadeCreateOrConnectWithoutSetorInput[]
+    upsert?: AtividadeUpsertWithWhereUniqueWithoutSetorInput | AtividadeUpsertWithWhereUniqueWithoutSetorInput[]
+    createMany?: AtividadeCreateManySetorInputEnvelope
+    set?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    disconnect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    delete?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    connect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    update?: AtividadeUpdateWithWhereUniqueWithoutSetorInput | AtividadeUpdateWithWhereUniqueWithoutSetorInput[]
+    updateMany?: AtividadeUpdateManyWithWhereWithoutSetorInput | AtividadeUpdateManyWithWhereWithoutSetorInput[]
+    deleteMany?: AtividadeScalarWhereInput | AtividadeScalarWhereInput[]
   }
 
   export type ResidenteCreateNestedOneWithoutUsuarioInput = {
@@ -17232,6 +18668,13 @@ export namespace Prisma {
     connect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
   }
 
+  export type AtividadeCreateNestedManyWithoutResidenteInput = {
+    create?: XOR<AtividadeCreateWithoutResidenteInput, AtividadeUncheckedCreateWithoutResidenteInput> | AtividadeCreateWithoutResidenteInput[] | AtividadeUncheckedCreateWithoutResidenteInput[]
+    connectOrCreate?: AtividadeCreateOrConnectWithoutResidenteInput | AtividadeCreateOrConnectWithoutResidenteInput[]
+    createMany?: AtividadeCreateManyResidenteInputEnvelope
+    connect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+  }
+
   export type FrequenciaUncheckedCreateNestedManyWithoutResidenteInput = {
     create?: XOR<FrequenciaCreateWithoutResidenteInput, FrequenciaUncheckedCreateWithoutResidenteInput> | FrequenciaCreateWithoutResidenteInput[] | FrequenciaUncheckedCreateWithoutResidenteInput[]
     connectOrCreate?: FrequenciaCreateOrConnectWithoutResidenteInput | FrequenciaCreateOrConnectWithoutResidenteInput[]
@@ -17244,6 +18687,13 @@ export namespace Prisma {
     connectOrCreate?: AvaliacaoCreateOrConnectWithoutResidenteInput | AvaliacaoCreateOrConnectWithoutResidenteInput[]
     createMany?: AvaliacaoCreateManyResidenteInputEnvelope
     connect?: AvaliacaoWhereUniqueInput | AvaliacaoWhereUniqueInput[]
+  }
+
+  export type AtividadeUncheckedCreateNestedManyWithoutResidenteInput = {
+    create?: XOR<AtividadeCreateWithoutResidenteInput, AtividadeUncheckedCreateWithoutResidenteInput> | AtividadeCreateWithoutResidenteInput[] | AtividadeUncheckedCreateWithoutResidenteInput[]
+    connectOrCreate?: AtividadeCreateOrConnectWithoutResidenteInput | AtividadeCreateOrConnectWithoutResidenteInput[]
+    createMany?: AtividadeCreateManyResidenteInputEnvelope
+    connect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -17300,6 +18750,20 @@ export namespace Prisma {
     deleteMany?: AvaliacaoScalarWhereInput | AvaliacaoScalarWhereInput[]
   }
 
+  export type AtividadeUpdateManyWithoutResidenteNestedInput = {
+    create?: XOR<AtividadeCreateWithoutResidenteInput, AtividadeUncheckedCreateWithoutResidenteInput> | AtividadeCreateWithoutResidenteInput[] | AtividadeUncheckedCreateWithoutResidenteInput[]
+    connectOrCreate?: AtividadeCreateOrConnectWithoutResidenteInput | AtividadeCreateOrConnectWithoutResidenteInput[]
+    upsert?: AtividadeUpsertWithWhereUniqueWithoutResidenteInput | AtividadeUpsertWithWhereUniqueWithoutResidenteInput[]
+    createMany?: AtividadeCreateManyResidenteInputEnvelope
+    set?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    disconnect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    delete?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    connect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    update?: AtividadeUpdateWithWhereUniqueWithoutResidenteInput | AtividadeUpdateWithWhereUniqueWithoutResidenteInput[]
+    updateMany?: AtividadeUpdateManyWithWhereWithoutResidenteInput | AtividadeUpdateManyWithWhereWithoutResidenteInput[]
+    deleteMany?: AtividadeScalarWhereInput | AtividadeScalarWhereInput[]
+  }
+
   export type FrequenciaUncheckedUpdateManyWithoutResidenteNestedInput = {
     create?: XOR<FrequenciaCreateWithoutResidenteInput, FrequenciaUncheckedCreateWithoutResidenteInput> | FrequenciaCreateWithoutResidenteInput[] | FrequenciaUncheckedCreateWithoutResidenteInput[]
     connectOrCreate?: FrequenciaCreateOrConnectWithoutResidenteInput | FrequenciaCreateOrConnectWithoutResidenteInput[]
@@ -17326,6 +18790,20 @@ export namespace Prisma {
     update?: AvaliacaoUpdateWithWhereUniqueWithoutResidenteInput | AvaliacaoUpdateWithWhereUniqueWithoutResidenteInput[]
     updateMany?: AvaliacaoUpdateManyWithWhereWithoutResidenteInput | AvaliacaoUpdateManyWithWhereWithoutResidenteInput[]
     deleteMany?: AvaliacaoScalarWhereInput | AvaliacaoScalarWhereInput[]
+  }
+
+  export type AtividadeUncheckedUpdateManyWithoutResidenteNestedInput = {
+    create?: XOR<AtividadeCreateWithoutResidenteInput, AtividadeUncheckedCreateWithoutResidenteInput> | AtividadeCreateWithoutResidenteInput[] | AtividadeUncheckedCreateWithoutResidenteInput[]
+    connectOrCreate?: AtividadeCreateOrConnectWithoutResidenteInput | AtividadeCreateOrConnectWithoutResidenteInput[]
+    upsert?: AtividadeUpsertWithWhereUniqueWithoutResidenteInput | AtividadeUpsertWithWhereUniqueWithoutResidenteInput[]
+    createMany?: AtividadeCreateManyResidenteInputEnvelope
+    set?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    disconnect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    delete?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    connect?: AtividadeWhereUniqueInput | AtividadeWhereUniqueInput[]
+    update?: AtividadeUpdateWithWhereUniqueWithoutResidenteInput | AtividadeUpdateWithWhereUniqueWithoutResidenteInput[]
+    updateMany?: AtividadeUpdateManyWithWhereWithoutResidenteInput | AtividadeUpdateManyWithWhereWithoutResidenteInput[]
+    deleteMany?: AtividadeScalarWhereInput | AtividadeScalarWhereInput[]
   }
 
   export type UsuarioCreateNestedOneWithoutSupervisorInput = {
@@ -17486,6 +18964,34 @@ export namespace Prisma {
     upsert?: UsuarioUpsertWithoutFrequencias_registradasInput
     connect?: UsuarioWhereUniqueInput
     update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutFrequencias_registradasInput, UsuarioUpdateWithoutFrequencias_registradasInput>, UsuarioUncheckedUpdateWithoutFrequencias_registradasInput>
+  }
+
+  export type ResidenteCreateNestedOneWithoutAtividadesInput = {
+    create?: XOR<ResidenteCreateWithoutAtividadesInput, ResidenteUncheckedCreateWithoutAtividadesInput>
+    connectOrCreate?: ResidenteCreateOrConnectWithoutAtividadesInput
+    connect?: ResidenteWhereUniqueInput
+  }
+
+  export type SetorCreateNestedOneWithoutAtividadesInput = {
+    create?: XOR<SetorCreateWithoutAtividadesInput, SetorUncheckedCreateWithoutAtividadesInput>
+    connectOrCreate?: SetorCreateOrConnectWithoutAtividadesInput
+    connect?: SetorWhereUniqueInput
+  }
+
+  export type ResidenteUpdateOneRequiredWithoutAtividadesNestedInput = {
+    create?: XOR<ResidenteCreateWithoutAtividadesInput, ResidenteUncheckedCreateWithoutAtividadesInput>
+    connectOrCreate?: ResidenteCreateOrConnectWithoutAtividadesInput
+    upsert?: ResidenteUpsertWithoutAtividadesInput
+    connect?: ResidenteWhereUniqueInput
+    update?: XOR<XOR<ResidenteUpdateToOneWithWhereWithoutAtividadesInput, ResidenteUpdateWithoutAtividadesInput>, ResidenteUncheckedUpdateWithoutAtividadesInput>
+  }
+
+  export type SetorUpdateOneRequiredWithoutAtividadesNestedInput = {
+    create?: XOR<SetorCreateWithoutAtividadesInput, SetorUncheckedCreateWithoutAtividadesInput>
+    connectOrCreate?: SetorCreateOrConnectWithoutAtividadesInput
+    upsert?: SetorUpsertWithoutAtividadesInput
+    connect?: SetorWhereUniqueInput
+    update?: XOR<XOR<SetorUpdateToOneWithWhereWithoutAtividadesInput, SetorUpdateWithoutAtividadesInput>, SetorUncheckedUpdateWithoutAtividadesInput>
   }
 
   export type RespostaAvaliacaoCreateNestedManyWithoutCampoInput = {
@@ -18028,6 +19534,7 @@ export namespace Prisma {
     usuario: UsuarioCreateNestedOneWithoutResidenteInput
     frequencias?: FrequenciaCreateNestedManyWithoutResidenteInput
     avaliacoes?: AvaliacaoCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteUncheckedCreateWithoutSetorInput = {
@@ -18037,6 +19544,7 @@ export namespace Prisma {
     ano_residencia?: number | null
     frequencias?: FrequenciaUncheckedCreateNestedManyWithoutResidenteInput
     avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeUncheckedCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteCreateOrConnectWithoutSetorInput = {
@@ -18070,6 +19578,33 @@ export namespace Prisma {
 
   export type SupervisorCreateManySetorInputEnvelope = {
     data: SupervisorCreateManySetorInput | SupervisorCreateManySetorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AtividadeCreateWithoutSetorInput = {
+    descricao: string
+    data_atividade: Date | string
+    criado_em?: Date | string
+    finalizada: boolean
+    residente: ResidenteCreateNestedOneWithoutAtividadesInput
+  }
+
+  export type AtividadeUncheckedCreateWithoutSetorInput = {
+    id?: number
+    residente_id: number
+    descricao: string
+    data_atividade: Date | string
+    criado_em?: Date | string
+    finalizada: boolean
+  }
+
+  export type AtividadeCreateOrConnectWithoutSetorInput = {
+    where: AtividadeWhereUniqueInput
+    create: XOR<AtividadeCreateWithoutSetorInput, AtividadeUncheckedCreateWithoutSetorInput>
+  }
+
+  export type AtividadeCreateManySetorInputEnvelope = {
+    data: AtividadeCreateManySetorInput | AtividadeCreateManySetorInput[]
     skipDuplicates?: boolean
   }
 
@@ -18125,6 +19660,35 @@ export namespace Prisma {
     setor_id?: IntNullableFilter<"Supervisor"> | number | null
   }
 
+  export type AtividadeUpsertWithWhereUniqueWithoutSetorInput = {
+    where: AtividadeWhereUniqueInput
+    update: XOR<AtividadeUpdateWithoutSetorInput, AtividadeUncheckedUpdateWithoutSetorInput>
+    create: XOR<AtividadeCreateWithoutSetorInput, AtividadeUncheckedCreateWithoutSetorInput>
+  }
+
+  export type AtividadeUpdateWithWhereUniqueWithoutSetorInput = {
+    where: AtividadeWhereUniqueInput
+    data: XOR<AtividadeUpdateWithoutSetorInput, AtividadeUncheckedUpdateWithoutSetorInput>
+  }
+
+  export type AtividadeUpdateManyWithWhereWithoutSetorInput = {
+    where: AtividadeScalarWhereInput
+    data: XOR<AtividadeUpdateManyMutationInput, AtividadeUncheckedUpdateManyWithoutSetorInput>
+  }
+
+  export type AtividadeScalarWhereInput = {
+    AND?: AtividadeScalarWhereInput | AtividadeScalarWhereInput[]
+    OR?: AtividadeScalarWhereInput[]
+    NOT?: AtividadeScalarWhereInput | AtividadeScalarWhereInput[]
+    id?: IntFilter<"Atividade"> | number
+    residente_id?: IntFilter<"Atividade"> | number
+    setor_id?: IntFilter<"Atividade"> | number
+    descricao?: StringFilter<"Atividade"> | string
+    data_atividade?: DateTimeFilter<"Atividade"> | Date | string
+    criado_em?: DateTimeFilter<"Atividade"> | Date | string
+    finalizada?: BoolFilter<"Atividade"> | boolean
+  }
+
   export type ResidenteCreateWithoutUsuarioInput = {
     crm?: string | null
     especialidade?: string | null
@@ -18132,6 +19696,7 @@ export namespace Prisma {
     setor?: SetorCreateNestedOneWithoutResidentesInput
     frequencias?: FrequenciaCreateNestedManyWithoutResidenteInput
     avaliacoes?: AvaliacaoCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteUncheckedCreateWithoutUsuarioInput = {
@@ -18141,6 +19706,7 @@ export namespace Prisma {
     setor_id?: number | null
     frequencias?: FrequenciaUncheckedCreateNestedManyWithoutResidenteInput
     avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeUncheckedCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteCreateOrConnectWithoutUsuarioInput = {
@@ -18281,6 +19847,7 @@ export namespace Prisma {
     setor?: SetorUpdateOneWithoutResidentesNestedInput
     frequencias?: FrequenciaUpdateManyWithoutResidenteNestedInput
     avaliacoes?: AvaliacaoUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUpdateManyWithoutResidenteNestedInput
   }
 
   export type ResidenteUncheckedUpdateWithoutUsuarioInput = {
@@ -18290,6 +19857,7 @@ export namespace Prisma {
     setor_id?: NullableIntFieldUpdateOperationsInput | number | null
     frequencias?: FrequenciaUncheckedUpdateManyWithoutResidenteNestedInput
     avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUncheckedUpdateManyWithoutResidenteNestedInput
   }
 
   export type SupervisorUpsertWithoutUsuarioInput = {
@@ -18462,6 +20030,7 @@ export namespace Prisma {
     nome: string
     descricao?: string | null
     supervisores?: SupervisorCreateNestedManyWithoutSetorInput
+    atividades?: AtividadeCreateNestedManyWithoutSetorInput
   }
 
   export type SetorUncheckedCreateWithoutResidentesInput = {
@@ -18469,6 +20038,7 @@ export namespace Prisma {
     nome: string
     descricao?: string | null
     supervisores?: SupervisorUncheckedCreateNestedManyWithoutSetorInput
+    atividades?: AtividadeUncheckedCreateNestedManyWithoutSetorInput
   }
 
   export type SetorCreateOrConnectWithoutResidentesInput = {
@@ -18540,6 +20110,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AtividadeCreateWithoutResidenteInput = {
+    descricao: string
+    data_atividade: Date | string
+    criado_em?: Date | string
+    finalizada: boolean
+    setor: SetorCreateNestedOneWithoutAtividadesInput
+  }
+
+  export type AtividadeUncheckedCreateWithoutResidenteInput = {
+    id?: number
+    setor_id: number
+    descricao: string
+    data_atividade: Date | string
+    criado_em?: Date | string
+    finalizada: boolean
+  }
+
+  export type AtividadeCreateOrConnectWithoutResidenteInput = {
+    where: AtividadeWhereUniqueInput
+    create: XOR<AtividadeCreateWithoutResidenteInput, AtividadeUncheckedCreateWithoutResidenteInput>
+  }
+
+  export type AtividadeCreateManyResidenteInputEnvelope = {
+    data: AtividadeCreateManyResidenteInput | AtividadeCreateManyResidenteInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UsuarioUpsertWithoutResidenteInput = {
     update: XOR<UsuarioUpdateWithoutResidenteInput, UsuarioUncheckedUpdateWithoutResidenteInput>
     create: XOR<UsuarioCreateWithoutResidenteInput, UsuarioUncheckedCreateWithoutResidenteInput>
@@ -18595,6 +20192,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     supervisores?: SupervisorUpdateManyWithoutSetorNestedInput
+    atividades?: AtividadeUpdateManyWithoutSetorNestedInput
   }
 
   export type SetorUncheckedUpdateWithoutResidentesInput = {
@@ -18602,6 +20200,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     supervisores?: SupervisorUncheckedUpdateManyWithoutSetorNestedInput
+    atividades?: AtividadeUncheckedUpdateManyWithoutSetorNestedInput
   }
 
   export type FrequenciaUpsertWithWhereUniqueWithoutResidenteInput = {
@@ -18649,6 +20248,22 @@ export namespace Prisma {
     criado_em?: DateTimeFilter<"Avaliacao"> | Date | string
   }
 
+  export type AtividadeUpsertWithWhereUniqueWithoutResidenteInput = {
+    where: AtividadeWhereUniqueInput
+    update: XOR<AtividadeUpdateWithoutResidenteInput, AtividadeUncheckedUpdateWithoutResidenteInput>
+    create: XOR<AtividadeCreateWithoutResidenteInput, AtividadeUncheckedCreateWithoutResidenteInput>
+  }
+
+  export type AtividadeUpdateWithWhereUniqueWithoutResidenteInput = {
+    where: AtividadeWhereUniqueInput
+    data: XOR<AtividadeUpdateWithoutResidenteInput, AtividadeUncheckedUpdateWithoutResidenteInput>
+  }
+
+  export type AtividadeUpdateManyWithWhereWithoutResidenteInput = {
+    where: AtividadeScalarWhereInput
+    data: XOR<AtividadeUpdateManyMutationInput, AtividadeUncheckedUpdateManyWithoutResidenteInput>
+  }
+
   export type UsuarioCreateWithoutSupervisorInput = {
     nome: string
     email: string
@@ -18687,6 +20302,7 @@ export namespace Prisma {
     nome: string
     descricao?: string | null
     residentes?: ResidenteCreateNestedManyWithoutSetorInput
+    atividades?: AtividadeCreateNestedManyWithoutSetorInput
   }
 
   export type SetorUncheckedCreateWithoutSupervisoresInput = {
@@ -18694,6 +20310,7 @@ export namespace Prisma {
     nome: string
     descricao?: string | null
     residentes?: ResidenteUncheckedCreateNestedManyWithoutSetorInput
+    atividades?: AtividadeUncheckedCreateNestedManyWithoutSetorInput
   }
 
   export type SetorCreateOrConnectWithoutSupervisoresInput = {
@@ -18810,6 +20427,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     residentes?: ResidenteUpdateManyWithoutSetorNestedInput
+    atividades?: AtividadeUpdateManyWithoutSetorNestedInput
   }
 
   export type SetorUncheckedUpdateWithoutSupervisoresInput = {
@@ -18817,6 +20435,7 @@ export namespace Prisma {
     nome?: StringFieldUpdateOperationsInput | string
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     residentes?: ResidenteUncheckedUpdateManyWithoutSetorNestedInput
+    atividades?: AtividadeUncheckedUpdateManyWithoutSetorNestedInput
   }
 
   export type AvaliacaoUpsertWithWhereUniqueWithoutSupervisorInput = {
@@ -18943,6 +20562,7 @@ export namespace Prisma {
     usuario: UsuarioCreateNestedOneWithoutResidenteInput
     setor?: SetorCreateNestedOneWithoutResidentesInput
     avaliacoes?: AvaliacaoCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteUncheckedCreateWithoutFrequenciasInput = {
@@ -18952,6 +20572,7 @@ export namespace Prisma {
     ano_residencia?: number | null
     setor_id?: number | null
     avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeUncheckedCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteCreateOrConnectWithoutFrequenciasInput = {
@@ -19011,6 +20632,7 @@ export namespace Prisma {
     usuario?: UsuarioUpdateOneRequiredWithoutResidenteNestedInput
     setor?: SetorUpdateOneWithoutResidentesNestedInput
     avaliacoes?: AvaliacaoUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUpdateManyWithoutResidenteNestedInput
   }
 
   export type ResidenteUncheckedUpdateWithoutFrequenciasInput = {
@@ -19020,6 +20642,7 @@ export namespace Prisma {
     ano_residencia?: NullableIntFieldUpdateOperationsInput | number | null
     setor_id?: NullableIntFieldUpdateOperationsInput | number | null
     avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUncheckedUpdateManyWithoutResidenteNestedInput
   }
 
   export type UsuarioUpsertWithoutFrequencias_registradasInput = {
@@ -19060,6 +20683,108 @@ export namespace Prisma {
     administrador?: AdministradorUncheckedUpdateOneWithoutUsuarioNestedInput
     logs?: LogAcessoUncheckedUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type ResidenteCreateWithoutAtividadesInput = {
+    crm?: string | null
+    especialidade?: string | null
+    ano_residencia?: number | null
+    usuario: UsuarioCreateNestedOneWithoutResidenteInput
+    setor?: SetorCreateNestedOneWithoutResidentesInput
+    frequencias?: FrequenciaCreateNestedManyWithoutResidenteInput
+    avaliacoes?: AvaliacaoCreateNestedManyWithoutResidenteInput
+  }
+
+  export type ResidenteUncheckedCreateWithoutAtividadesInput = {
+    id: number
+    crm?: string | null
+    especialidade?: string | null
+    ano_residencia?: number | null
+    setor_id?: number | null
+    frequencias?: FrequenciaUncheckedCreateNestedManyWithoutResidenteInput
+    avaliacoes?: AvaliacaoUncheckedCreateNestedManyWithoutResidenteInput
+  }
+
+  export type ResidenteCreateOrConnectWithoutAtividadesInput = {
+    where: ResidenteWhereUniqueInput
+    create: XOR<ResidenteCreateWithoutAtividadesInput, ResidenteUncheckedCreateWithoutAtividadesInput>
+  }
+
+  export type SetorCreateWithoutAtividadesInput = {
+    nome: string
+    descricao?: string | null
+    residentes?: ResidenteCreateNestedManyWithoutSetorInput
+    supervisores?: SupervisorCreateNestedManyWithoutSetorInput
+  }
+
+  export type SetorUncheckedCreateWithoutAtividadesInput = {
+    id?: number
+    nome: string
+    descricao?: string | null
+    residentes?: ResidenteUncheckedCreateNestedManyWithoutSetorInput
+    supervisores?: SupervisorUncheckedCreateNestedManyWithoutSetorInput
+  }
+
+  export type SetorCreateOrConnectWithoutAtividadesInput = {
+    where: SetorWhereUniqueInput
+    create: XOR<SetorCreateWithoutAtividadesInput, SetorUncheckedCreateWithoutAtividadesInput>
+  }
+
+  export type ResidenteUpsertWithoutAtividadesInput = {
+    update: XOR<ResidenteUpdateWithoutAtividadesInput, ResidenteUncheckedUpdateWithoutAtividadesInput>
+    create: XOR<ResidenteCreateWithoutAtividadesInput, ResidenteUncheckedCreateWithoutAtividadesInput>
+    where?: ResidenteWhereInput
+  }
+
+  export type ResidenteUpdateToOneWithWhereWithoutAtividadesInput = {
+    where?: ResidenteWhereInput
+    data: XOR<ResidenteUpdateWithoutAtividadesInput, ResidenteUncheckedUpdateWithoutAtividadesInput>
+  }
+
+  export type ResidenteUpdateWithoutAtividadesInput = {
+    crm?: NullableStringFieldUpdateOperationsInput | string | null
+    especialidade?: NullableStringFieldUpdateOperationsInput | string | null
+    ano_residencia?: NullableIntFieldUpdateOperationsInput | number | null
+    usuario?: UsuarioUpdateOneRequiredWithoutResidenteNestedInput
+    setor?: SetorUpdateOneWithoutResidentesNestedInput
+    frequencias?: FrequenciaUpdateManyWithoutResidenteNestedInput
+    avaliacoes?: AvaliacaoUpdateManyWithoutResidenteNestedInput
+  }
+
+  export type ResidenteUncheckedUpdateWithoutAtividadesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    crm?: NullableStringFieldUpdateOperationsInput | string | null
+    especialidade?: NullableStringFieldUpdateOperationsInput | string | null
+    ano_residencia?: NullableIntFieldUpdateOperationsInput | number | null
+    setor_id?: NullableIntFieldUpdateOperationsInput | number | null
+    frequencias?: FrequenciaUncheckedUpdateManyWithoutResidenteNestedInput
+    avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutResidenteNestedInput
+  }
+
+  export type SetorUpsertWithoutAtividadesInput = {
+    update: XOR<SetorUpdateWithoutAtividadesInput, SetorUncheckedUpdateWithoutAtividadesInput>
+    create: XOR<SetorCreateWithoutAtividadesInput, SetorUncheckedCreateWithoutAtividadesInput>
+    where?: SetorWhereInput
+  }
+
+  export type SetorUpdateToOneWithWhereWithoutAtividadesInput = {
+    where?: SetorWhereInput
+    data: XOR<SetorUpdateWithoutAtividadesInput, SetorUncheckedUpdateWithoutAtividadesInput>
+  }
+
+  export type SetorUpdateWithoutAtividadesInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    residentes?: ResidenteUpdateManyWithoutSetorNestedInput
+    supervisores?: SupervisorUpdateManyWithoutSetorNestedInput
+  }
+
+  export type SetorUncheckedUpdateWithoutAtividadesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    descricao?: NullableStringFieldUpdateOperationsInput | string | null
+    residentes?: ResidenteUncheckedUpdateManyWithoutSetorNestedInput
+    supervisores?: SupervisorUncheckedUpdateManyWithoutSetorNestedInput
   }
 
   export type RespostaAvaliacaoCreateWithoutCampoInput = {
@@ -19122,6 +20847,7 @@ export namespace Prisma {
     usuario: UsuarioCreateNestedOneWithoutResidenteInput
     setor?: SetorCreateNestedOneWithoutResidentesInput
     frequencias?: FrequenciaCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteUncheckedCreateWithoutAvaliacoesInput = {
@@ -19131,6 +20857,7 @@ export namespace Prisma {
     ano_residencia?: number | null
     setor_id?: number | null
     frequencias?: FrequenciaUncheckedCreateNestedManyWithoutResidenteInput
+    atividades?: AtividadeUncheckedCreateNestedManyWithoutResidenteInput
   }
 
   export type ResidenteCreateOrConnectWithoutAvaliacoesInput = {
@@ -19223,6 +20950,7 @@ export namespace Prisma {
     usuario?: UsuarioUpdateOneRequiredWithoutResidenteNestedInput
     setor?: SetorUpdateOneWithoutResidentesNestedInput
     frequencias?: FrequenciaUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUpdateManyWithoutResidenteNestedInput
   }
 
   export type ResidenteUncheckedUpdateWithoutAvaliacoesInput = {
@@ -19232,6 +20960,7 @@ export namespace Prisma {
     ano_residencia?: NullableIntFieldUpdateOperationsInput | number | null
     setor_id?: NullableIntFieldUpdateOperationsInput | number | null
     frequencias?: FrequenciaUncheckedUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUncheckedUpdateManyWithoutResidenteNestedInput
   }
 
   export type SupervisorUpsertWithoutAvaliacoesInput = {
@@ -19661,6 +21390,15 @@ export namespace Prisma {
     crm?: string | null
   }
 
+  export type AtividadeCreateManySetorInput = {
+    id?: number
+    residente_id: number
+    descricao: string
+    data_atividade: Date | string
+    criado_em?: Date | string
+    finalizada: boolean
+  }
+
   export type ResidenteUpdateWithoutSetorInput = {
     crm?: NullableStringFieldUpdateOperationsInput | string | null
     especialidade?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19668,6 +21406,7 @@ export namespace Prisma {
     usuario?: UsuarioUpdateOneRequiredWithoutResidenteNestedInput
     frequencias?: FrequenciaUpdateManyWithoutResidenteNestedInput
     avaliacoes?: AvaliacaoUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUpdateManyWithoutResidenteNestedInput
   }
 
   export type ResidenteUncheckedUpdateWithoutSetorInput = {
@@ -19677,6 +21416,7 @@ export namespace Prisma {
     ano_residencia?: NullableIntFieldUpdateOperationsInput | number | null
     frequencias?: FrequenciaUncheckedUpdateManyWithoutResidenteNestedInput
     avaliacoes?: AvaliacaoUncheckedUpdateManyWithoutResidenteNestedInput
+    atividades?: AtividadeUncheckedUpdateManyWithoutResidenteNestedInput
   }
 
   export type ResidenteUncheckedUpdateManyWithoutSetorInput = {
@@ -19703,6 +21443,32 @@ export namespace Prisma {
   export type SupervisorUncheckedUpdateManyWithoutSetorInput = {
     id?: IntFieldUpdateOperationsInput | number
     crm?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type AtividadeUpdateWithoutSetorInput = {
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
+    residente?: ResidenteUpdateOneRequiredWithoutAtividadesNestedInput
+  }
+
+  export type AtividadeUncheckedUpdateWithoutSetorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    residente_id?: IntFieldUpdateOperationsInput | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AtividadeUncheckedUpdateManyWithoutSetorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    residente_id?: IntFieldUpdateOperationsInput | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type LogAcessoCreateManyUsuarioInput = {
@@ -19835,6 +21601,15 @@ export namespace Prisma {
     criado_em?: Date | string
   }
 
+  export type AtividadeCreateManyResidenteInput = {
+    id?: number
+    setor_id: number
+    descricao: string
+    data_atividade: Date | string
+    criado_em?: Date | string
+    finalizada: boolean
+  }
+
   export type FrequenciaUpdateWithoutResidenteInput = {
     data?: DateTimeFieldUpdateOperationsInput | Date | string
     presente?: BoolFieldUpdateOperationsInput | boolean
@@ -19898,6 +21673,32 @@ export namespace Prisma {
     periodo_inicio?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     periodo_fim?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AtividadeUpdateWithoutResidenteInput = {
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
+    setor?: SetorUpdateOneRequiredWithoutAtividadesNestedInput
+  }
+
+  export type AtividadeUncheckedUpdateWithoutResidenteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    setor_id?: IntFieldUpdateOperationsInput | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AtividadeUncheckedUpdateManyWithoutResidenteInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    setor_id?: IntFieldUpdateOperationsInput | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type AvaliacaoCreateManySupervisorInput = {

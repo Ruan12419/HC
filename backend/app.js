@@ -39,6 +39,8 @@ const usuarioRoute = require("./src/routes/user.routes");
 app.use("/user", usuarioRoute);
 const frequenciaRoute = require('./src/routes/frequency.routes');
 app.use('/frequencias', frequenciaRoute);
+const atividadeRoute = require('./src/routes/activity.routes');
+app.use('/atividade', atividadeRoute);
 
 app.use(errorMiddleware);
 

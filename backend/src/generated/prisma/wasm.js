@@ -167,6 +167,16 @@ exports.Prisma.FrequenciaScalarFieldEnum = {
   registrado_por: 'registrado_por'
 };
 
+exports.Prisma.AtividadeScalarFieldEnum = {
+  id: 'id',
+  residente_id: 'residente_id',
+  setor_id: 'setor_id',
+  descricao: 'descricao',
+  data_atividade: 'data_atividade',
+  criado_em: 'criado_em',
+  finalizada: 'finalizada'
+};
+
 exports.Prisma.CampoAvaliacaoScalarFieldEnum = {
   id: 'id',
   titulo: 'titulo',
@@ -255,6 +265,10 @@ exports.Prisma.FrequenciaOrderByRelevanceFieldEnum = {
   observacoes: 'observacoes'
 };
 
+exports.Prisma.AtividadeOrderByRelevanceFieldEnum = {
+  descricao: 'descricao'
+};
+
 exports.Prisma.CampoAvaliacaoOrderByRelevanceFieldEnum = {
   titulo: 'titulo',
   descricao: 'descricao'
@@ -297,6 +311,7 @@ exports.Prisma.ModelName = {
   Supervisor: 'Supervisor',
   Administrador: 'Administrador',
   Frequencia: 'Frequencia',
+  Atividade: 'Atividade',
   CampoAvaliacao: 'CampoAvaliacao',
   Avaliacao: 'Avaliacao',
   RespostaAvaliacao: 'RespostaAvaliacao',

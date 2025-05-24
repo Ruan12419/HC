@@ -17,6 +17,7 @@ model Setor {
   descricao    String?      @db.Text
   residentes   Residente[]
   supervisores Supervisor[]
+  atividades   Atividade[]
 }
 
 model Usuario {
@@ -52,6 +53,7 @@ model Residente {
   setor          Setor?       @relation(fields: [setor_id], references: [id])
   frequencias    Frequencia[]
   avaliacoes     Avaliacao[]
+  atividades     Atividade[]
 }
 
 model Supervisor {
@@ -85,6 +87,23 @@ model Frequencia {
   registradoPor Usuario   @relation("Registradas", fields: [registrado_por], references: [id])
 
   @@unique([residente_id, data])
+}
+
+model Atividade {
+  id             Int      @id @default(autoincrement())
+  residente_id   Int
+  setor_id       Int
+  descricao      String   @db.VarChar(255)
+  data_atividade DateTime @db.Date
+  criado_em      DateTime @default(now())
+  finalizada     Boolean
+
+  residente Residente @relation(fields: [residente_id], references: [id])
+  setor     Setor     @relation(fields: [setor_id], references: [id])
+
+  @@unique([residente_id, data_atividade, descricao])
+  @@index([residente_id])
+  @@index([setor_id])
 }
 
 model CampoAvaliacao {
