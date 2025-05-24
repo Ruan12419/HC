@@ -6,7 +6,7 @@ const {criar, atualizar, excluir, listarPorResidente, pendentes} = require('../c
 activityRoute.post('/criar', criar);
 
 // Atualizar atividade existente
-activityRoute.put('/:id', atualizar);
+activityRoute.patch('/:id', atualizar);
 
 // Excluir atividade
 activityRoute.delete('/:id', excluir);
