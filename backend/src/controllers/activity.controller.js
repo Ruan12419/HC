@@ -43,6 +43,18 @@ exports.excluir = async (req, res, next) => {
     }
 };
 
+// Busca a atividade pelo seu Id
+exports.buscarPorId = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const atividade = await service.buscarPorId(Number(id));
+        if (!atividade) return res.status(404).json({ message: 'Atividade não encontrada' });
+        res.json(atividade);
+    } catch (err) {
+        next(err);
+    }
+};
+
 // Lista as atividades de um residente a partir de seu residente_id
 exports.listarPorResidente = async (req, res, next) => {
     try {
@@ -64,3 +76,26 @@ exports.pendentes = async (req, res, next) => {
         next(err);
     }
 };
+
+// Retorna todas as atividades finalizadas de um residente
+exports.listarFinalizadas = async (req, res, next) => {
+    try {
+        const { residenteId } = req.params;
+        const resultado = await service.buscarFinalizadas(Number(residenteId));
+        res.json(resultado);
+    } catch (err) {
+        next(err);
+    }
+};
+
+// Retorna valores para estatísticos para serem apresentados em Dashboard
+exports.estatisticas = async (req, res, next) => {
+    try {
+        const residenteId = Number(req.params.residenteId);
+        const stats = await service.obterEstatisticas(residenteId);
+        res.json(stats);
+    } catch (err) {
+        next(err);
+    }
+};
+
