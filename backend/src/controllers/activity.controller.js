@@ -27,7 +27,7 @@ exports.atualizar = async (req, res, next) => {
         const atividade = await service.atualizar(Number(id), req.body);
         res.json(atividade);
     } catch (err) {
-        res.status(400).json({ erro: err.message });
+        next(err);
     }
 };
 
@@ -39,7 +39,7 @@ exports.excluir = async (req, res, next) => {
         await service.excluir(Number(id));
         res.json({ mensagem: 'Atividade excluída com sucesso.' });
     } catch (err) {
-        res.status(400).json({ erro: err.message });
+        next(err);
     }
 };
 
@@ -50,7 +50,7 @@ exports.listarPorResidente = async (req, res, next) => {
         const atividades = await service.buscarPorResidente(Number(residenteId));
         res.json(atividades);
     } catch (err) {
-        res.status(400).json({ erro: err.message });
+        next(err);
     }
 };
 
