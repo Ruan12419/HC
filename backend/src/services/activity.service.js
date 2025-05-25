@@ -59,7 +59,7 @@ exports.atualizar = async (id, dados, usuario) => {
       acao: "editar",
       dados_anteriores: atividade,
       dados_novos: atualizada,
-      usuario_id: usuario.id
+      usuario_id: usuario.id,
     });
 
     return atualizada;
@@ -104,4 +104,9 @@ exports.buscarFinalizadas = async (residenteId) => {
 
 exports.obterEstatisticas = async (residenteId) => {
   return await repository.obterEstatisticas(residenteId);
+};
+
+exports.listarAtividadesFiltradas = async (residenteId, filtros, usuario) => {
+  await verificarPermissaoParaResidente(usuario, residenteId);
+  return await repository.listarAtividadesComFiltros(residenteId, filtros);
 };

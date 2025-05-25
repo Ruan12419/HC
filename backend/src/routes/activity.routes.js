@@ -1,7 +1,7 @@
 const express = require('express');
 const activityRoute = express.Router();
 const {criar, atualizar, excluir, buscarPorId, listarPorResidente, 
-    pendentes, listarFinalizadas, estatisticas} = require('../controllers/activity.controller');
+    pendentes, listarFinalizadas, estatisticas, listarAtividadesComFiltros} = require('../controllers/activity.controller');
 const { authMiddleware, permitirRoles } = require("../middlewares/auth.middleware")
 
 // Criar nova atividade
@@ -27,5 +27,8 @@ activityRoute.get('/finalizadas/:residenteId', authMiddleware, permitirRoles("re
 
 // Retorna estatísticas para Dashboard
 activityRoute.get('/residente/:residenteId/stats', authMiddleware, permitirRoles("residente", "supervisor", "administrador"), estatisticas);
+
+// Retorna atividades com paginação
+activityRoute.get('/residente/:residenteId/atividades', authMiddleware, permitirRoles("residente", "supervisor", "administrador"), listarAtividadesComFiltros);
 
 module.exports = activityRoute;

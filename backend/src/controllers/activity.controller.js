@@ -108,3 +108,14 @@ exports.estatisticas = async (req, res, next) => {
     }
 };
 
+exports.listarAtividadesComFiltros = async (req, res, next) => {
+  const { residenteId } = req.params;
+  const filtros = req.query;
+
+  try {
+    const resultado = await atividadeService.listarAtividadesFiltradas(residenteId, filtros, usuario(req));
+    res.json(resultado);
+  } catch (err) {
+    next(err);
+  }
+}

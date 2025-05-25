@@ -131,3 +131,50 @@ exports.obterEstatisticas = async (residenteId) => {
     porSetor: setoresComNome,
   };
 };
+
+exports.listarAtividadesComFiltros = async (residenteId, filtros) => {
+  const {
+    page = 1,
+    limit = 10,
+    data_inicio,
+    data_fim,
+    finalizada,
+    setor_id
+  } = filtros;
+
+  const skip = (page - 1) * limit;
+  const take = parseInt(limit);
+
+  const where = {
+    residente_id: parseInt(residenteId),
+    ...(finalizada !== undefined && { finalizada: finalizada === 'true' }),
+    ...(setor_id && { setor_id: parseInt(setor_id) }),
+    ...(data_inicio || data_fim
+      ? {
+          data_atividade: {
+            ...(data_inicio && { gte: new Date(data_inicio) }),
+            ...(data_fim && { lte: new Date(data_fim) }),
+          }
+        }
+      : {})
+  };
+
+  const [atividades, total] = await Promise.all([
+    prisma.atividade.findMany({
+      where,
+      skip,
+      take,
+      orderBy: { data_atividade: 'desc' }
+    }),
+    prisma.atividade.count({ where })
+  ]);
+
+  return {
+    atividades,
+    total,
+    page: parseInt(page),
+    limit: take,
+    totalPages: Math.ceil(total / take)
+  };
+}
+
