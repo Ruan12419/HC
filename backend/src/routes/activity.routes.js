@@ -14,7 +14,7 @@ activityRoute.patch('/:id', authMiddleware, permitirRoles("residente", "supervis
 activityRoute.delete('/:id', authMiddleware, permitirRoles("supervisor", "administrador"), excluir);
 
 // Buscar Atividade por Id
-activityRoute.get('/:id', authMiddleware, permitirRoles("residente", "supervisor", "administrador"), buscarPorId);
+activityRoute.get('/:id/residente/:residenteId', authMiddleware, permitirRoles("residente", "supervisor", "administrador"), buscarPorId);
 
 // Listar atividades de um residente
 activityRoute.get('/residente/:residenteId', authMiddleware, permitirRoles("residente", "supervisor", "administrador"), listarPorResidente);

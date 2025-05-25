@@ -54,8 +54,7 @@ exports.excluir = async (req, res, next) => {
 // Busca a atividade pelo seu Id
 exports.buscarPorId = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const { residenteId } = req.body;
+        const { id, residenteId } = req.params;
         const atividade = await atividadeService.buscarPorId(Number(id), Number(residenteId), usuario(req));
         if (!atividade) return res.status(404).json({ message: 'Atividade não encontrada' });
         res.json(atividade);
