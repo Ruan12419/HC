@@ -21,6 +21,9 @@ exports.atualizarAtividade = async (id, dados) => {
     if (dados.data_atividade) {
         dados.data_atividade = new Date(dados.data_atividade);
     }
+    if (dados.data_finalizacao) {
+        dados.data_finalizacao = new Date(dados.data_finalizacao);
+    }
     return await prisma.atividade.update({
         where: { id },
         data: dados
