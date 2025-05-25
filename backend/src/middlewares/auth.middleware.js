@@ -19,6 +19,14 @@ const authMiddleware = (req, res, next) => {
     }
 };
 
+const permitirRoles = (...rolesPermitidos) => {
+  return (req, res, next) => {
+    if (!req.usuario || !rolesPermitidos.includes(req.usuario.tipo)) {
+      return res.status(403).json({ error: 'Acesso negado' });
+    }
+    next();
+  };
+};
 
 // Limitador de requisições
 const limitador = rateLimit({
@@ -32,4 +40,4 @@ const limitador = rateLimit({
 });
 
 
-module.exports = {authMiddleware, limitador};
+module.exports = {authMiddleware, permitirRoles, limitador};

@@ -173,8 +173,19 @@ exports.Prisma.AtividadeScalarFieldEnum = {
   setor_id: 'setor_id',
   descricao: 'descricao',
   data_atividade: 'data_atividade',
+  data_finalizacao: 'data_finalizacao',
   criado_em: 'criado_em',
   finalizada: 'finalizada'
+};
+
+exports.Prisma.AtividadeLogScalarFieldEnum = {
+  id: 'id',
+  atividade_id: 'atividade_id',
+  acao: 'acao',
+  dados_anteriores: 'dados_anteriores',
+  dados_novos: 'dados_novos',
+  usuario_id: 'usuario_id',
+  timestamp: 'timestamp'
 };
 
 exports.Prisma.CampoAvaliacaoScalarFieldEnum = {
@@ -236,6 +247,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
@@ -267,6 +283,21 @@ exports.Prisma.FrequenciaOrderByRelevanceFieldEnum = {
 
 exports.Prisma.AtividadeOrderByRelevanceFieldEnum = {
   descricao: 'descricao'
+};
+
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
+exports.Prisma.AtividadeLogOrderByRelevanceFieldEnum = {
+  acao: 'acao'
 };
 
 exports.Prisma.CampoAvaliacaoOrderByRelevanceFieldEnum = {
@@ -312,6 +343,7 @@ exports.Prisma.ModelName = {
   Administrador: 'Administrador',
   Frequencia: 'Frequencia',
   Atividade: 'Atividade',
+  AtividadeLog: 'AtividadeLog',
   CampoAvaliacao: 'CampoAvaliacao',
   Avaliacao: 'Avaliacao',
   RespostaAvaliacao: 'RespostaAvaliacao',

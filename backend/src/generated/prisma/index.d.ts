@@ -49,6 +49,11 @@ export type Frequencia = $Result.DefaultSelection<Prisma.$FrequenciaPayload>
  */
 export type Atividade = $Result.DefaultSelection<Prisma.$AtividadePayload>
 /**
+ * Model AtividadeLog
+ * 
+ */
+export type AtividadeLog = $Result.DefaultSelection<Prisma.$AtividadeLogPayload>
+/**
  * Model CampoAvaliacao
  * 
  */
@@ -304,6 +309,16 @@ export class PrismaClient<
     * ```
     */
   get atividade(): Prisma.AtividadeDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.atividadeLog`: Exposes CRUD operations for the **AtividadeLog** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more AtividadeLogs
+    * const atividadeLogs = await prisma.atividadeLog.findMany()
+    * ```
+    */
+  get atividadeLog(): Prisma.AtividadeLogDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.campoAvaliacao`: Exposes CRUD operations for the **CampoAvaliacao** model.
@@ -811,6 +826,7 @@ export namespace Prisma {
     Administrador: 'Administrador',
     Frequencia: 'Frequencia',
     Atividade: 'Atividade',
+    AtividadeLog: 'AtividadeLog',
     CampoAvaliacao: 'CampoAvaliacao',
     Avaliacao: 'Avaliacao',
     RespostaAvaliacao: 'RespostaAvaliacao',
@@ -835,7 +851,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "setor" | "usuario" | "residente" | "supervisor" | "administrador" | "frequencia" | "atividade" | "campoAvaliacao" | "avaliacao" | "respostaAvaliacao" | "comentario" | "logAcesso" | "notificacao"
+      modelProps: "setor" | "usuario" | "residente" | "supervisor" | "administrador" | "frequencia" | "atividade" | "atividadeLog" | "campoAvaliacao" | "avaliacao" | "respostaAvaliacao" | "comentario" | "logAcesso" | "notificacao"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1298,6 +1314,72 @@ export namespace Prisma {
           count: {
             args: Prisma.AtividadeCountArgs<ExtArgs>
             result: $Utils.Optional<AtividadeCountAggregateOutputType> | number
+          }
+        }
+      }
+      AtividadeLog: {
+        payload: Prisma.$AtividadeLogPayload<ExtArgs>
+        fields: Prisma.AtividadeLogFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AtividadeLogFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadeLogPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AtividadeLogFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadeLogPayload>
+          }
+          findFirst: {
+            args: Prisma.AtividadeLogFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadeLogPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AtividadeLogFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadeLogPayload>
+          }
+          findMany: {
+            args: Prisma.AtividadeLogFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadeLogPayload>[]
+          }
+          create: {
+            args: Prisma.AtividadeLogCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadeLogPayload>
+          }
+          createMany: {
+            args: Prisma.AtividadeLogCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.AtividadeLogDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadeLogPayload>
+          }
+          update: {
+            args: Prisma.AtividadeLogUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadeLogPayload>
+          }
+          deleteMany: {
+            args: Prisma.AtividadeLogDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AtividadeLogUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.AtividadeLogUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AtividadeLogPayload>
+          }
+          aggregate: {
+            args: Prisma.AtividadeLogAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAtividadeLog>
+          }
+          groupBy: {
+            args: Prisma.AtividadeLogGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AtividadeLogGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AtividadeLogCountArgs<ExtArgs>
+            result: $Utils.Optional<AtividadeLogCountAggregateOutputType> | number
           }
         }
       }
@@ -1788,6 +1870,7 @@ export namespace Prisma {
     administrador?: AdministradorOmit
     frequencia?: FrequenciaOmit
     atividade?: AtividadeOmit
+    atividadeLog?: AtividadeLogOmit
     campoAvaliacao?: CampoAvaliacaoOmit
     avaliacao?: AvaliacaoOmit
     respostaAvaliacao?: RespostaAvaliacaoOmit
@@ -1940,12 +2023,14 @@ export namespace Prisma {
     logs: number
     notificacoes: number
     frequencias_registradas: number
+    AtividadeLog: number
   }
 
   export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     logs?: boolean | UsuarioCountOutputTypeCountLogsArgs
     notificacoes?: boolean | UsuarioCountOutputTypeCountNotificacoesArgs
     frequencias_registradas?: boolean | UsuarioCountOutputTypeCountFrequencias_registradasArgs
+    AtividadeLog?: boolean | UsuarioCountOutputTypeCountAtividadeLogArgs
   }
 
   // Custom InputTypes
@@ -1978,6 +2063,13 @@ export namespace Prisma {
    */
   export type UsuarioCountOutputTypeCountFrequencias_registradasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: FrequenciaWhereInput
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountAtividadeLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AtividadeLogWhereInput
   }
 
 
@@ -2067,6 +2159,37 @@ export namespace Prisma {
    */
   export type SupervisorCountOutputTypeCountComentariosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ComentarioWhereInput
+  }
+
+
+  /**
+   * Count Type AtividadeCountOutputType
+   */
+
+  export type AtividadeCountOutputType = {
+    AtividadeLog: number
+  }
+
+  export type AtividadeCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    AtividadeLog?: boolean | AtividadeCountOutputTypeCountAtividadeLogArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * AtividadeCountOutputType without action
+   */
+  export type AtividadeCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeCountOutputType
+     */
+    select?: AtividadeCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * AtividadeCountOutputType without action
+   */
+  export type AtividadeCountOutputTypeCountAtividadeLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AtividadeLogWhereInput
   }
 
 
@@ -3388,6 +3511,7 @@ export namespace Prisma {
     logs?: boolean | Usuario$logsArgs<ExtArgs>
     notificacoes?: boolean | Usuario$notificacoesArgs<ExtArgs>
     frequencias_registradas?: boolean | Usuario$frequencias_registradasArgs<ExtArgs>
+    AtividadeLog?: boolean | Usuario$AtividadeLogArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
@@ -3411,6 +3535,7 @@ export namespace Prisma {
     logs?: boolean | Usuario$logsArgs<ExtArgs>
     notificacoes?: boolean | Usuario$notificacoesArgs<ExtArgs>
     frequencias_registradas?: boolean | Usuario$frequencias_registradasArgs<ExtArgs>
+    AtividadeLog?: boolean | Usuario$AtividadeLogArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3423,6 +3548,7 @@ export namespace Prisma {
       logs: Prisma.$LogAcessoPayload<ExtArgs>[]
       notificacoes: Prisma.$NotificacaoPayload<ExtArgs>[]
       frequencias_registradas: Prisma.$FrequenciaPayload<ExtArgs>[]
+      AtividadeLog: Prisma.$AtividadeLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3778,6 +3904,7 @@ export namespace Prisma {
     logs<T extends Usuario$logsArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$logsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LogAcessoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     notificacoes<T extends Usuario$notificacoesArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$notificacoesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$NotificacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     frequencias_registradas<T extends Usuario$frequencias_registradasArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$frequencias_registradasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$FrequenciaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    AtividadeLog<T extends Usuario$AtividadeLogArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$AtividadeLogArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4283,6 +4410,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: FrequenciaScalarFieldEnum | FrequenciaScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario.AtividadeLog
+   */
+  export type Usuario$AtividadeLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    where?: AtividadeLogWhereInput
+    orderBy?: AtividadeLogOrderByWithRelationInput | AtividadeLogOrderByWithRelationInput[]
+    cursor?: AtividadeLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AtividadeLogScalarFieldEnum | AtividadeLogScalarFieldEnum[]
   }
 
   /**
@@ -8389,6 +8540,7 @@ export namespace Prisma {
     setor_id: number | null
     descricao: string | null
     data_atividade: Date | null
+    data_finalizacao: Date | null
     criado_em: Date | null
     finalizada: boolean | null
   }
@@ -8399,6 +8551,7 @@ export namespace Prisma {
     setor_id: number | null
     descricao: string | null
     data_atividade: Date | null
+    data_finalizacao: Date | null
     criado_em: Date | null
     finalizada: boolean | null
   }
@@ -8409,6 +8562,7 @@ export namespace Prisma {
     setor_id: number
     descricao: number
     data_atividade: number
+    data_finalizacao: number
     criado_em: number
     finalizada: number
     _all: number
@@ -8433,6 +8587,7 @@ export namespace Prisma {
     setor_id?: true
     descricao?: true
     data_atividade?: true
+    data_finalizacao?: true
     criado_em?: true
     finalizada?: true
   }
@@ -8443,6 +8598,7 @@ export namespace Prisma {
     setor_id?: true
     descricao?: true
     data_atividade?: true
+    data_finalizacao?: true
     criado_em?: true
     finalizada?: true
   }
@@ -8453,6 +8609,7 @@ export namespace Prisma {
     setor_id?: true
     descricao?: true
     data_atividade?: true
+    data_finalizacao?: true
     criado_em?: true
     finalizada?: true
     _all?: true
@@ -8550,6 +8707,7 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date
+    data_finalizacao: Date | null
     criado_em: Date
     finalizada: boolean
     _count: AtividadeCountAggregateOutputType | null
@@ -8579,10 +8737,13 @@ export namespace Prisma {
     setor_id?: boolean
     descricao?: boolean
     data_atividade?: boolean
+    data_finalizacao?: boolean
     criado_em?: boolean
     finalizada?: boolean
     residente?: boolean | ResidenteDefaultArgs<ExtArgs>
     setor?: boolean | SetorDefaultArgs<ExtArgs>
+    AtividadeLog?: boolean | Atividade$AtividadeLogArgs<ExtArgs>
+    _count?: boolean | AtividadeCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["atividade"]>
 
 
@@ -8593,14 +8754,17 @@ export namespace Prisma {
     setor_id?: boolean
     descricao?: boolean
     data_atividade?: boolean
+    data_finalizacao?: boolean
     criado_em?: boolean
     finalizada?: boolean
   }
 
-  export type AtividadeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residente_id" | "setor_id" | "descricao" | "data_atividade" | "criado_em" | "finalizada", ExtArgs["result"]["atividade"]>
+  export type AtividadeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residente_id" | "setor_id" | "descricao" | "data_atividade" | "data_finalizacao" | "criado_em" | "finalizada", ExtArgs["result"]["atividade"]>
   export type AtividadeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     residente?: boolean | ResidenteDefaultArgs<ExtArgs>
     setor?: boolean | SetorDefaultArgs<ExtArgs>
+    AtividadeLog?: boolean | Atividade$AtividadeLogArgs<ExtArgs>
+    _count?: boolean | AtividadeCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $AtividadePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8608,6 +8772,7 @@ export namespace Prisma {
     objects: {
       residente: Prisma.$ResidentePayload<ExtArgs>
       setor: Prisma.$SetorPayload<ExtArgs>
+      AtividadeLog: Prisma.$AtividadeLogPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -8615,6 +8780,7 @@ export namespace Prisma {
       setor_id: number
       descricao: string
       data_atividade: Date
+      data_finalizacao: Date | null
       criado_em: Date
       finalizada: boolean
     }, ExtArgs["result"]["atividade"]>
@@ -8959,6 +9125,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     residente<T extends ResidenteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ResidenteDefaultArgs<ExtArgs>>): Prisma__ResidenteClient<$Result.GetResult<Prisma.$ResidentePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     setor<T extends SetorDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SetorDefaultArgs<ExtArgs>>): Prisma__SetorClient<$Result.GetResult<Prisma.$SetorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    AtividadeLog<T extends Atividade$AtividadeLogArgs<ExtArgs> = {}>(args?: Subset<T, Atividade$AtividadeLogArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8993,6 +9160,7 @@ export namespace Prisma {
     readonly setor_id: FieldRef<"Atividade", 'Int'>
     readonly descricao: FieldRef<"Atividade", 'String'>
     readonly data_atividade: FieldRef<"Atividade", 'DateTime'>
+    readonly data_finalizacao: FieldRef<"Atividade", 'DateTime'>
     readonly criado_em: FieldRef<"Atividade", 'DateTime'>
     readonly finalizada: FieldRef<"Atividade", 'Boolean'>
   }
@@ -9338,6 +9506,30 @@ export namespace Prisma {
   }
 
   /**
+   * Atividade.AtividadeLog
+   */
+  export type Atividade$AtividadeLogArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    where?: AtividadeLogWhereInput
+    orderBy?: AtividadeLogOrderByWithRelationInput | AtividadeLogOrderByWithRelationInput[]
+    cursor?: AtividadeLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AtividadeLogScalarFieldEnum | AtividadeLogScalarFieldEnum[]
+  }
+
+  /**
    * Atividade without action
    */
   export type AtividadeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9353,6 +9545,995 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AtividadeInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model AtividadeLog
+   */
+
+  export type AggregateAtividadeLog = {
+    _count: AtividadeLogCountAggregateOutputType | null
+    _avg: AtividadeLogAvgAggregateOutputType | null
+    _sum: AtividadeLogSumAggregateOutputType | null
+    _min: AtividadeLogMinAggregateOutputType | null
+    _max: AtividadeLogMaxAggregateOutputType | null
+  }
+
+  export type AtividadeLogAvgAggregateOutputType = {
+    id: number | null
+    atividade_id: number | null
+    usuario_id: number | null
+  }
+
+  export type AtividadeLogSumAggregateOutputType = {
+    id: number | null
+    atividade_id: number | null
+    usuario_id: number | null
+  }
+
+  export type AtividadeLogMinAggregateOutputType = {
+    id: number | null
+    atividade_id: number | null
+    acao: string | null
+    usuario_id: number | null
+    timestamp: Date | null
+  }
+
+  export type AtividadeLogMaxAggregateOutputType = {
+    id: number | null
+    atividade_id: number | null
+    acao: string | null
+    usuario_id: number | null
+    timestamp: Date | null
+  }
+
+  export type AtividadeLogCountAggregateOutputType = {
+    id: number
+    atividade_id: number
+    acao: number
+    dados_anteriores: number
+    dados_novos: number
+    usuario_id: number
+    timestamp: number
+    _all: number
+  }
+
+
+  export type AtividadeLogAvgAggregateInputType = {
+    id?: true
+    atividade_id?: true
+    usuario_id?: true
+  }
+
+  export type AtividadeLogSumAggregateInputType = {
+    id?: true
+    atividade_id?: true
+    usuario_id?: true
+  }
+
+  export type AtividadeLogMinAggregateInputType = {
+    id?: true
+    atividade_id?: true
+    acao?: true
+    usuario_id?: true
+    timestamp?: true
+  }
+
+  export type AtividadeLogMaxAggregateInputType = {
+    id?: true
+    atividade_id?: true
+    acao?: true
+    usuario_id?: true
+    timestamp?: true
+  }
+
+  export type AtividadeLogCountAggregateInputType = {
+    id?: true
+    atividade_id?: true
+    acao?: true
+    dados_anteriores?: true
+    dados_novos?: true
+    usuario_id?: true
+    timestamp?: true
+    _all?: true
+  }
+
+  export type AtividadeLogAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AtividadeLog to aggregate.
+     */
+    where?: AtividadeLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AtividadeLogs to fetch.
+     */
+    orderBy?: AtividadeLogOrderByWithRelationInput | AtividadeLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AtividadeLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AtividadeLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AtividadeLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned AtividadeLogs
+    **/
+    _count?: true | AtividadeLogCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AtividadeLogAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AtividadeLogSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AtividadeLogMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AtividadeLogMaxAggregateInputType
+  }
+
+  export type GetAtividadeLogAggregateType<T extends AtividadeLogAggregateArgs> = {
+        [P in keyof T & keyof AggregateAtividadeLog]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAtividadeLog[P]>
+      : GetScalarType<T[P], AggregateAtividadeLog[P]>
+  }
+
+
+
+
+  export type AtividadeLogGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AtividadeLogWhereInput
+    orderBy?: AtividadeLogOrderByWithAggregationInput | AtividadeLogOrderByWithAggregationInput[]
+    by: AtividadeLogScalarFieldEnum[] | AtividadeLogScalarFieldEnum
+    having?: AtividadeLogScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AtividadeLogCountAggregateInputType | true
+    _avg?: AtividadeLogAvgAggregateInputType
+    _sum?: AtividadeLogSumAggregateInputType
+    _min?: AtividadeLogMinAggregateInputType
+    _max?: AtividadeLogMaxAggregateInputType
+  }
+
+  export type AtividadeLogGroupByOutputType = {
+    id: number
+    atividade_id: number
+    acao: string
+    dados_anteriores: JsonValue | null
+    dados_novos: JsonValue | null
+    usuario_id: number
+    timestamp: Date
+    _count: AtividadeLogCountAggregateOutputType | null
+    _avg: AtividadeLogAvgAggregateOutputType | null
+    _sum: AtividadeLogSumAggregateOutputType | null
+    _min: AtividadeLogMinAggregateOutputType | null
+    _max: AtividadeLogMaxAggregateOutputType | null
+  }
+
+  type GetAtividadeLogGroupByPayload<T extends AtividadeLogGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AtividadeLogGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AtividadeLogGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AtividadeLogGroupByOutputType[P]>
+            : GetScalarType<T[P], AtividadeLogGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AtividadeLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    atividade_id?: boolean
+    acao?: boolean
+    dados_anteriores?: boolean
+    dados_novos?: boolean
+    usuario_id?: boolean
+    timestamp?: boolean
+    atividade?: boolean | AtividadeDefaultArgs<ExtArgs>
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["atividadeLog"]>
+
+
+
+  export type AtividadeLogSelectScalar = {
+    id?: boolean
+    atividade_id?: boolean
+    acao?: boolean
+    dados_anteriores?: boolean
+    dados_novos?: boolean
+    usuario_id?: boolean
+    timestamp?: boolean
+  }
+
+  export type AtividadeLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "atividade_id" | "acao" | "dados_anteriores" | "dados_novos" | "usuario_id" | "timestamp", ExtArgs["result"]["atividadeLog"]>
+  export type AtividadeLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    atividade?: boolean | AtividadeDefaultArgs<ExtArgs>
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
+
+  export type $AtividadeLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "AtividadeLog"
+    objects: {
+      atividade: Prisma.$AtividadePayload<ExtArgs>
+      usuario: Prisma.$UsuarioPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      atividade_id: number
+      acao: string
+      dados_anteriores: Prisma.JsonValue | null
+      dados_novos: Prisma.JsonValue | null
+      usuario_id: number
+      timestamp: Date
+    }, ExtArgs["result"]["atividadeLog"]>
+    composites: {}
+  }
+
+  type AtividadeLogGetPayload<S extends boolean | null | undefined | AtividadeLogDefaultArgs> = $Result.GetResult<Prisma.$AtividadeLogPayload, S>
+
+  type AtividadeLogCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AtividadeLogFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AtividadeLogCountAggregateInputType | true
+    }
+
+  export interface AtividadeLogDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['AtividadeLog'], meta: { name: 'AtividadeLog' } }
+    /**
+     * Find zero or one AtividadeLog that matches the filter.
+     * @param {AtividadeLogFindUniqueArgs} args - Arguments to find a AtividadeLog
+     * @example
+     * // Get one AtividadeLog
+     * const atividadeLog = await prisma.atividadeLog.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AtividadeLogFindUniqueArgs>(args: SelectSubset<T, AtividadeLogFindUniqueArgs<ExtArgs>>): Prisma__AtividadeLogClient<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one AtividadeLog that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AtividadeLogFindUniqueOrThrowArgs} args - Arguments to find a AtividadeLog
+     * @example
+     * // Get one AtividadeLog
+     * const atividadeLog = await prisma.atividadeLog.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AtividadeLogFindUniqueOrThrowArgs>(args: SelectSubset<T, AtividadeLogFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AtividadeLogClient<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AtividadeLog that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeLogFindFirstArgs} args - Arguments to find a AtividadeLog
+     * @example
+     * // Get one AtividadeLog
+     * const atividadeLog = await prisma.atividadeLog.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AtividadeLogFindFirstArgs>(args?: SelectSubset<T, AtividadeLogFindFirstArgs<ExtArgs>>): Prisma__AtividadeLogClient<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first AtividadeLog that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeLogFindFirstOrThrowArgs} args - Arguments to find a AtividadeLog
+     * @example
+     * // Get one AtividadeLog
+     * const atividadeLog = await prisma.atividadeLog.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AtividadeLogFindFirstOrThrowArgs>(args?: SelectSubset<T, AtividadeLogFindFirstOrThrowArgs<ExtArgs>>): Prisma__AtividadeLogClient<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more AtividadeLogs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeLogFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all AtividadeLogs
+     * const atividadeLogs = await prisma.atividadeLog.findMany()
+     * 
+     * // Get first 10 AtividadeLogs
+     * const atividadeLogs = await prisma.atividadeLog.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const atividadeLogWithIdOnly = await prisma.atividadeLog.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AtividadeLogFindManyArgs>(args?: SelectSubset<T, AtividadeLogFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a AtividadeLog.
+     * @param {AtividadeLogCreateArgs} args - Arguments to create a AtividadeLog.
+     * @example
+     * // Create one AtividadeLog
+     * const AtividadeLog = await prisma.atividadeLog.create({
+     *   data: {
+     *     // ... data to create a AtividadeLog
+     *   }
+     * })
+     * 
+     */
+    create<T extends AtividadeLogCreateArgs>(args: SelectSubset<T, AtividadeLogCreateArgs<ExtArgs>>): Prisma__AtividadeLogClient<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many AtividadeLogs.
+     * @param {AtividadeLogCreateManyArgs} args - Arguments to create many AtividadeLogs.
+     * @example
+     * // Create many AtividadeLogs
+     * const atividadeLog = await prisma.atividadeLog.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AtividadeLogCreateManyArgs>(args?: SelectSubset<T, AtividadeLogCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a AtividadeLog.
+     * @param {AtividadeLogDeleteArgs} args - Arguments to delete one AtividadeLog.
+     * @example
+     * // Delete one AtividadeLog
+     * const AtividadeLog = await prisma.atividadeLog.delete({
+     *   where: {
+     *     // ... filter to delete one AtividadeLog
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AtividadeLogDeleteArgs>(args: SelectSubset<T, AtividadeLogDeleteArgs<ExtArgs>>): Prisma__AtividadeLogClient<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one AtividadeLog.
+     * @param {AtividadeLogUpdateArgs} args - Arguments to update one AtividadeLog.
+     * @example
+     * // Update one AtividadeLog
+     * const atividadeLog = await prisma.atividadeLog.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AtividadeLogUpdateArgs>(args: SelectSubset<T, AtividadeLogUpdateArgs<ExtArgs>>): Prisma__AtividadeLogClient<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more AtividadeLogs.
+     * @param {AtividadeLogDeleteManyArgs} args - Arguments to filter AtividadeLogs to delete.
+     * @example
+     * // Delete a few AtividadeLogs
+     * const { count } = await prisma.atividadeLog.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AtividadeLogDeleteManyArgs>(args?: SelectSubset<T, AtividadeLogDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more AtividadeLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeLogUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many AtividadeLogs
+     * const atividadeLog = await prisma.atividadeLog.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AtividadeLogUpdateManyArgs>(args: SelectSubset<T, AtividadeLogUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one AtividadeLog.
+     * @param {AtividadeLogUpsertArgs} args - Arguments to update or create a AtividadeLog.
+     * @example
+     * // Update or create a AtividadeLog
+     * const atividadeLog = await prisma.atividadeLog.upsert({
+     *   create: {
+     *     // ... data to create a AtividadeLog
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the AtividadeLog we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AtividadeLogUpsertArgs>(args: SelectSubset<T, AtividadeLogUpsertArgs<ExtArgs>>): Prisma__AtividadeLogClient<$Result.GetResult<Prisma.$AtividadeLogPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of AtividadeLogs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeLogCountArgs} args - Arguments to filter AtividadeLogs to count.
+     * @example
+     * // Count the number of AtividadeLogs
+     * const count = await prisma.atividadeLog.count({
+     *   where: {
+     *     // ... the filter for the AtividadeLogs we want to count
+     *   }
+     * })
+    **/
+    count<T extends AtividadeLogCountArgs>(
+      args?: Subset<T, AtividadeLogCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AtividadeLogCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a AtividadeLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeLogAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AtividadeLogAggregateArgs>(args: Subset<T, AtividadeLogAggregateArgs>): Prisma.PrismaPromise<GetAtividadeLogAggregateType<T>>
+
+    /**
+     * Group by AtividadeLog.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AtividadeLogGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AtividadeLogGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AtividadeLogGroupByArgs['orderBy'] }
+        : { orderBy?: AtividadeLogGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AtividadeLogGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAtividadeLogGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the AtividadeLog model
+   */
+  readonly fields: AtividadeLogFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for AtividadeLog.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AtividadeLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    atividade<T extends AtividadeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AtividadeDefaultArgs<ExtArgs>>): Prisma__AtividadeClient<$Result.GetResult<Prisma.$AtividadePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    usuario<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the AtividadeLog model
+   */
+  interface AtividadeLogFieldRefs {
+    readonly id: FieldRef<"AtividadeLog", 'Int'>
+    readonly atividade_id: FieldRef<"AtividadeLog", 'Int'>
+    readonly acao: FieldRef<"AtividadeLog", 'String'>
+    readonly dados_anteriores: FieldRef<"AtividadeLog", 'Json'>
+    readonly dados_novos: FieldRef<"AtividadeLog", 'Json'>
+    readonly usuario_id: FieldRef<"AtividadeLog", 'Int'>
+    readonly timestamp: FieldRef<"AtividadeLog", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * AtividadeLog findUnique
+   */
+  export type AtividadeLogFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    /**
+     * Filter, which AtividadeLog to fetch.
+     */
+    where: AtividadeLogWhereUniqueInput
+  }
+
+  /**
+   * AtividadeLog findUniqueOrThrow
+   */
+  export type AtividadeLogFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    /**
+     * Filter, which AtividadeLog to fetch.
+     */
+    where: AtividadeLogWhereUniqueInput
+  }
+
+  /**
+   * AtividadeLog findFirst
+   */
+  export type AtividadeLogFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    /**
+     * Filter, which AtividadeLog to fetch.
+     */
+    where?: AtividadeLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AtividadeLogs to fetch.
+     */
+    orderBy?: AtividadeLogOrderByWithRelationInput | AtividadeLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AtividadeLogs.
+     */
+    cursor?: AtividadeLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AtividadeLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AtividadeLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AtividadeLogs.
+     */
+    distinct?: AtividadeLogScalarFieldEnum | AtividadeLogScalarFieldEnum[]
+  }
+
+  /**
+   * AtividadeLog findFirstOrThrow
+   */
+  export type AtividadeLogFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    /**
+     * Filter, which AtividadeLog to fetch.
+     */
+    where?: AtividadeLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AtividadeLogs to fetch.
+     */
+    orderBy?: AtividadeLogOrderByWithRelationInput | AtividadeLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for AtividadeLogs.
+     */
+    cursor?: AtividadeLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AtividadeLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AtividadeLogs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of AtividadeLogs.
+     */
+    distinct?: AtividadeLogScalarFieldEnum | AtividadeLogScalarFieldEnum[]
+  }
+
+  /**
+   * AtividadeLog findMany
+   */
+  export type AtividadeLogFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    /**
+     * Filter, which AtividadeLogs to fetch.
+     */
+    where?: AtividadeLogWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of AtividadeLogs to fetch.
+     */
+    orderBy?: AtividadeLogOrderByWithRelationInput | AtividadeLogOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing AtividadeLogs.
+     */
+    cursor?: AtividadeLogWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` AtividadeLogs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` AtividadeLogs.
+     */
+    skip?: number
+    distinct?: AtividadeLogScalarFieldEnum | AtividadeLogScalarFieldEnum[]
+  }
+
+  /**
+   * AtividadeLog create
+   */
+  export type AtividadeLogCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    /**
+     * The data needed to create a AtividadeLog.
+     */
+    data: XOR<AtividadeLogCreateInput, AtividadeLogUncheckedCreateInput>
+  }
+
+  /**
+   * AtividadeLog createMany
+   */
+  export type AtividadeLogCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many AtividadeLogs.
+     */
+    data: AtividadeLogCreateManyInput | AtividadeLogCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * AtividadeLog update
+   */
+  export type AtividadeLogUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    /**
+     * The data needed to update a AtividadeLog.
+     */
+    data: XOR<AtividadeLogUpdateInput, AtividadeLogUncheckedUpdateInput>
+    /**
+     * Choose, which AtividadeLog to update.
+     */
+    where: AtividadeLogWhereUniqueInput
+  }
+
+  /**
+   * AtividadeLog updateMany
+   */
+  export type AtividadeLogUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update AtividadeLogs.
+     */
+    data: XOR<AtividadeLogUpdateManyMutationInput, AtividadeLogUncheckedUpdateManyInput>
+    /**
+     * Filter which AtividadeLogs to update
+     */
+    where?: AtividadeLogWhereInput
+    /**
+     * Limit how many AtividadeLogs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * AtividadeLog upsert
+   */
+  export type AtividadeLogUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    /**
+     * The filter to search for the AtividadeLog to update in case it exists.
+     */
+    where: AtividadeLogWhereUniqueInput
+    /**
+     * In case the AtividadeLog found by the `where` argument doesn't exist, create a new AtividadeLog with this data.
+     */
+    create: XOR<AtividadeLogCreateInput, AtividadeLogUncheckedCreateInput>
+    /**
+     * In case the AtividadeLog was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AtividadeLogUpdateInput, AtividadeLogUncheckedUpdateInput>
+  }
+
+  /**
+   * AtividadeLog delete
+   */
+  export type AtividadeLogDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
+    /**
+     * Filter which AtividadeLog to delete.
+     */
+    where: AtividadeLogWhereUniqueInput
+  }
+
+  /**
+   * AtividadeLog deleteMany
+   */
+  export type AtividadeLogDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which AtividadeLogs to delete
+     */
+    where?: AtividadeLogWhereInput
+    /**
+     * Limit how many AtividadeLogs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * AtividadeLog without action
+   */
+  export type AtividadeLogDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AtividadeLog
+     */
+    select?: AtividadeLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AtividadeLog
+     */
+    omit?: AtividadeLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AtividadeLogInclude<ExtArgs> | null
   }
 
 
@@ -15421,11 +16602,25 @@ export namespace Prisma {
     setor_id: 'setor_id',
     descricao: 'descricao',
     data_atividade: 'data_atividade',
+    data_finalizacao: 'data_finalizacao',
     criado_em: 'criado_em',
     finalizada: 'finalizada'
   };
 
   export type AtividadeScalarFieldEnum = (typeof AtividadeScalarFieldEnum)[keyof typeof AtividadeScalarFieldEnum]
+
+
+  export const AtividadeLogScalarFieldEnum: {
+    id: 'id',
+    atividade_id: 'atividade_id',
+    acao: 'acao',
+    dados_anteriores: 'dados_anteriores',
+    dados_novos: 'dados_novos',
+    usuario_id: 'usuario_id',
+    timestamp: 'timestamp'
+  };
+
+  export type AtividadeLogScalarFieldEnum = (typeof AtividadeLogScalarFieldEnum)[keyof typeof AtividadeLogScalarFieldEnum]
 
 
   export const CampoAvaliacaoScalarFieldEnum: {
@@ -15508,6 +16703,14 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const NullableJsonNullValueInput: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull
+  };
+
+  export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
   export const NullsOrder: {
     first: 'first',
     last: 'last'
@@ -15560,6 +16763,30 @@ export namespace Prisma {
   };
 
   export type AtividadeOrderByRelevanceFieldEnum = (typeof AtividadeOrderByRelevanceFieldEnum)[keyof typeof AtividadeOrderByRelevanceFieldEnum]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
+  };
+
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+  export const AtividadeLogOrderByRelevanceFieldEnum: {
+    acao: 'acao'
+  };
+
+  export type AtividadeLogOrderByRelevanceFieldEnum = (typeof AtividadeLogOrderByRelevanceFieldEnum)[keyof typeof AtividadeLogOrderByRelevanceFieldEnum]
 
 
   export const CampoAvaliacaoOrderByRelevanceFieldEnum: {
@@ -15638,6 +16865,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -15736,6 +16977,7 @@ export namespace Prisma {
     logs?: LogAcessoListRelationFilter
     notificacoes?: NotificacaoListRelationFilter
     frequencias_registradas?: FrequenciaListRelationFilter
+    AtividadeLog?: AtividadeLogListRelationFilter
   }
 
   export type UsuarioOrderByWithRelationInput = {
@@ -15752,6 +16994,7 @@ export namespace Prisma {
     logs?: LogAcessoOrderByRelationAggregateInput
     notificacoes?: NotificacaoOrderByRelationAggregateInput
     frequencias_registradas?: FrequenciaOrderByRelationAggregateInput
+    AtividadeLog?: AtividadeLogOrderByRelationAggregateInput
     _relevance?: UsuarioOrderByRelevanceInput
   }
 
@@ -15772,6 +17015,7 @@ export namespace Prisma {
     logs?: LogAcessoListRelationFilter
     notificacoes?: NotificacaoListRelationFilter
     frequencias_registradas?: FrequenciaListRelationFilter
+    AtividadeLog?: AtividadeLogListRelationFilter
   }, "id" | "email">
 
   export type UsuarioOrderByWithAggregationInput = {
@@ -16062,10 +17306,12 @@ export namespace Prisma {
     setor_id?: IntFilter<"Atividade"> | number
     descricao?: StringFilter<"Atividade"> | string
     data_atividade?: DateTimeFilter<"Atividade"> | Date | string
+    data_finalizacao?: DateTimeNullableFilter<"Atividade"> | Date | string | null
     criado_em?: DateTimeFilter<"Atividade"> | Date | string
     finalizada?: BoolFilter<"Atividade"> | boolean
     residente?: XOR<ResidenteScalarRelationFilter, ResidenteWhereInput>
     setor?: XOR<SetorScalarRelationFilter, SetorWhereInput>
+    AtividadeLog?: AtividadeLogListRelationFilter
   }
 
   export type AtividadeOrderByWithRelationInput = {
@@ -16074,10 +17320,12 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrderInput | SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
     residente?: ResidenteOrderByWithRelationInput
     setor?: SetorOrderByWithRelationInput
+    AtividadeLog?: AtividadeLogOrderByRelationAggregateInput
     _relevance?: AtividadeOrderByRelevanceInput
   }
 
@@ -16091,10 +17339,12 @@ export namespace Prisma {
     setor_id?: IntFilter<"Atividade"> | number
     descricao?: StringFilter<"Atividade"> | string
     data_atividade?: DateTimeFilter<"Atividade"> | Date | string
+    data_finalizacao?: DateTimeNullableFilter<"Atividade"> | Date | string | null
     criado_em?: DateTimeFilter<"Atividade"> | Date | string
     finalizada?: BoolFilter<"Atividade"> | boolean
     residente?: XOR<ResidenteScalarRelationFilter, ResidenteWhereInput>
     setor?: XOR<SetorScalarRelationFilter, SetorWhereInput>
+    AtividadeLog?: AtividadeLogListRelationFilter
   }, "id" | "residente_id_data_atividade_descricao">
 
   export type AtividadeOrderByWithAggregationInput = {
@@ -16103,6 +17353,7 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrderInput | SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
     _count?: AtividadeCountOrderByAggregateInput
@@ -16121,8 +17372,80 @@ export namespace Prisma {
     setor_id?: IntWithAggregatesFilter<"Atividade"> | number
     descricao?: StringWithAggregatesFilter<"Atividade"> | string
     data_atividade?: DateTimeWithAggregatesFilter<"Atividade"> | Date | string
+    data_finalizacao?: DateTimeNullableWithAggregatesFilter<"Atividade"> | Date | string | null
     criado_em?: DateTimeWithAggregatesFilter<"Atividade"> | Date | string
     finalizada?: BoolWithAggregatesFilter<"Atividade"> | boolean
+  }
+
+  export type AtividadeLogWhereInput = {
+    AND?: AtividadeLogWhereInput | AtividadeLogWhereInput[]
+    OR?: AtividadeLogWhereInput[]
+    NOT?: AtividadeLogWhereInput | AtividadeLogWhereInput[]
+    id?: IntFilter<"AtividadeLog"> | number
+    atividade_id?: IntFilter<"AtividadeLog"> | number
+    acao?: StringFilter<"AtividadeLog"> | string
+    dados_anteriores?: JsonNullableFilter<"AtividadeLog">
+    dados_novos?: JsonNullableFilter<"AtividadeLog">
+    usuario_id?: IntFilter<"AtividadeLog"> | number
+    timestamp?: DateTimeFilter<"AtividadeLog"> | Date | string
+    atividade?: XOR<AtividadeScalarRelationFilter, AtividadeWhereInput>
+    usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+  }
+
+  export type AtividadeLogOrderByWithRelationInput = {
+    id?: SortOrder
+    atividade_id?: SortOrder
+    acao?: SortOrder
+    dados_anteriores?: SortOrderInput | SortOrder
+    dados_novos?: SortOrderInput | SortOrder
+    usuario_id?: SortOrder
+    timestamp?: SortOrder
+    atividade?: AtividadeOrderByWithRelationInput
+    usuario?: UsuarioOrderByWithRelationInput
+    _relevance?: AtividadeLogOrderByRelevanceInput
+  }
+
+  export type AtividadeLogWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: AtividadeLogWhereInput | AtividadeLogWhereInput[]
+    OR?: AtividadeLogWhereInput[]
+    NOT?: AtividadeLogWhereInput | AtividadeLogWhereInput[]
+    atividade_id?: IntFilter<"AtividadeLog"> | number
+    acao?: StringFilter<"AtividadeLog"> | string
+    dados_anteriores?: JsonNullableFilter<"AtividadeLog">
+    dados_novos?: JsonNullableFilter<"AtividadeLog">
+    usuario_id?: IntFilter<"AtividadeLog"> | number
+    timestamp?: DateTimeFilter<"AtividadeLog"> | Date | string
+    atividade?: XOR<AtividadeScalarRelationFilter, AtividadeWhereInput>
+    usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+  }, "id">
+
+  export type AtividadeLogOrderByWithAggregationInput = {
+    id?: SortOrder
+    atividade_id?: SortOrder
+    acao?: SortOrder
+    dados_anteriores?: SortOrderInput | SortOrder
+    dados_novos?: SortOrderInput | SortOrder
+    usuario_id?: SortOrder
+    timestamp?: SortOrder
+    _count?: AtividadeLogCountOrderByAggregateInput
+    _avg?: AtividadeLogAvgOrderByAggregateInput
+    _max?: AtividadeLogMaxOrderByAggregateInput
+    _min?: AtividadeLogMinOrderByAggregateInput
+    _sum?: AtividadeLogSumOrderByAggregateInput
+  }
+
+  export type AtividadeLogScalarWhereWithAggregatesInput = {
+    AND?: AtividadeLogScalarWhereWithAggregatesInput | AtividadeLogScalarWhereWithAggregatesInput[]
+    OR?: AtividadeLogScalarWhereWithAggregatesInput[]
+    NOT?: AtividadeLogScalarWhereWithAggregatesInput | AtividadeLogScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"AtividadeLog"> | number
+    atividade_id?: IntWithAggregatesFilter<"AtividadeLog"> | number
+    acao?: StringWithAggregatesFilter<"AtividadeLog"> | string
+    dados_anteriores?: JsonNullableWithAggregatesFilter<"AtividadeLog">
+    dados_novos?: JsonNullableWithAggregatesFilter<"AtividadeLog">
+    usuario_id?: IntWithAggregatesFilter<"AtividadeLog"> | number
+    timestamp?: DateTimeWithAggregatesFilter<"AtividadeLog"> | Date | string
   }
 
   export type CampoAvaliacaoWhereInput = {
@@ -16581,6 +17904,7 @@ export namespace Prisma {
     logs?: LogAcessoCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateInput = {
@@ -16597,6 +17921,7 @@ export namespace Prisma {
     logs?: LogAcessoUncheckedCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoUncheckedCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaUncheckedCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUpdateInput = {
@@ -16612,6 +17937,7 @@ export namespace Prisma {
     logs?: LogAcessoUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateInput = {
@@ -16628,6 +17954,7 @@ export namespace Prisma {
     logs?: LogAcessoUncheckedUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUncheckedUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUncheckedUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioCreateManyInput = {
@@ -16890,10 +18217,12 @@ export namespace Prisma {
   export type AtividadeCreateInput = {
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     residente: ResidenteCreateNestedOneWithoutAtividadesInput
     setor: SetorCreateNestedOneWithoutAtividadesInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutAtividadeInput
   }
 
   export type AtividadeUncheckedCreateInput = {
@@ -16902,17 +18231,21 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutAtividadeInput
   }
 
   export type AtividadeUpdateInput = {
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     residente?: ResidenteUpdateOneRequiredWithoutAtividadesNestedInput
     setor?: SetorUpdateOneRequiredWithoutAtividadesNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutAtividadeNestedInput
   }
 
   export type AtividadeUncheckedUpdateInput = {
@@ -16921,8 +18254,10 @@ export namespace Prisma {
     setor_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutAtividadeNestedInput
   }
 
   export type AtividadeCreateManyInput = {
@@ -16931,6 +18266,7 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
   }
@@ -16938,6 +18274,7 @@ export namespace Prisma {
   export type AtividadeUpdateManyMutationInput = {
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -16948,8 +18285,74 @@ export namespace Prisma {
     setor_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type AtividadeLogCreateInput = {
+    acao: string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: Date | string
+    atividade: AtividadeCreateNestedOneWithoutAtividadeLogInput
+    usuario: UsuarioCreateNestedOneWithoutAtividadeLogInput
+  }
+
+  export type AtividadeLogUncheckedCreateInput = {
+    id?: number
+    atividade_id: number
+    acao: string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    usuario_id: number
+    timestamp?: Date | string
+  }
+
+  export type AtividadeLogUpdateInput = {
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    atividade?: AtividadeUpdateOneRequiredWithoutAtividadeLogNestedInput
+    usuario?: UsuarioUpdateOneRequiredWithoutAtividadeLogNestedInput
+  }
+
+  export type AtividadeLogUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    atividade_id?: IntFieldUpdateOperationsInput | number
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    usuario_id?: IntFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AtividadeLogCreateManyInput = {
+    id?: number
+    atividade_id: number
+    acao: string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    usuario_id: number
+    timestamp?: Date | string
+  }
+
+  export type AtividadeLogUpdateManyMutationInput = {
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AtividadeLogUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    atividade_id?: IntFieldUpdateOperationsInput | number
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    usuario_id?: IntFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CampoAvaliacaoCreateInput = {
@@ -17532,6 +18935,12 @@ export namespace Prisma {
     none?: FrequenciaWhereInput
   }
 
+  export type AtividadeLogListRelationFilter = {
+    every?: AtividadeLogWhereInput
+    some?: AtividadeLogWhereInput
+    none?: AtividadeLogWhereInput
+  }
+
   export type LogAcessoOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -17541,6 +18950,10 @@ export namespace Prisma {
   }
 
   export type FrequenciaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AtividadeLogOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17888,6 +19301,7 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
   }
@@ -17904,6 +19318,7 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
   }
@@ -17914,6 +19329,7 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
   }
@@ -17922,6 +19338,104 @@ export namespace Prisma {
     id?: SortOrder
     residente_id?: SortOrder
     setor_id?: SortOrder
+  }
+  export type JsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type AtividadeScalarRelationFilter = {
+    is?: AtividadeWhereInput
+    isNot?: AtividadeWhereInput
+  }
+
+  export type AtividadeLogOrderByRelevanceInput = {
+    fields: AtividadeLogOrderByRelevanceFieldEnum | AtividadeLogOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type AtividadeLogCountOrderByAggregateInput = {
+    id?: SortOrder
+    atividade_id?: SortOrder
+    acao?: SortOrder
+    dados_anteriores?: SortOrder
+    dados_novos?: SortOrder
+    usuario_id?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type AtividadeLogAvgOrderByAggregateInput = {
+    id?: SortOrder
+    atividade_id?: SortOrder
+    usuario_id?: SortOrder
+  }
+
+  export type AtividadeLogMaxOrderByAggregateInput = {
+    id?: SortOrder
+    atividade_id?: SortOrder
+    acao?: SortOrder
+    usuario_id?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type AtividadeLogMinOrderByAggregateInput = {
+    id?: SortOrder
+    atividade_id?: SortOrder
+    acao?: SortOrder
+    usuario_id?: SortOrder
+    timestamp?: SortOrder
+  }
+
+  export type AtividadeLogSumOrderByAggregateInput = {
+    id?: SortOrder
+    atividade_id?: SortOrder
+    usuario_id?: SortOrder
+  }
+  export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonNullableWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonNullableWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedJsonNullableFilter<$PrismaModel>
+    _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
   export type EnumTipoCampoFilter<$PrismaModel = never> = {
@@ -18447,6 +19961,13 @@ export namespace Prisma {
     connect?: FrequenciaWhereUniqueInput | FrequenciaWhereUniqueInput[]
   }
 
+  export type AtividadeLogCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<AtividadeLogCreateWithoutUsuarioInput, AtividadeLogUncheckedCreateWithoutUsuarioInput> | AtividadeLogCreateWithoutUsuarioInput[] | AtividadeLogUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: AtividadeLogCreateOrConnectWithoutUsuarioInput | AtividadeLogCreateOrConnectWithoutUsuarioInput[]
+    createMany?: AtividadeLogCreateManyUsuarioInputEnvelope
+    connect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+  }
+
   export type ResidenteUncheckedCreateNestedOneWithoutUsuarioInput = {
     create?: XOR<ResidenteCreateWithoutUsuarioInput, ResidenteUncheckedCreateWithoutUsuarioInput>
     connectOrCreate?: ResidenteCreateOrConnectWithoutUsuarioInput
@@ -18484,6 +20005,13 @@ export namespace Prisma {
     connectOrCreate?: FrequenciaCreateOrConnectWithoutRegistradoPorInput | FrequenciaCreateOrConnectWithoutRegistradoPorInput[]
     createMany?: FrequenciaCreateManyRegistradoPorInputEnvelope
     connect?: FrequenciaWhereUniqueInput | FrequenciaWhereUniqueInput[]
+  }
+
+  export type AtividadeLogUncheckedCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<AtividadeLogCreateWithoutUsuarioInput, AtividadeLogUncheckedCreateWithoutUsuarioInput> | AtividadeLogCreateWithoutUsuarioInput[] | AtividadeLogUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: AtividadeLogCreateOrConnectWithoutUsuarioInput | AtividadeLogCreateOrConnectWithoutUsuarioInput[]
+    createMany?: AtividadeLogCreateManyUsuarioInputEnvelope
+    connect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
   }
 
   export type EnumTipoUsuarioFieldUpdateOperationsInput = {
@@ -18570,6 +20098,20 @@ export namespace Prisma {
     deleteMany?: FrequenciaScalarWhereInput | FrequenciaScalarWhereInput[]
   }
 
+  export type AtividadeLogUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<AtividadeLogCreateWithoutUsuarioInput, AtividadeLogUncheckedCreateWithoutUsuarioInput> | AtividadeLogCreateWithoutUsuarioInput[] | AtividadeLogUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: AtividadeLogCreateOrConnectWithoutUsuarioInput | AtividadeLogCreateOrConnectWithoutUsuarioInput[]
+    upsert?: AtividadeLogUpsertWithWhereUniqueWithoutUsuarioInput | AtividadeLogUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: AtividadeLogCreateManyUsuarioInputEnvelope
+    set?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    disconnect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    delete?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    connect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    update?: AtividadeLogUpdateWithWhereUniqueWithoutUsuarioInput | AtividadeLogUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: AtividadeLogUpdateManyWithWhereWithoutUsuarioInput | AtividadeLogUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: AtividadeLogScalarWhereInput | AtividadeLogScalarWhereInput[]
+  }
+
   export type ResidenteUncheckedUpdateOneWithoutUsuarioNestedInput = {
     create?: XOR<ResidenteCreateWithoutUsuarioInput, ResidenteUncheckedCreateWithoutUsuarioInput>
     connectOrCreate?: ResidenteCreateOrConnectWithoutUsuarioInput
@@ -18640,6 +20182,20 @@ export namespace Prisma {
     update?: FrequenciaUpdateWithWhereUniqueWithoutRegistradoPorInput | FrequenciaUpdateWithWhereUniqueWithoutRegistradoPorInput[]
     updateMany?: FrequenciaUpdateManyWithWhereWithoutRegistradoPorInput | FrequenciaUpdateManyWithWhereWithoutRegistradoPorInput[]
     deleteMany?: FrequenciaScalarWhereInput | FrequenciaScalarWhereInput[]
+  }
+
+  export type AtividadeLogUncheckedUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<AtividadeLogCreateWithoutUsuarioInput, AtividadeLogUncheckedCreateWithoutUsuarioInput> | AtividadeLogCreateWithoutUsuarioInput[] | AtividadeLogUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: AtividadeLogCreateOrConnectWithoutUsuarioInput | AtividadeLogCreateOrConnectWithoutUsuarioInput[]
+    upsert?: AtividadeLogUpsertWithWhereUniqueWithoutUsuarioInput | AtividadeLogUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: AtividadeLogCreateManyUsuarioInputEnvelope
+    set?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    disconnect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    delete?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    connect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    update?: AtividadeLogUpdateWithWhereUniqueWithoutUsuarioInput | AtividadeLogUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: AtividadeLogUpdateManyWithWhereWithoutUsuarioInput | AtividadeLogUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: AtividadeLogScalarWhereInput | AtividadeLogScalarWhereInput[]
   }
 
   export type UsuarioCreateNestedOneWithoutResidenteInput = {
@@ -18978,6 +20534,20 @@ export namespace Prisma {
     connect?: SetorWhereUniqueInput
   }
 
+  export type AtividadeLogCreateNestedManyWithoutAtividadeInput = {
+    create?: XOR<AtividadeLogCreateWithoutAtividadeInput, AtividadeLogUncheckedCreateWithoutAtividadeInput> | AtividadeLogCreateWithoutAtividadeInput[] | AtividadeLogUncheckedCreateWithoutAtividadeInput[]
+    connectOrCreate?: AtividadeLogCreateOrConnectWithoutAtividadeInput | AtividadeLogCreateOrConnectWithoutAtividadeInput[]
+    createMany?: AtividadeLogCreateManyAtividadeInputEnvelope
+    connect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+  }
+
+  export type AtividadeLogUncheckedCreateNestedManyWithoutAtividadeInput = {
+    create?: XOR<AtividadeLogCreateWithoutAtividadeInput, AtividadeLogUncheckedCreateWithoutAtividadeInput> | AtividadeLogCreateWithoutAtividadeInput[] | AtividadeLogUncheckedCreateWithoutAtividadeInput[]
+    connectOrCreate?: AtividadeLogCreateOrConnectWithoutAtividadeInput | AtividadeLogCreateOrConnectWithoutAtividadeInput[]
+    createMany?: AtividadeLogCreateManyAtividadeInputEnvelope
+    connect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+  }
+
   export type ResidenteUpdateOneRequiredWithoutAtividadesNestedInput = {
     create?: XOR<ResidenteCreateWithoutAtividadesInput, ResidenteUncheckedCreateWithoutAtividadesInput>
     connectOrCreate?: ResidenteCreateOrConnectWithoutAtividadesInput
@@ -18992,6 +20562,62 @@ export namespace Prisma {
     upsert?: SetorUpsertWithoutAtividadesInput
     connect?: SetorWhereUniqueInput
     update?: XOR<XOR<SetorUpdateToOneWithWhereWithoutAtividadesInput, SetorUpdateWithoutAtividadesInput>, SetorUncheckedUpdateWithoutAtividadesInput>
+  }
+
+  export type AtividadeLogUpdateManyWithoutAtividadeNestedInput = {
+    create?: XOR<AtividadeLogCreateWithoutAtividadeInput, AtividadeLogUncheckedCreateWithoutAtividadeInput> | AtividadeLogCreateWithoutAtividadeInput[] | AtividadeLogUncheckedCreateWithoutAtividadeInput[]
+    connectOrCreate?: AtividadeLogCreateOrConnectWithoutAtividadeInput | AtividadeLogCreateOrConnectWithoutAtividadeInput[]
+    upsert?: AtividadeLogUpsertWithWhereUniqueWithoutAtividadeInput | AtividadeLogUpsertWithWhereUniqueWithoutAtividadeInput[]
+    createMany?: AtividadeLogCreateManyAtividadeInputEnvelope
+    set?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    disconnect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    delete?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    connect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    update?: AtividadeLogUpdateWithWhereUniqueWithoutAtividadeInput | AtividadeLogUpdateWithWhereUniqueWithoutAtividadeInput[]
+    updateMany?: AtividadeLogUpdateManyWithWhereWithoutAtividadeInput | AtividadeLogUpdateManyWithWhereWithoutAtividadeInput[]
+    deleteMany?: AtividadeLogScalarWhereInput | AtividadeLogScalarWhereInput[]
+  }
+
+  export type AtividadeLogUncheckedUpdateManyWithoutAtividadeNestedInput = {
+    create?: XOR<AtividadeLogCreateWithoutAtividadeInput, AtividadeLogUncheckedCreateWithoutAtividadeInput> | AtividadeLogCreateWithoutAtividadeInput[] | AtividadeLogUncheckedCreateWithoutAtividadeInput[]
+    connectOrCreate?: AtividadeLogCreateOrConnectWithoutAtividadeInput | AtividadeLogCreateOrConnectWithoutAtividadeInput[]
+    upsert?: AtividadeLogUpsertWithWhereUniqueWithoutAtividadeInput | AtividadeLogUpsertWithWhereUniqueWithoutAtividadeInput[]
+    createMany?: AtividadeLogCreateManyAtividadeInputEnvelope
+    set?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    disconnect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    delete?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    connect?: AtividadeLogWhereUniqueInput | AtividadeLogWhereUniqueInput[]
+    update?: AtividadeLogUpdateWithWhereUniqueWithoutAtividadeInput | AtividadeLogUpdateWithWhereUniqueWithoutAtividadeInput[]
+    updateMany?: AtividadeLogUpdateManyWithWhereWithoutAtividadeInput | AtividadeLogUpdateManyWithWhereWithoutAtividadeInput[]
+    deleteMany?: AtividadeLogScalarWhereInput | AtividadeLogScalarWhereInput[]
+  }
+
+  export type AtividadeCreateNestedOneWithoutAtividadeLogInput = {
+    create?: XOR<AtividadeCreateWithoutAtividadeLogInput, AtividadeUncheckedCreateWithoutAtividadeLogInput>
+    connectOrCreate?: AtividadeCreateOrConnectWithoutAtividadeLogInput
+    connect?: AtividadeWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutAtividadeLogInput = {
+    create?: XOR<UsuarioCreateWithoutAtividadeLogInput, UsuarioUncheckedCreateWithoutAtividadeLogInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutAtividadeLogInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type AtividadeUpdateOneRequiredWithoutAtividadeLogNestedInput = {
+    create?: XOR<AtividadeCreateWithoutAtividadeLogInput, AtividadeUncheckedCreateWithoutAtividadeLogInput>
+    connectOrCreate?: AtividadeCreateOrConnectWithoutAtividadeLogInput
+    upsert?: AtividadeUpsertWithoutAtividadeLogInput
+    connect?: AtividadeWhereUniqueInput
+    update?: XOR<XOR<AtividadeUpdateToOneWithWhereWithoutAtividadeLogInput, AtividadeUpdateWithoutAtividadeLogInput>, AtividadeUncheckedUpdateWithoutAtividadeLogInput>
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutAtividadeLogNestedInput = {
+    create?: XOR<UsuarioCreateWithoutAtividadeLogInput, UsuarioUncheckedCreateWithoutAtividadeLogInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutAtividadeLogInput
+    upsert?: UsuarioUpsertWithoutAtividadeLogInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutAtividadeLogInput, UsuarioUpdateWithoutAtividadeLogInput>, UsuarioUncheckedUpdateWithoutAtividadeLogInput>
   }
 
   export type RespostaAvaliacaoCreateNestedManyWithoutCampoInput = {
@@ -19469,6 +21095,29 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
+  export type NestedJsonNullableFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonNullableFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonNullableFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonNullableFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type NestedEnumTipoCampoFilter<$PrismaModel = never> = {
     equals?: $Enums.TipoCampo | EnumTipoCampoFieldRefInput<$PrismaModel>
@@ -19584,9 +21233,11 @@ export namespace Prisma {
   export type AtividadeCreateWithoutSetorInput = {
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     residente: ResidenteCreateNestedOneWithoutAtividadesInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutAtividadeInput
   }
 
   export type AtividadeUncheckedCreateWithoutSetorInput = {
@@ -19594,8 +21245,10 @@ export namespace Prisma {
     residente_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutAtividadeInput
   }
 
   export type AtividadeCreateOrConnectWithoutSetorInput = {
@@ -19685,6 +21338,7 @@ export namespace Prisma {
     setor_id?: IntFilter<"Atividade"> | number
     descricao?: StringFilter<"Atividade"> | string
     data_atividade?: DateTimeFilter<"Atividade"> | Date | string
+    data_finalizacao?: DateTimeNullableFilter<"Atividade"> | Date | string | null
     criado_em?: DateTimeFilter<"Atividade"> | Date | string
     finalizada?: BoolFilter<"Atividade"> | boolean
   }
@@ -19826,6 +21480,33 @@ export namespace Prisma {
 
   export type FrequenciaCreateManyRegistradoPorInputEnvelope = {
     data: FrequenciaCreateManyRegistradoPorInput | FrequenciaCreateManyRegistradoPorInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AtividadeLogCreateWithoutUsuarioInput = {
+    acao: string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: Date | string
+    atividade: AtividadeCreateNestedOneWithoutAtividadeLogInput
+  }
+
+  export type AtividadeLogUncheckedCreateWithoutUsuarioInput = {
+    id?: number
+    atividade_id: number
+    acao: string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: Date | string
+  }
+
+  export type AtividadeLogCreateOrConnectWithoutUsuarioInput = {
+    where: AtividadeLogWhereUniqueInput
+    create: XOR<AtividadeLogCreateWithoutUsuarioInput, AtividadeLogUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type AtividadeLogCreateManyUsuarioInputEnvelope = {
+    data: AtividadeLogCreateManyUsuarioInput | AtividadeLogCreateManyUsuarioInput[]
     skipDuplicates?: boolean
   }
 
@@ -19992,6 +21673,35 @@ export namespace Prisma {
     registrado_por?: IntFilter<"Frequencia"> | number
   }
 
+  export type AtividadeLogUpsertWithWhereUniqueWithoutUsuarioInput = {
+    where: AtividadeLogWhereUniqueInput
+    update: XOR<AtividadeLogUpdateWithoutUsuarioInput, AtividadeLogUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<AtividadeLogCreateWithoutUsuarioInput, AtividadeLogUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type AtividadeLogUpdateWithWhereUniqueWithoutUsuarioInput = {
+    where: AtividadeLogWhereUniqueInput
+    data: XOR<AtividadeLogUpdateWithoutUsuarioInput, AtividadeLogUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type AtividadeLogUpdateManyWithWhereWithoutUsuarioInput = {
+    where: AtividadeLogScalarWhereInput
+    data: XOR<AtividadeLogUpdateManyMutationInput, AtividadeLogUncheckedUpdateManyWithoutUsuarioInput>
+  }
+
+  export type AtividadeLogScalarWhereInput = {
+    AND?: AtividadeLogScalarWhereInput | AtividadeLogScalarWhereInput[]
+    OR?: AtividadeLogScalarWhereInput[]
+    NOT?: AtividadeLogScalarWhereInput | AtividadeLogScalarWhereInput[]
+    id?: IntFilter<"AtividadeLog"> | number
+    atividade_id?: IntFilter<"AtividadeLog"> | number
+    acao?: StringFilter<"AtividadeLog"> | string
+    dados_anteriores?: JsonNullableFilter<"AtividadeLog">
+    dados_novos?: JsonNullableFilter<"AtividadeLog">
+    usuario_id?: IntFilter<"AtividadeLog"> | number
+    timestamp?: DateTimeFilter<"AtividadeLog"> | Date | string
+  }
+
   export type UsuarioCreateWithoutResidenteInput = {
     nome: string
     email: string
@@ -20004,6 +21714,7 @@ export namespace Prisma {
     logs?: LogAcessoCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutResidenteInput = {
@@ -20019,6 +21730,7 @@ export namespace Prisma {
     logs?: LogAcessoUncheckedCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoUncheckedCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaUncheckedCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutResidenteInput = {
@@ -20113,9 +21825,11 @@ export namespace Prisma {
   export type AtividadeCreateWithoutResidenteInput = {
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     setor: SetorCreateNestedOneWithoutAtividadesInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutAtividadeInput
   }
 
   export type AtividadeUncheckedCreateWithoutResidenteInput = {
@@ -20123,8 +21837,10 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutAtividadeInput
   }
 
   export type AtividadeCreateOrConnectWithoutResidenteInput = {
@@ -20160,6 +21876,7 @@ export namespace Prisma {
     logs?: LogAcessoUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutResidenteInput = {
@@ -20175,6 +21892,7 @@ export namespace Prisma {
     logs?: LogAcessoUncheckedUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUncheckedUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUncheckedUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type SetorUpsertWithoutResidentesInput = {
@@ -20276,6 +21994,7 @@ export namespace Prisma {
     logs?: LogAcessoCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutSupervisorInput = {
@@ -20291,6 +22010,7 @@ export namespace Prisma {
     logs?: LogAcessoUncheckedCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoUncheckedCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaUncheckedCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutSupervisorInput = {
@@ -20395,6 +22115,7 @@ export namespace Prisma {
     logs?: LogAcessoUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutSupervisorInput = {
@@ -20410,6 +22131,7 @@ export namespace Prisma {
     logs?: LogAcessoUncheckedUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUncheckedUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUncheckedUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type SetorUpsertWithoutSupervisoresInput = {
@@ -20493,6 +22215,7 @@ export namespace Prisma {
     logs?: LogAcessoCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutAdministradorInput = {
@@ -20508,6 +22231,7 @@ export namespace Prisma {
     logs?: LogAcessoUncheckedCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoUncheckedCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaUncheckedCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutAdministradorInput = {
@@ -20538,6 +22262,7 @@ export namespace Prisma {
     logs?: LogAcessoUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutAdministradorInput = {
@@ -20553,6 +22278,7 @@ export namespace Prisma {
     logs?: LogAcessoUncheckedUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUncheckedUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUncheckedUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type ResidenteCreateWithoutFrequenciasInput = {
@@ -20592,6 +22318,7 @@ export namespace Prisma {
     administrador?: AdministradorCreateNestedOneWithoutUsuarioInput
     logs?: LogAcessoCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoCreateNestedManyWithoutUsuarioInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutFrequencias_registradasInput = {
@@ -20607,6 +22334,7 @@ export namespace Prisma {
     administrador?: AdministradorUncheckedCreateNestedOneWithoutUsuarioInput
     logs?: LogAcessoUncheckedCreateNestedManyWithoutUsuarioInput
     notificacoes?: NotificacaoUncheckedCreateNestedManyWithoutUsuarioInput
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutFrequencias_registradasInput = {
@@ -20668,6 +22396,7 @@ export namespace Prisma {
     administrador?: AdministradorUpdateOneWithoutUsuarioNestedInput
     logs?: LogAcessoUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUpdateManyWithoutUsuarioNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutFrequencias_registradasInput = {
@@ -20683,6 +22412,7 @@ export namespace Prisma {
     administrador?: AdministradorUncheckedUpdateOneWithoutUsuarioNestedInput
     logs?: LogAcessoUncheckedUpdateManyWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type ResidenteCreateWithoutAtividadesInput = {
@@ -20728,6 +22458,33 @@ export namespace Prisma {
   export type SetorCreateOrConnectWithoutAtividadesInput = {
     where: SetorWhereUniqueInput
     create: XOR<SetorCreateWithoutAtividadesInput, SetorUncheckedCreateWithoutAtividadesInput>
+  }
+
+  export type AtividadeLogCreateWithoutAtividadeInput = {
+    acao: string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: Date | string
+    usuario: UsuarioCreateNestedOneWithoutAtividadeLogInput
+  }
+
+  export type AtividadeLogUncheckedCreateWithoutAtividadeInput = {
+    id?: number
+    acao: string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    usuario_id: number
+    timestamp?: Date | string
+  }
+
+  export type AtividadeLogCreateOrConnectWithoutAtividadeInput = {
+    where: AtividadeLogWhereUniqueInput
+    create: XOR<AtividadeLogCreateWithoutAtividadeInput, AtividadeLogUncheckedCreateWithoutAtividadeInput>
+  }
+
+  export type AtividadeLogCreateManyAtividadeInputEnvelope = {
+    data: AtividadeLogCreateManyAtividadeInput | AtividadeLogCreateManyAtividadeInput[]
+    skipDuplicates?: boolean
   }
 
   export type ResidenteUpsertWithoutAtividadesInput = {
@@ -20785,6 +22542,158 @@ export namespace Prisma {
     descricao?: NullableStringFieldUpdateOperationsInput | string | null
     residentes?: ResidenteUncheckedUpdateManyWithoutSetorNestedInput
     supervisores?: SupervisorUncheckedUpdateManyWithoutSetorNestedInput
+  }
+
+  export type AtividadeLogUpsertWithWhereUniqueWithoutAtividadeInput = {
+    where: AtividadeLogWhereUniqueInput
+    update: XOR<AtividadeLogUpdateWithoutAtividadeInput, AtividadeLogUncheckedUpdateWithoutAtividadeInput>
+    create: XOR<AtividadeLogCreateWithoutAtividadeInput, AtividadeLogUncheckedCreateWithoutAtividadeInput>
+  }
+
+  export type AtividadeLogUpdateWithWhereUniqueWithoutAtividadeInput = {
+    where: AtividadeLogWhereUniqueInput
+    data: XOR<AtividadeLogUpdateWithoutAtividadeInput, AtividadeLogUncheckedUpdateWithoutAtividadeInput>
+  }
+
+  export type AtividadeLogUpdateManyWithWhereWithoutAtividadeInput = {
+    where: AtividadeLogScalarWhereInput
+    data: XOR<AtividadeLogUpdateManyMutationInput, AtividadeLogUncheckedUpdateManyWithoutAtividadeInput>
+  }
+
+  export type AtividadeCreateWithoutAtividadeLogInput = {
+    descricao: string
+    data_atividade: Date | string
+    data_finalizacao?: Date | string | null
+    criado_em?: Date | string
+    finalizada: boolean
+    residente: ResidenteCreateNestedOneWithoutAtividadesInput
+    setor: SetorCreateNestedOneWithoutAtividadesInput
+  }
+
+  export type AtividadeUncheckedCreateWithoutAtividadeLogInput = {
+    id?: number
+    residente_id: number
+    setor_id: number
+    descricao: string
+    data_atividade: Date | string
+    data_finalizacao?: Date | string | null
+    criado_em?: Date | string
+    finalizada: boolean
+  }
+
+  export type AtividadeCreateOrConnectWithoutAtividadeLogInput = {
+    where: AtividadeWhereUniqueInput
+    create: XOR<AtividadeCreateWithoutAtividadeLogInput, AtividadeUncheckedCreateWithoutAtividadeLogInput>
+  }
+
+  export type UsuarioCreateWithoutAtividadeLogInput = {
+    nome: string
+    email: string
+    senha_hash: string
+    tipo: $Enums.TipoUsuario
+    ativo?: boolean
+    criado_em?: Date | string
+    residente?: ResidenteCreateNestedOneWithoutUsuarioInput
+    supervisor?: SupervisorCreateNestedOneWithoutUsuarioInput
+    administrador?: AdministradorCreateNestedOneWithoutUsuarioInput
+    logs?: LogAcessoCreateNestedManyWithoutUsuarioInput
+    notificacoes?: NotificacaoCreateNestedManyWithoutUsuarioInput
+    frequencias_registradas?: FrequenciaCreateNestedManyWithoutRegistradoPorInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutAtividadeLogInput = {
+    id?: number
+    nome: string
+    email: string
+    senha_hash: string
+    tipo: $Enums.TipoUsuario
+    ativo?: boolean
+    criado_em?: Date | string
+    residente?: ResidenteUncheckedCreateNestedOneWithoutUsuarioInput
+    supervisor?: SupervisorUncheckedCreateNestedOneWithoutUsuarioInput
+    administrador?: AdministradorUncheckedCreateNestedOneWithoutUsuarioInput
+    logs?: LogAcessoUncheckedCreateNestedManyWithoutUsuarioInput
+    notificacoes?: NotificacaoUncheckedCreateNestedManyWithoutUsuarioInput
+    frequencias_registradas?: FrequenciaUncheckedCreateNestedManyWithoutRegistradoPorInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutAtividadeLogInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutAtividadeLogInput, UsuarioUncheckedCreateWithoutAtividadeLogInput>
+  }
+
+  export type AtividadeUpsertWithoutAtividadeLogInput = {
+    update: XOR<AtividadeUpdateWithoutAtividadeLogInput, AtividadeUncheckedUpdateWithoutAtividadeLogInput>
+    create: XOR<AtividadeCreateWithoutAtividadeLogInput, AtividadeUncheckedCreateWithoutAtividadeLogInput>
+    where?: AtividadeWhereInput
+  }
+
+  export type AtividadeUpdateToOneWithWhereWithoutAtividadeLogInput = {
+    where?: AtividadeWhereInput
+    data: XOR<AtividadeUpdateWithoutAtividadeLogInput, AtividadeUncheckedUpdateWithoutAtividadeLogInput>
+  }
+
+  export type AtividadeUpdateWithoutAtividadeLogInput = {
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
+    residente?: ResidenteUpdateOneRequiredWithoutAtividadesNestedInput
+    setor?: SetorUpdateOneRequiredWithoutAtividadesNestedInput
+  }
+
+  export type AtividadeUncheckedUpdateWithoutAtividadeLogInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    residente_id?: IntFieldUpdateOperationsInput | number
+    setor_id?: IntFieldUpdateOperationsInput | number
+    descricao?: StringFieldUpdateOperationsInput | string
+    data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    finalizada?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type UsuarioUpsertWithoutAtividadeLogInput = {
+    update: XOR<UsuarioUpdateWithoutAtividadeLogInput, UsuarioUncheckedUpdateWithoutAtividadeLogInput>
+    create: XOR<UsuarioCreateWithoutAtividadeLogInput, UsuarioUncheckedCreateWithoutAtividadeLogInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutAtividadeLogInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutAtividadeLogInput, UsuarioUncheckedUpdateWithoutAtividadeLogInput>
+  }
+
+  export type UsuarioUpdateWithoutAtividadeLogInput = {
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha_hash?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    residente?: ResidenteUpdateOneWithoutUsuarioNestedInput
+    supervisor?: SupervisorUpdateOneWithoutUsuarioNestedInput
+    administrador?: AdministradorUpdateOneWithoutUsuarioNestedInput
+    logs?: LogAcessoUpdateManyWithoutUsuarioNestedInput
+    notificacoes?: NotificacaoUpdateManyWithoutUsuarioNestedInput
+    frequencias_registradas?: FrequenciaUpdateManyWithoutRegistradoPorNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutAtividadeLogInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nome?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    senha_hash?: StringFieldUpdateOperationsInput | string
+    tipo?: EnumTipoUsuarioFieldUpdateOperationsInput | $Enums.TipoUsuario
+    ativo?: BoolFieldUpdateOperationsInput | boolean
+    criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+    residente?: ResidenteUncheckedUpdateOneWithoutUsuarioNestedInput
+    supervisor?: SupervisorUncheckedUpdateOneWithoutUsuarioNestedInput
+    administrador?: AdministradorUncheckedUpdateOneWithoutUsuarioNestedInput
+    logs?: LogAcessoUncheckedUpdateManyWithoutUsuarioNestedInput
+    notificacoes?: NotificacaoUncheckedUpdateManyWithoutUsuarioNestedInput
+    frequencias_registradas?: FrequenciaUncheckedUpdateManyWithoutRegistradoPorNestedInput
   }
 
   export type RespostaAvaliacaoCreateWithoutCampoInput = {
@@ -21242,6 +23151,7 @@ export namespace Prisma {
     administrador?: AdministradorCreateNestedOneWithoutUsuarioInput
     notificacoes?: NotificacaoCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutLogsInput = {
@@ -21257,6 +23167,7 @@ export namespace Prisma {
     administrador?: AdministradorUncheckedCreateNestedOneWithoutUsuarioInput
     notificacoes?: NotificacaoUncheckedCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaUncheckedCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutLogsInput = {
@@ -21287,6 +23198,7 @@ export namespace Prisma {
     administrador?: AdministradorUpdateOneWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutLogsInput = {
@@ -21302,6 +23214,7 @@ export namespace Prisma {
     administrador?: AdministradorUncheckedUpdateOneWithoutUsuarioNestedInput
     notificacoes?: NotificacaoUncheckedUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUncheckedUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioCreateWithoutNotificacoesInput = {
@@ -21316,6 +23229,7 @@ export namespace Prisma {
     administrador?: AdministradorCreateNestedOneWithoutUsuarioInput
     logs?: LogAcessoCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioUncheckedCreateWithoutNotificacoesInput = {
@@ -21331,6 +23245,7 @@ export namespace Prisma {
     administrador?: AdministradorUncheckedCreateNestedOneWithoutUsuarioInput
     logs?: LogAcessoUncheckedCreateNestedManyWithoutUsuarioInput
     frequencias_registradas?: FrequenciaUncheckedCreateNestedManyWithoutRegistradoPorInput
+    AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutUsuarioInput
   }
 
   export type UsuarioCreateOrConnectWithoutNotificacoesInput = {
@@ -21361,6 +23276,7 @@ export namespace Prisma {
     administrador?: AdministradorUpdateOneWithoutUsuarioNestedInput
     logs?: LogAcessoUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutUsuarioNestedInput
   }
 
   export type UsuarioUncheckedUpdateWithoutNotificacoesInput = {
@@ -21376,6 +23292,7 @@ export namespace Prisma {
     administrador?: AdministradorUncheckedUpdateOneWithoutUsuarioNestedInput
     logs?: LogAcessoUncheckedUpdateManyWithoutUsuarioNestedInput
     frequencias_registradas?: FrequenciaUncheckedUpdateManyWithoutRegistradoPorNestedInput
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type ResidenteCreateManySetorInput = {
@@ -21395,6 +23312,7 @@ export namespace Prisma {
     residente_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
   }
@@ -21448,9 +23366,11 @@ export namespace Prisma {
   export type AtividadeUpdateWithoutSetorInput = {
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     residente?: ResidenteUpdateOneRequiredWithoutAtividadesNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutAtividadeNestedInput
   }
 
   export type AtividadeUncheckedUpdateWithoutSetorInput = {
@@ -21458,8 +23378,10 @@ export namespace Prisma {
     residente_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutAtividadeNestedInput
   }
 
   export type AtividadeUncheckedUpdateManyWithoutSetorInput = {
@@ -21467,6 +23389,7 @@ export namespace Prisma {
     residente_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -21497,6 +23420,15 @@ export namespace Prisma {
     fim_intervalo?: Date | string | null
     horario_saida?: Date | string | null
     observacoes?: string | null
+  }
+
+  export type AtividadeLogCreateManyUsuarioInput = {
+    id?: number
+    atividade_id: number
+    acao: string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: Date | string
   }
 
   export type LogAcessoUpdateWithoutUsuarioInput = {
@@ -21580,6 +23512,32 @@ export namespace Prisma {
     observacoes?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
+  export type AtividadeLogUpdateWithoutUsuarioInput = {
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    atividade?: AtividadeUpdateOneRequiredWithoutAtividadeLogNestedInput
+  }
+
+  export type AtividadeLogUncheckedUpdateWithoutUsuarioInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    atividade_id?: IntFieldUpdateOperationsInput | number
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AtividadeLogUncheckedUpdateManyWithoutUsuarioInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    atividade_id?: IntFieldUpdateOperationsInput | number
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type FrequenciaCreateManyResidenteInput = {
     id?: number
     data: Date | string
@@ -21606,6 +23564,7 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
   }
@@ -21678,9 +23637,11 @@ export namespace Prisma {
   export type AtividadeUpdateWithoutResidenteInput = {
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     setor?: SetorUpdateOneRequiredWithoutAtividadesNestedInput
+    AtividadeLog?: AtividadeLogUpdateManyWithoutAtividadeNestedInput
   }
 
   export type AtividadeUncheckedUpdateWithoutResidenteInput = {
@@ -21688,8 +23649,10 @@ export namespace Prisma {
     setor_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
+    AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutAtividadeNestedInput
   }
 
   export type AtividadeUncheckedUpdateManyWithoutResidenteInput = {
@@ -21697,6 +23660,7 @@ export namespace Prisma {
     setor_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -21765,6 +23729,41 @@ export namespace Prisma {
     avaliacao_id?: IntFieldUpdateOperationsInput | number
     comentario?: StringFieldUpdateOperationsInput | string
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AtividadeLogCreateManyAtividadeInput = {
+    id?: number
+    acao: string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    usuario_id: number
+    timestamp?: Date | string
+  }
+
+  export type AtividadeLogUpdateWithoutAtividadeInput = {
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+    usuario?: UsuarioUpdateOneRequiredWithoutAtividadeLogNestedInput
+  }
+
+  export type AtividadeLogUncheckedUpdateWithoutAtividadeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    usuario_id?: IntFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AtividadeLogUncheckedUpdateManyWithoutAtividadeInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    acao?: StringFieldUpdateOperationsInput | string
+    dados_anteriores?: NullableJsonNullValueInput | InputJsonValue
+    dados_novos?: NullableJsonNullValueInput | InputJsonValue
+    usuario_id?: IntFieldUpdateOperationsInput | number
+    timestamp?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RespostaAvaliacaoCreateManyCampoInput = {
