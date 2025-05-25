@@ -91,13 +91,14 @@ model Frequencia {
 }
 
 model Atividade {
-  id             Int      @id @default(autoincrement())
-  residente_id   Int
-  setor_id       Int
-  descricao      String   @db.VarChar(255)
-  data_atividade DateTime @db.Date
-  criado_em      DateTime @default(now())
-  finalizada     Boolean
+  id               Int       @id @default(autoincrement())
+  residente_id     Int
+  setor_id         Int
+  descricao        String    @db.VarChar(255)
+  data_atividade   DateTime  @db.Date
+  data_finalizacao DateTime? @db.Date
+  criado_em        DateTime  @default(now())
+  finalizada       Boolean
 
   residente    Residente      @relation(fields: [residente_id], references: [id])
   setor        Setor          @relation(fields: [setor_id], references: [id])

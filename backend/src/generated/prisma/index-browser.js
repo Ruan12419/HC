@@ -173,6 +173,7 @@ exports.Prisma.AtividadeScalarFieldEnum = {
   setor_id: 'setor_id',
   descricao: 'descricao',
   data_atividade: 'data_atividade',
+  data_finalizacao: 'data_finalizacao',
   criado_em: 'criado_em',
   finalizada: 'finalizada'
 };

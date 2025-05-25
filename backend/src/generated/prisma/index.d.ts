@@ -8540,6 +8540,7 @@ export namespace Prisma {
     setor_id: number | null
     descricao: string | null
     data_atividade: Date | null
+    data_finalizacao: Date | null
     criado_em: Date | null
     finalizada: boolean | null
   }
@@ -8550,6 +8551,7 @@ export namespace Prisma {
     setor_id: number | null
     descricao: string | null
     data_atividade: Date | null
+    data_finalizacao: Date | null
     criado_em: Date | null
     finalizada: boolean | null
   }
@@ -8560,6 +8562,7 @@ export namespace Prisma {
     setor_id: number
     descricao: number
     data_atividade: number
+    data_finalizacao: number
     criado_em: number
     finalizada: number
     _all: number
@@ -8584,6 +8587,7 @@ export namespace Prisma {
     setor_id?: true
     descricao?: true
     data_atividade?: true
+    data_finalizacao?: true
     criado_em?: true
     finalizada?: true
   }
@@ -8594,6 +8598,7 @@ export namespace Prisma {
     setor_id?: true
     descricao?: true
     data_atividade?: true
+    data_finalizacao?: true
     criado_em?: true
     finalizada?: true
   }
@@ -8604,6 +8609,7 @@ export namespace Prisma {
     setor_id?: true
     descricao?: true
     data_atividade?: true
+    data_finalizacao?: true
     criado_em?: true
     finalizada?: true
     _all?: true
@@ -8701,6 +8707,7 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date
+    data_finalizacao: Date | null
     criado_em: Date
     finalizada: boolean
     _count: AtividadeCountAggregateOutputType | null
@@ -8730,6 +8737,7 @@ export namespace Prisma {
     setor_id?: boolean
     descricao?: boolean
     data_atividade?: boolean
+    data_finalizacao?: boolean
     criado_em?: boolean
     finalizada?: boolean
     residente?: boolean | ResidenteDefaultArgs<ExtArgs>
@@ -8746,11 +8754,12 @@ export namespace Prisma {
     setor_id?: boolean
     descricao?: boolean
     data_atividade?: boolean
+    data_finalizacao?: boolean
     criado_em?: boolean
     finalizada?: boolean
   }
 
-  export type AtividadeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residente_id" | "setor_id" | "descricao" | "data_atividade" | "criado_em" | "finalizada", ExtArgs["result"]["atividade"]>
+  export type AtividadeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "residente_id" | "setor_id" | "descricao" | "data_atividade" | "data_finalizacao" | "criado_em" | "finalizada", ExtArgs["result"]["atividade"]>
   export type AtividadeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     residente?: boolean | ResidenteDefaultArgs<ExtArgs>
     setor?: boolean | SetorDefaultArgs<ExtArgs>
@@ -8771,6 +8780,7 @@ export namespace Prisma {
       setor_id: number
       descricao: string
       data_atividade: Date
+      data_finalizacao: Date | null
       criado_em: Date
       finalizada: boolean
     }, ExtArgs["result"]["atividade"]>
@@ -9150,6 +9160,7 @@ export namespace Prisma {
     readonly setor_id: FieldRef<"Atividade", 'Int'>
     readonly descricao: FieldRef<"Atividade", 'String'>
     readonly data_atividade: FieldRef<"Atividade", 'DateTime'>
+    readonly data_finalizacao: FieldRef<"Atividade", 'DateTime'>
     readonly criado_em: FieldRef<"Atividade", 'DateTime'>
     readonly finalizada: FieldRef<"Atividade", 'Boolean'>
   }
@@ -16591,6 +16602,7 @@ export namespace Prisma {
     setor_id: 'setor_id',
     descricao: 'descricao',
     data_atividade: 'data_atividade',
+    data_finalizacao: 'data_finalizacao',
     criado_em: 'criado_em',
     finalizada: 'finalizada'
   };
@@ -17294,6 +17306,7 @@ export namespace Prisma {
     setor_id?: IntFilter<"Atividade"> | number
     descricao?: StringFilter<"Atividade"> | string
     data_atividade?: DateTimeFilter<"Atividade"> | Date | string
+    data_finalizacao?: DateTimeNullableFilter<"Atividade"> | Date | string | null
     criado_em?: DateTimeFilter<"Atividade"> | Date | string
     finalizada?: BoolFilter<"Atividade"> | boolean
     residente?: XOR<ResidenteScalarRelationFilter, ResidenteWhereInput>
@@ -17307,6 +17320,7 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrderInput | SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
     residente?: ResidenteOrderByWithRelationInput
@@ -17325,6 +17339,7 @@ export namespace Prisma {
     setor_id?: IntFilter<"Atividade"> | number
     descricao?: StringFilter<"Atividade"> | string
     data_atividade?: DateTimeFilter<"Atividade"> | Date | string
+    data_finalizacao?: DateTimeNullableFilter<"Atividade"> | Date | string | null
     criado_em?: DateTimeFilter<"Atividade"> | Date | string
     finalizada?: BoolFilter<"Atividade"> | boolean
     residente?: XOR<ResidenteScalarRelationFilter, ResidenteWhereInput>
@@ -17338,6 +17353,7 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrderInput | SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
     _count?: AtividadeCountOrderByAggregateInput
@@ -17356,6 +17372,7 @@ export namespace Prisma {
     setor_id?: IntWithAggregatesFilter<"Atividade"> | number
     descricao?: StringWithAggregatesFilter<"Atividade"> | string
     data_atividade?: DateTimeWithAggregatesFilter<"Atividade"> | Date | string
+    data_finalizacao?: DateTimeNullableWithAggregatesFilter<"Atividade"> | Date | string | null
     criado_em?: DateTimeWithAggregatesFilter<"Atividade"> | Date | string
     finalizada?: BoolWithAggregatesFilter<"Atividade"> | boolean
   }
@@ -18200,6 +18217,7 @@ export namespace Prisma {
   export type AtividadeCreateInput = {
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     residente: ResidenteCreateNestedOneWithoutAtividadesInput
@@ -18213,6 +18231,7 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutAtividadeInput
@@ -18221,6 +18240,7 @@ export namespace Prisma {
   export type AtividadeUpdateInput = {
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     residente?: ResidenteUpdateOneRequiredWithoutAtividadesNestedInput
@@ -18234,6 +18254,7 @@ export namespace Prisma {
     setor_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutAtividadeNestedInput
@@ -18245,6 +18266,7 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
   }
@@ -18252,6 +18274,7 @@ export namespace Prisma {
   export type AtividadeUpdateManyMutationInput = {
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -18262,6 +18285,7 @@ export namespace Prisma {
     setor_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -19277,6 +19301,7 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
   }
@@ -19293,6 +19318,7 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
   }
@@ -19303,6 +19329,7 @@ export namespace Prisma {
     setor_id?: SortOrder
     descricao?: SortOrder
     data_atividade?: SortOrder
+    data_finalizacao?: SortOrder
     criado_em?: SortOrder
     finalizada?: SortOrder
   }
@@ -21206,6 +21233,7 @@ export namespace Prisma {
   export type AtividadeCreateWithoutSetorInput = {
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     residente: ResidenteCreateNestedOneWithoutAtividadesInput
@@ -21217,6 +21245,7 @@ export namespace Prisma {
     residente_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutAtividadeInput
@@ -21309,6 +21338,7 @@ export namespace Prisma {
     setor_id?: IntFilter<"Atividade"> | number
     descricao?: StringFilter<"Atividade"> | string
     data_atividade?: DateTimeFilter<"Atividade"> | Date | string
+    data_finalizacao?: DateTimeNullableFilter<"Atividade"> | Date | string | null
     criado_em?: DateTimeFilter<"Atividade"> | Date | string
     finalizada?: BoolFilter<"Atividade"> | boolean
   }
@@ -21795,6 +21825,7 @@ export namespace Prisma {
   export type AtividadeCreateWithoutResidenteInput = {
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     setor: SetorCreateNestedOneWithoutAtividadesInput
@@ -21806,6 +21837,7 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     AtividadeLog?: AtividadeLogUncheckedCreateNestedManyWithoutAtividadeInput
@@ -22531,6 +22563,7 @@ export namespace Prisma {
   export type AtividadeCreateWithoutAtividadeLogInput = {
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
     residente: ResidenteCreateNestedOneWithoutAtividadesInput
@@ -22543,6 +22576,7 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
   }
@@ -22602,6 +22636,7 @@ export namespace Prisma {
   export type AtividadeUpdateWithoutAtividadeLogInput = {
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     residente?: ResidenteUpdateOneRequiredWithoutAtividadesNestedInput
@@ -22614,6 +22649,7 @@ export namespace Prisma {
     setor_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -23276,6 +23312,7 @@ export namespace Prisma {
     residente_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
   }
@@ -23329,6 +23366,7 @@ export namespace Prisma {
   export type AtividadeUpdateWithoutSetorInput = {
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     residente?: ResidenteUpdateOneRequiredWithoutAtividadesNestedInput
@@ -23340,6 +23378,7 @@ export namespace Prisma {
     residente_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutAtividadeNestedInput
@@ -23350,6 +23389,7 @@ export namespace Prisma {
     residente_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
@@ -23524,6 +23564,7 @@ export namespace Prisma {
     setor_id: number
     descricao: string
     data_atividade: Date | string
+    data_finalizacao?: Date | string | null
     criado_em?: Date | string
     finalizada: boolean
   }
@@ -23596,6 +23637,7 @@ export namespace Prisma {
   export type AtividadeUpdateWithoutResidenteInput = {
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     setor?: SetorUpdateOneRequiredWithoutAtividadesNestedInput
@@ -23607,6 +23649,7 @@ export namespace Prisma {
     setor_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
     AtividadeLog?: AtividadeLogUncheckedUpdateManyWithoutAtividadeNestedInput
@@ -23617,6 +23660,7 @@ export namespace Prisma {
     setor_id?: IntFieldUpdateOperationsInput | number
     descricao?: StringFieldUpdateOperationsInput | string
     data_atividade?: DateTimeFieldUpdateOperationsInput | Date | string
+    data_finalizacao?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     criado_em?: DateTimeFieldUpdateOperationsInput | Date | string
     finalizada?: BoolFieldUpdateOperationsInput | boolean
   }
