@@ -18,7 +18,7 @@ const usuario = (req) => {
  */
 exports.criar = async (req, res, next) => {
     try {
-        const atividade = await atividadeService.criar(req.body);
+        const atividade = await atividadeService.criar(req.body,  usuario(req));
         res.status(201).json(atividade);
     } catch (err) {
         next(err);
@@ -32,7 +32,7 @@ exports.criar = async (req, res, next) => {
 exports.atualizar = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const atividade = await atividadeService.atualizar(Number(id), req.body,  usuario(req).id);
+        const atividade = await atividadeService.atualizar(Number(id), req.body,  usuario(req));
         res.json(atividade);
     } catch (err) {
         next(err);
@@ -44,7 +44,7 @@ exports.atualizar = async (req, res, next) => {
 exports.excluir = async (req, res, next) => {
     try {
         const { id } = req.params;
-        await atividadeService.excluir(Number(id));
+        await atividadeService.excluir(Number(id),  usuario(req));
         res.json({ mensagem: 'Atividade excluída com sucesso.' });
     } catch (err) {
         next(err);
@@ -55,7 +55,8 @@ exports.excluir = async (req, res, next) => {
 exports.buscarPorId = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const atividade = await atividadeService.buscarPorId(Number(id));
+        const { residenteId } = req.body;
+        const atividade = await atividadeService.buscarPorId(Number(id), Number(residenteId), usuario(req));
         if (!atividade) return res.status(404).json({ message: 'Atividade não encontrada' });
         res.json(atividade);
     } catch (err) {
@@ -67,7 +68,7 @@ exports.buscarPorId = async (req, res, next) => {
 exports.listarPorResidente = async (req, res, next) => {
     try {
         const { residenteId } = req.params;
-        const atividades = await atividadeService.buscarPorResidente(Number(residenteId));
+        const atividades = await atividadeService.buscarPorResidente(Number(residenteId),  usuario(req));
         res.json(atividades);
     } catch (err) {
         next(err);
